@@ -10,9 +10,19 @@ module.exports = {
       },
       expertId: {
         type: Sequelize.INTEGER,
+        allowNull:false,
+        references:{
+          model:'Users',
+          key: 'id',
+        }
       },
       questionId: {
         type: Sequelize.INTEGER,
+        allowNull:false,
+        references:{
+          model:'Questions',
+          key: 'id',
+        }
       },
       text: {
         type: Sequelize.STRING,

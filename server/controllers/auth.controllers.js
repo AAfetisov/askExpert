@@ -55,7 +55,7 @@ exports.destroySession = (req,res)=>{
             console.log('Error:',err);
             res.sendStatus(401);
         } else {
-            await res.clearCookie("tdz",{ httpOnly: true });
+            await res.clearCookie("exp",{ httpOnly: true });
             res.sendStatus(200);
         }
     })

@@ -10,12 +10,18 @@ module.exports = {
       },
       userId: {
         type: Sequelize.INTEGER,
+        allowNull:false,
+        references:{
+          model:'Users',
+          key: 'id',
+        }
       },
       title: {
         type: Sequelize.STRING,
+        allowNull:false,
       },
       text: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(1000),
       },
       price: {
         type: Sequelize.INTEGER,
@@ -25,6 +31,7 @@ module.exports = {
       },
       createdAt: {
         allowNull: false,
+        type: Sequelize.DATE,
         defaultValue: Sequelize.fn('now'),
       },
       updatedAt: {

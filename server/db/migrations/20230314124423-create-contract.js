@@ -10,9 +10,19 @@ module.exports = {
       },
       questionId: {
         type: Sequelize.INTEGER,
+        allowNull:false,
+        references:{
+          model:'Questions',
+          key: 'id',
+        }
       },
       offerId: {
         type: Sequelize.INTEGER,
+        allowNull:false,
+        references:{
+          model:'Offers',
+          key: 'id',
+        }
       },
       price: {
         type: Sequelize.INTEGER,

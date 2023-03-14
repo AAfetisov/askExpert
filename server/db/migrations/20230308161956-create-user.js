@@ -9,16 +9,12 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       name: {
-        allowNull: false,
-        unique: true,
         type: Sequelize.STRING,
         validate: {
           notEmpty: true,
         },
       },
       surname: {
-        allowNull: false,
-        unique: true,
         type: Sequelize.STRING,
         validate: {
           notEmpty: true,
@@ -41,7 +37,7 @@ module.exports = {
         },
       },
       bio: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(500),
       },
       createdAt: {
         allowNull: false,
