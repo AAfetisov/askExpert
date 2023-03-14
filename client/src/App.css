@@ -22,3 +22,7 @@ nav {
   spacer-1rem {
     margin: 1rem 1rem;
   }
+.img {
+  width: 10px;
+  height: 10px;
+}

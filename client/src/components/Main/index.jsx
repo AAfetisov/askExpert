@@ -7,6 +7,7 @@ import style from './style.module.css';
 export default function Main() {
   const navigate = useNavigate();
   const isAuth = useSelector((state) => state.auth.isAuth);
+
   useEffect(() => {
     const abortController = new AbortController();
     const { signal } = abortController;
