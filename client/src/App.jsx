@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, Route, Routes } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, Route, Routes } from 'react-router-dom';
 
-import LoginForm from "./components/LoginForm";
-import Logout from "./components/Logout";
-import Main from "./components/Main";
-import { Profile } from "./components/Profile/profile";
-import RegisterForm from "./components/RegistrationForm";
-import { refreshSessionTh } from "./store/authReducer/actions";
-import Styles from "./App.css";
-import { Logo } from "./components/Logo/logo";
+import Styles from './App.css';
+import LoginForm from './components/LoginForm';
+import { Logo } from './components/Logo/logo';
+import Logout from './components/Logout';
+import Main from './components/Main';
+import { Profile } from './components/Profile/profile';
+import RegisterForm from './components/RegistrationForm';
+import { refreshSessionTh } from './store/authReducer/actions';
 
 function App() {
   const dispatch = useDispatch();
@@ -27,7 +27,11 @@ function App() {
         {isAuth ? (
           <>
             <img src="logo.png" alt="logo" />
-            <div className="userinfo">Logged in as: {user?.name}</div>
+            <div className="userinfo">
+              Logged in as:
+              {' '}
+              {user?.name}
+            </div>
             <Link to="/logout">Logout</Link>
             <Link to="/profile">Profile</Link>
           </>
