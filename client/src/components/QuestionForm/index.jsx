@@ -14,7 +14,7 @@ export default function QuestionForm() {
   //   }, []);
 
   const handleQInp = (e) => {
-    setQuestion((state) => e.target.value);
+    setQuestion(() => e.target.value);
   };
   const handlePriceInp = (e) => {
     setPrice((state) => (e.target.validity.valid ? e.target.value : state));
