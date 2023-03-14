@@ -11,13 +11,15 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import * as React from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { setUserAC } from '../../store/authReducer/actions';
 
 const theme = createTheme();
 
-export default function LoginForm({setAuth}) {
+export default function LoginForm() {
   const [err, setErr] = React.useState();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -30,14 +32,15 @@ export default function LoginForm({setAuth}) {
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({email, password}),
+        body: JSON.stringify({ email, password }),
         credentials: 'include',
       },
     );
     if (response.ok) {
       const result = await response.json();
-      const user = {id:result.id,name:result.email};
-      dispatch(setUserAC(user))
+      const user = { id: result.id, name: result.email };
+      dispatch(setUserAC(user));
+      navigate('/');
     } else {
       const error = await response.json();
       setErr(error);
@@ -45,7 +48,7 @@ export default function LoginForm({setAuth}) {
   };
 
   return (
-    
+
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -64,8 +67,7 @@ export default function LoginForm({setAuth}) {
             Sign in
           </Typography>
           <Typography component="h1" variant="h6" color="red">
-            {err&& <>Incorrect Email or Password</>
-            }
+            {err && <>Incorrect Email or Password</>}
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
@@ -101,13 +103,13 @@ export default function LoginForm({setAuth}) {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
+                <Link to="asdf" variant="body2">
                   Forgot password?
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="/register"  variant="body2">
-                  {"Don't have an account? Sign Up"}
+                <Link href="/register" variant="body2">
+                  Dont have an account? Sign Up
                 </Link>
               </Grid>
             </Grid>
