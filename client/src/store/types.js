@@ -1,0 +1,15 @@
+const TodoOps ={
+    TODO_INIT:'TODO_INIT',
+    TODO_ADD:'TODO_ADD',
+    TODO_UPDATE:'TODO_UPDATE',
+    TODO_DEL:'TODO_DEL',
+    FUNC:'FUNC',
+    LOADING_SET:'LOADING_SET',
+
+    AUTH_SET: "AUTH_SET",
+    USER_SET: "USER_SET",
+    AUTH_REFRESH:"AUTH_REFRESH",
+    AUTH_LOGOUT:"AUTH_LOGOUT",
+}
+
+export default TodoOps;

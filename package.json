@@ -1,0 +1,20 @@
+{
+  "name": "react-grok-2022",
+  "version": "1.4.0",
+  "description": "This tool can help you understand the basic concepts of `React` and solve the 'don't know where to start' problem.",
+  "main": "index.js",
+  "scripts": {
+    "preinstall": "node check-env.js",
+    "postinstall": "cd client && npm i && cd ../server && npm i",
+    "test": "cd client && npm test",
+    "test-dev": "cd client && npm run test-dev",
+    "test-only": "cd client && npm run test-only",
+    "start-server": "cd server && npm start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^4.1.2"
+  }
+}
