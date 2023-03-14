@@ -5,6 +5,7 @@ import './App.css';
 import LoginForm from './components/LoginForm';
 import Logout from './components/Logout';
 import Main from './components/Main';
+import { Profile } from './components/Profile/profile';
 import RegisterForm from './components/RegistrationForm';
 import { refreshSessionTh } from './store/authReducer/actions';
 
@@ -32,6 +33,7 @@ return (
       <Route path="/register" element={<RegisterForm/>} />
       <Route path="/login" element={<LoginForm/>} />
       <Route path="/logout" element={<Logout/>} />
+      <Route path ="/profile" element={<Profile/>}></Route>
     </Routes>
   </>
   )
