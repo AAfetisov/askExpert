@@ -22,3 +22,9 @@ input {
 spacer-1rem {
   margin: 1rem 1rem;
 }
+
+.flexcontainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  }
