@@ -1,0 +1,15 @@
+.imgBox {
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.avatar {
+  width: 200px;
+  height: 200px;
+}
+
+.btn {
+  width: 100px;
+}

@@ -1,4 +1,3 @@
-import { useSelector } from 'react-redux';
 import TodoOps from '../types';
 
 export const initTodoAc=(data)=>({

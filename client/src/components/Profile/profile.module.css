@@ -1,0 +1,8 @@
+.mainbox {
+  margin: 20px;
+  display: flex;
+}
+
+.userInfo {
+  margin: 50px;
+}
