@@ -48,7 +48,6 @@ export default function LoginForm() {
   };
 
   return (
-
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />

@@ -1,8 +1,12 @@
 import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import QuestionForm from '../QuestionForm';
-import './style.module.css';
+import style from './style.module.css';
 
 export default function Main() {
+  const navigate = useNavigate();
+  const isAuth = useSelector((state) => state.auth.isAuth);
   useEffect(() => {
     const abortController = new AbortController();
     const { signal } = abortController;
@@ -11,6 +15,10 @@ export default function Main() {
   }, []);
 
   return (
-    <QuestionForm />
+    <div className={style.flexcontainer}>
+      {isAuth
+        ? <QuestionForm />
+        : <button type="button" onClick={() => navigate('/login')}>Sign In to ask question</button>}
+    </div>
   );
 }
