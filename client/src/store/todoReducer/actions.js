@@ -1,4 +1,4 @@
-import TodoOps from '../types';
+import TodoOps from "../types";
 
 export const initTodoAc = (data) => ({
   type: TodoOps.TODO_INIT,

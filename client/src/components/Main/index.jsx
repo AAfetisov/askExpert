@@ -1,8 +1,10 @@
-import React, { Fragment, useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import QuestionForm from '../QuestionForm';
-import style from './style.module.css';
+/* eslint-disable import/no-named-as-default */
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import QuestionForm from "../QuestionForm";
+import YourQuestion from "../YourQuestion/YourQuestion";
+import style from "./style.module.css";
 
 export default function Main() {
   const navigate = useNavigate();
@@ -16,7 +18,10 @@ export default function Main() {
           <span>
             {qBtnClicked
               ? (
-                <QuestionForm />
+                <>
+                  <QuestionForm />
+                  <YourQuestion />
+                </>
               )
               : <button type="button" onClick={() => setQBtnClicked(true)}>Ask an expert your question</button>}
           </span>
