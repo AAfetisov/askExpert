@@ -2,12 +2,8 @@ const {Question,Subject,Tag} = require('../db/models')
 
 exports.CreateQuestion = async (req,res)=>{
     const {user} = req.session;
-    console.log(1,'user: ', user);
     const {price,title,text,tags}= req.body;
-    console.log('price,title,text: ', price,title,text,tags);
-    if(!title){console.log(222);}
     if(!user||!title||!text||!price||!parseInt(price,10)){res.status(401).json({err:'Something wrong with your data'});return} 
-    console.log(11111);   
     try{
         const questionRec = await Question.create({userId:user.id, title,text, price})
 
