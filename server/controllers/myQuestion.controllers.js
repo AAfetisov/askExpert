@@ -1,11 +1,13 @@
-const { Question } = require("../db/models");
+const { Question, Subject } = require("../db/models");
 
 exports.findAndSupplyQuestion = async (req, res) => {
   const { user } = req.session;
   try {
     const question = await Question.findAll({
       where: { userId: user.id },
-      raw: true,
+      include: [
+        {
+          model: Subject, attributes: ["title"]}]
     });
     if (question) {
       res.json(question);

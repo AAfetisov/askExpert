@@ -13,20 +13,24 @@ export default function Main() {
 
   return (
     <div className={style.flexcontainer}>
-      {isAuth
-        ? (
+      {isAuth ? (
+        <>
           <span>
-            {qBtnClicked
-              ? (
-                <>
-                  <QuestionForm />
-                  <YourQuestion />
-                </>
-              )
-              : <button type="button" onClick={() => setQBtnClicked(true)}>Ask an expert your question</button>}
+            {qBtnClicked ? (
+              <QuestionForm />
+            ) : (
+              <button type="button" onClick={() => setQBtnClicked(true)}>
+                Ask an expert your question
+              </button>
+            )}
           </span>
-        )
-        : <button type="button" onClick={() => navigate('/login')}>Sign In to ask question</button>}
+          <YourQuestion />
+        </>
+      ) : (
+        <button type="button" onClick={() => navigate("/login")}>
+          Sign In to ask question
+        </button>
+      )}
     </div>
   );
 }
