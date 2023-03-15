@@ -1,3 +1,4 @@
+/* eslint-disable operator-linebreak */
 import { composeWithDevTools } from "@redux-devtools/extension";
 import {
   applyMiddleware,

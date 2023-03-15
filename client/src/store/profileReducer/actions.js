@@ -19,7 +19,7 @@ export const updateUser = (arg) => async (dispatch) => {
   }
 
   const result = await response.json();
- 
+
   console.log(result, "result from back");
 
   const user = {
@@ -30,7 +30,7 @@ export const updateUser = (arg) => async (dispatch) => {
     password: result.password,
     bio: result.bio,
   };
-  
+
   dispatch(updateUserAC(user));
 };
 
@@ -50,7 +50,7 @@ export const refreshUser = (arg) => async (dispatch) => {
   }
 
   const result = await response.json();
- 
+
   console.log(result, "result from back");
 
   const user = {
@@ -61,6 +61,6 @@ export const refreshUser = (arg) => async (dispatch) => {
     password: result.password,
     bio: result.bio,
   };
-  
+
   dispatch(refreshUserAC(user));
 };
