@@ -1,5 +1,50 @@
-.flexcontainer{
-display: flex;
-flex-direction: column;
-align-items: center;
+.flexcontainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.qform {
+  gap: 0.1rem;
+  display: flex;
+  flex-direction: column;
+
+  background-color: rgb(231, 231, 231);
+  border-radius: 10px;
+  padding: 1rem 2rem 1rem 2rem;
+  width: 600px;
+}
+.qform > label {
+  margin-top: 1rem;
+}
+
+.qform > input {
+  line-height: 2rem;
+  background-clip: padding-box;
+  border: 1px solid #bdbdbd;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  border-radius: 5px;
+}
+.qform > textarea {
+  height: 200px;
+
+  resize: none;
+}
+
+[price-attr] {
+}
+
+.qform > button {
+  width: 5rem;
+  height: 3rem;
+  margin-top: 1rem;
+  align-self: center;
+}
+
+.tag {
+  background-color: rgb(183, 208, 255);
+  margin-top: 0.3rem;
+  margin-right: 0.3rem;
+  line-height: 1.5rem;
 }

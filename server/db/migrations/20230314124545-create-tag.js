@@ -14,7 +14,8 @@ module.exports = {
         references:{
           model:'Questions',
           key: 'id',
-        }
+        },
+        onDelete:'cascade',
       },
       subjectId: {
         type: Sequelize.INTEGER,
@@ -22,7 +23,8 @@ module.exports = {
         references:{
           model:'Subjects',
           key: 'id',
-        }
+        },
+        onDelete:'cascade',
       },
       createdAt: {
         allowNull: false,
