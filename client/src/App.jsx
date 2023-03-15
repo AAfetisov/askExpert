@@ -12,6 +12,7 @@ import { ProfileForm } from "./components/ProfileForm";
 import RegisterForm from "./components/RegistrationForm";
 import { refreshSessionTh } from "./store/authReducer/actions";
 import { refreshUser } from "./store/profileReducer/actions";
+import QuestionPage from "./components/QuestionPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -55,6 +56,7 @@ function App() {
         <Route path="/logout" element={<Logout />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/profile/form" element={<ProfileForm />} />
+        <Route path="/question/:id" element={<QuestionPage />} />
       </Routes>
     </>
   );

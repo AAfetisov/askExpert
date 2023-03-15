@@ -1,3 +1,5 @@
+/* eslint-disable react/button-has-type */
+/* eslint-disable prefer-const */
 // import { style } from "@mui/system";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,12 +17,9 @@ export function Profile() {
 
   const userAuth = useSelector((state) => state.auth.user);
 
-  
-
-
   return (
     <div className={Styles.mainbox}>
-      <Avatar></Avatar>
+      <Avatar />
 
       <div className={Styles.userInfo}>
         {user.name ? (
@@ -45,7 +44,7 @@ export function Profile() {
           <button>Change your profile</button>
         </Link>
       </div>
-      <Rate></Rate>
+      <Rate />
     </div>
   );
 }
