@@ -1,8 +1,10 @@
-import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import QuestionForm from '../QuestionForm';
-import style from './style.module.css';
+/* eslint-disable import/no-named-as-default */
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import QuestionForm from "../QuestionForm";
+import style from "./style.module.css";
+import YourQuestion from "../YourQuestion/YourQuestion";
 
 export default function Main() {
   const navigate = useNavigate();
@@ -17,9 +19,16 @@ export default function Main() {
 
   return (
     <div className={style.flexcontainer}>
-      {isAuth
-        ? <QuestionForm />
-        : <button type="button" onClick={() => navigate('/login')}>Sign In to ask question</button>}
+      {isAuth ? (
+        <>
+          <QuestionForm />
+          <YourQuestion />
+        </>
+      ) : (
+        <button type="button" onClick={() => navigate("/login")}>
+          Sign In to ask question
+        </button>
+      )}
     </div>
   );
 }
