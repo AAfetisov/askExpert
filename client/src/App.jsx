@@ -8,6 +8,7 @@ import { Logo } from './components/Logo/logo';
 import Logout from './components/Logout';
 import Main from './components/Main';
 import { Profile } from './components/Profile/profile';
+import QuestionPage from './components/QuestionPage';
 import RegisterForm from './components/RegistrationForm';
 import { refreshSessionTh } from './store/authReducer/actions';
 
@@ -50,6 +51,7 @@ function App() {
         <Route path="/login" element={<LoginForm />} />
         <Route path="/logout" element={<Logout />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/question/:id" element={<QuestionPage />} />
       </Routes>
     </>
   );

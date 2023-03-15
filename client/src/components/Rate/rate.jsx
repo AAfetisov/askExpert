@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React from "react";
-import Styles from "./rate.module.css";
+import React from 'react';
+import Styles from './rate.module.css';
 
 export function Rate() {
   return (
