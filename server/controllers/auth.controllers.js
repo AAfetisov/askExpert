@@ -42,6 +42,7 @@ exports.createNewUserAndSession = async(req,res)=>{
 
         req.session.user = {id:newUserRecord.id,email:newUserRecord.email};
         res.json({id:newUserRecord.id,email:newUserRecord.email});
+        console.log(req.session);
     }
     catch(error){
         console.log('createNewUserAndSession: ',error);

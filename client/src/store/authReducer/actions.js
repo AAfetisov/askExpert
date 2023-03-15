@@ -6,7 +6,7 @@ export const refreshSEssionAC = (user) => ({ type: ATypes.AUTH_REFRESH, payload:
 export const logoutAC = () => ({ type: ATypes.AUTH_LOGOUT, payload: {} });
 
 export const refreshSessionTh = () => async (dispatch) => {
-  const response = await fetch('http://localhost:4000/auth', {
+  const response = await fetch('http://localhost:4002/auth', {
     method: 'get',
     headers: { 'Content-Type': 'application/json' },
     credentials: 'include',
