@@ -14,7 +14,8 @@ module.exports = {
         references:{
           model:'Questions',
           key: 'id',
-        }
+        },
+        onDelete:'cascade',
       },
       offerId: {
         type: Sequelize.INTEGER,
@@ -22,7 +23,8 @@ module.exports = {
         references:{
           model:'Offers',
           key: 'id',
-        }
+        },
+        onDelete:'cascade',
       },
       price: {
         type: Sequelize.INTEGER,

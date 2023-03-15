@@ -24,10 +24,6 @@ export default function RegistrationForm() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
     const email = data.get('email');
     const password = data.get('password');
 
@@ -36,27 +32,22 @@ export default function RegistrationForm() {
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({email, password}),
+        body: JSON.stringify({ email, password }),
         credentials: 'include',
       },
     );
     if (response.ok) {
       const result = await response.json();
-      // dispatch({ type: 'USER_LOGIN', payload: {user:{id:result.id,email:result.email} } });
-      dispatch(setUserAC({id:result.id,name:result.email}))
-      // dispatch(setAuthAC(true));
+      dispatch(setUserAC({ id: result.id, name: result.email }));
       navigate('/');
-      
     } else {
       const error = await response.json();
       setErr(error);
     }
   };
 
-
-
   return (
-    
+
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -75,8 +66,7 @@ export default function RegistrationForm() {
             Register
           </Typography>
           <Typography component="h1" variant="h6" color="red">
-            {err&& <>{err.err}</>
-            }
+            {err && <span>{err.err}</span>}
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
@@ -112,13 +102,13 @@ export default function RegistrationForm() {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
+                <Link href="/restore" variant="body2">
                   Forgot password?
                 </Link>
               </Grid>
               <Grid item>
                 <Link href="/login" variant="body2">
-                  {"Or Log in here"}
+                  Or Log in here
                 </Link>
               </Grid>
             </Grid>

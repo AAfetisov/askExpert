@@ -14,7 +14,8 @@ module.exports = {
         references:{
           model:'Users',
           key: 'id',
-        }
+        },
+        onDelete:'cascade',
       },
       questionId: {
         type: Sequelize.INTEGER,
@@ -22,7 +23,8 @@ module.exports = {
         references:{
           model:'Questions',
           key: 'id',
-        }
+        },
+        onDelete:'cascade',
       },
       text: {
         type: Sequelize.STRING,

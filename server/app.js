@@ -5,8 +5,10 @@ const cors = require("cors");
 require('dotenv').config();
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
-const authRouter = require('./routes/auth.route.js')
 const morgan = require('morgan');
+//routes
+const authRouter = require('./routes/auth.route.js')
+const questionRouter = require('./routes/question.route.js')
 
 const app = express();
 
@@ -31,6 +33,7 @@ app.use(cors({
 }))
 
 app.use('/auth',authRouter)
+app.use('/question',questionRouter)
 
 const port = process.env.PORT ?? 3100;
 app.listen(port, () =>
