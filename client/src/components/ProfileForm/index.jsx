@@ -1,3 +1,5 @@
+/* eslint-disable object-shorthand */
+/* eslint-disable prefer-destructuring */
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
@@ -42,7 +44,7 @@ export function ProfileForm() {
         email: email,
         password: password,
         bio: bio,
-      })
+      }),
     );
     navigate("/profile");
   };
