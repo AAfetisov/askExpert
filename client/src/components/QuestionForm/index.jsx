@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/no-unknown-property */
 /* eslint-disable jsx-a11y/label-has-associated-control */
