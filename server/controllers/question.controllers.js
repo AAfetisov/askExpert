@@ -38,11 +38,25 @@ exports.getQuestion = async (req, res) => {
     });
     console.log(question);
     res.json(question);
+<<<<<<< HEAD
+}catch(error){
+    console.log('getQuestion: ',error);
+    res.status(501).json({err:'something wrong with the Db :('})
+}
+}
+
+exports.setQuestionCompleted = async (req,res)=>{
+    const {user}= req.session;
+    const id = parseInt(req.params.id);
+    if(!id){res.status(401).json({err:'Id must be a number'});return}
+    if(!user){res.status(401).json({err:'Authorization required'});return}
+=======
   } catch (error) {
     console.log('getQuestion: ', error);
     res.status(501).json({ err: 'something wrong with the Db :(' });
   }
 };
+>>>>>>> dev
 
 exports.setQuestionCompleted = async (req, res) => {
   const { user } = req.session;

@@ -2,15 +2,16 @@ require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
-require('dotenv').config();
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 const morgan = require('morgan');
+
 // routes
 const authRouter = require('./routes/auth.route');
 const questionRouter = require('./routes/question.route');
 const profileRouter = require('./routes/profile.route');
 const myQuestionRouter = require('./routes/myQuestion.route');
+const signallingChannelRouter = require('./routes/signallingChannel.route');
 const subscribeRouter = require('./routes/subscribe.route');
 
 const app = express();
@@ -46,6 +47,7 @@ app.use('/auth', authRouter);
 app.use('/question', questionRouter);
 app.use('/profile', profileRouter);
 app.use('/myquestion', myQuestionRouter);
+app.use('/schannel', signallingChannelRouter);
 app.use('/subscribe', subscribeRouter);
 
 const port = process.env.PORT ?? 3100;
