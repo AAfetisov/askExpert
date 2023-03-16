@@ -11,7 +11,7 @@ import { Avatar } from "../Avatar/avatar";
 import { Rate } from "../Rate/rate";
 // import "bootstrap/dist/js/popper.min.js";
 
-import Styles from "./profile.module.css";
+import Styles from './profile.module.css';
 
 export function Profile() {
   const user = useSelector((state) => state.profile.user);

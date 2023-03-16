@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import QuestionForm from "../QuestionForm";
 import YourQuestion from "../YourQuestion/YourQuestion";
+import Subscribe from '../Subscribe/Subscribe';
 import style from "./style.module.css";
 
 export default function Main() {
@@ -25,6 +26,7 @@ export default function Main() {
             )}
           </span>
           <YourQuestion />
+          <Subscribe />
         </>
       ) : (
         <button type="button" onClick={() => navigate("/login")}>
