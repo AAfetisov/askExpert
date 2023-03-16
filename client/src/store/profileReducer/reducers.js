@@ -1,4 +1,4 @@
-import ATypes from "../types";
+import ATypes from '../types';
 
 const initialState = {
   isAuth: false,
