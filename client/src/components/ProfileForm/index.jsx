@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable object-shorthand */
 /* eslint-disable prefer-destructuring */
 import Box from '@mui/material/Box';
