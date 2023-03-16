@@ -2,7 +2,7 @@
 /* eslint-disable max-len */
 /* eslint-disable no-await-in-loop */
 const {
-  Question, Subject, Tag, User,
+  Question, Subject, Tag, User, Offer,
 } = require('../db/models');
 
 exports.CreateQuestion = async (req, res) => {
@@ -61,6 +61,45 @@ exports.setQuestionCompleted = async (req, res) => {
     res.sendStatus(200);
   } catch (error) {
     console.log('setQuestionCompleted: ', error);
+    res.status(501).json({ err: 'something wrong with the Db :(' });
+  }
+};
+
+exports.makeOffer = async (req, res) => {
+  const { user } = req.session;
+  const { id: questionId } = req.params;
+  const { price } = req.body;
+  if (!user) { res.status(401).json({ err: 'Authorization required' }); return; }
+  if (!parseInt(questionId, 10)) { res.status(401).json({ err: 'questionId must be a number' }); return; }
+
+  try {
+    const [offer, created] = await Offer.findOrCreate({
+      where: { expertId: user.id, questionId },
+      defaults: {
+        expertId: user.id, price, questionId, status: true,
+      },
+    });
+    if (!offer) { res.status(401).json({ err: 'couldn\'t create an offer' }); return; }
+    res.json(offer);
+  } catch (error) {
+    console.log('makeOffer: ', error);
+    res.status(501).json({ err: 'something wrong with the Db :(' });
+  }
+};
+
+exports.getOffer = async (req, res) => {
+  const { user } = req.session;
+  const { id: questionId } = req.params;
+
+  if (!user) { res.status(401).json({ err: 'Authorization required' }); return; }
+
+  if (!parseInt(questionId, 10)) { res.status(401).json({ err: 'questionId must be a number' }); return; }
+  try {
+    const offer = await Offer.findOne({ where: { questionId, expertId: user.id } });
+    console.log(222, offer);
+    res.json(offer);
+  } catch (error) {
+    console.log('getOffer: ', error);
     res.status(501).json({ err: 'something wrong with the Db :(' });
   }
 };

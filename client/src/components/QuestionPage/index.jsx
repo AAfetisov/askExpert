@@ -3,8 +3,8 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
+import { receiveSignalMessage, sendSignalMessage, turnServerConfig } from './signallingChannel';
 import style from './style.module.css';
-import { turnServerConfig } from './turnServerConfig';
 
 export default function QuestionPage() {
   const navigate = useNavigate();
@@ -12,10 +12,26 @@ export default function QuestionPage() {
   const user = useSelector((state) => state.auth.user);
   const [question, setQuestion] = useState({});
   const { id } = useParams();
+  const [offeredHelp, setOfferHelp] = useState(null);
+  const [price, setPrice] = useState(1);
   const [err, setErr] = useState('');
+  const [invitationToVideo, setInvitationToVideo] = useState(null);
+
+  const checkIfUserOfferedHelpToThisQUestion = async () => {
+    const response = await fetch(`http://localhost:4000/question/${id}/offer`, {
+      method: 'GET',
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
+    });
+    if (response.ok) {
+      const data = await response.json();
+      setOfferHelp(data);
+    }
+  };
 
   useEffect(() => {
     setErr('');
+    checkIfUserOfferedHelpToThisQUestion();
     const abortController = new AbortController();
     const { signal } = abortController;
     (async () => {
@@ -26,7 +42,6 @@ export default function QuestionPage() {
         signal,
       });
       const data = await response.json();
-      console.log(data);
       setQuestion(data);
     })();
 
@@ -55,8 +70,29 @@ export default function QuestionPage() {
   };
 
   const makeCall = async () => {
-    const myPeerConnection = new RTCPeerConnection(turnServerConfig);
-    console.log(turnServerConfig);
+    const peerConnection = new RTCPeerConnection(turnServerConfig);
+    const myOffer = await peerConnection.createOffer();
+    await peerConnection.setLocalDescription(myOffer);
+    sendSignalMessage(2, myOffer);
+  };
+
+  const acceptCall = async () => {
+    setInvitationToVideo(null);
+    console.log(invitationToVideo);
+    // receiveSignalMessage(2);
+  };
+
+  const handleOfferHelp = async () => {
+    const response = await fetch(`http://localhost:4000/question/${id}/offer`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ price }),
+    });
+    if (response.ok) {
+      const data = await response.json();
+      setOfferHelp(data);
+    }
   };
 
   return (
@@ -65,8 +101,6 @@ export default function QuestionPage() {
         ? (
 
           <div className={style.container}>
-            <button type="button" onClick={makeCall}>Share Your Screen</button>
-            <video id="localVideo" autoPlay playsInline controls={false} />
             {!question.status
             && <div className={style.status}>Completed</div>}
             <div className={style.title}>
@@ -96,6 +130,29 @@ export default function QuestionPage() {
             <div className={style.error}>{err.message}</div>
             {user.id === question?.User?.id && question.status
         && <button type="button" onClick={handleSolveClick} className={style.solvedBtn}>Solved</button>}
+
+            { user.id !== question?.User?.id && question.status
+            && (
+            <div>
+
+              {offeredHelp
+                ? (
+                  <div>
+                    Help offered for
+                    {' '}
+                    {offeredHelp.price}
+                    ₽
+                  </div>
+                )
+                : (
+                  <>
+                    <input type="number" name="price" onChange={(e) => setPrice(e.target.value)} value={price} />
+                    <button type="button" onClick={handleOfferHelp}>Offer Help</button>
+                  </>
+                )}
+            </div>
+            )}
+
           </div>
         )
         : <div>Nothing Found</div>}
