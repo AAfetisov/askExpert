@@ -4,7 +4,6 @@ exports.GetUser = async (req, res) => {
   const {
     id, name, surname, email, password, bio,
   } = req.body;
-  console.log(1, 'user: ', req.body);
 
   try {
     const profile = await User.update(
@@ -31,7 +30,6 @@ exports.GetUser = async (req, res) => {
 
 exports.findUser = async (req, res) => {
   const { user } = req.session;
-  console.log(req.session, '77777777777777777');
 
   try {
     const userRecord = await User.findOne({
@@ -43,10 +41,6 @@ exports.findUser = async (req, res) => {
     const data = delete userRecord.password;
 
     res.json(userRecord);
-
-    console.log(userRecord, '655555551');
-
-    console.log(data, 'data======');
   } catch (error) {
     console.log('User: ', error);
     res.status(501).json({ err: 'something wrong with the Db :(' });
