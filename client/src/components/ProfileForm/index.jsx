@@ -1,16 +1,16 @@
 /* eslint-disable object-shorthand */
 /* eslint-disable prefer-destructuring */
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Container from "@mui/material/Container";
-import CssBaseline from "@mui/material/CssBaseline";
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Container from '@mui/material/Container';
+import CssBaseline from '@mui/material/CssBaseline';
 
-import TextField from "@mui/material/TextField";
-import Typography from "@mui/material/Typography";
-import * as React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { updateUser, updateUserAC } from "../../store/profileReducer/actions";
+import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
+import * as React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { updateUser, updateUserAC } from '../../store/profileReducer/actions';
 
 export function ProfileForm() {
   const err = null;
@@ -20,19 +20,19 @@ export function ProfileForm() {
   const updatedUser = useSelector((state) => state.profile.user);
   const userId = useSelector((state) => state.auth.user);
 
-  console.log(updatedUser, userId, "5555555555");
+  console.log(updatedUser, userId, '5555555555');
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     const data = new FormData(event.currentTarget);
-    console.log(data, "here dats");
+    console.log(data, 'here dats');
 
-    const name = data.get("name");
-    const surname = data.get("surname");
-    const email = data.get("email");
-    const password = data.get("password");
-    const bio = data.get("bio");
+    const name = data.get('name');
+    const surname = data.get('surname');
+    const email = data.get('email');
+    const password = data.get('password');
+    const bio = data.get('bio');
 
     const id = userId.id;
 
@@ -46,7 +46,7 @@ export function ProfileForm() {
         bio: bio,
       }),
     );
-    navigate("/profile");
+    navigate('/profile');
   };
 
   return (
@@ -55,9 +55,9 @@ export function ProfileForm() {
       <Box
         sx={{
           marginTop: 8,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
         }}
       >
         <Typography component="h1" variant="h5">

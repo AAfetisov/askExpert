@@ -3,19 +3,19 @@
 /* eslint-disable react/button-has-type */
 /* eslint-disable prefer-const */
 // import { style } from "@mui/system";
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { updatedUser, updateUserAC } from "../../store/profileReducer/actions";
-import { Avatar } from "../Avatar/avatar";
-import { Rate } from "../Rate/rate";
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { updatedUser, updateUserAC } from '../../store/profileReducer/actions';
+import { Avatar } from '../Avatar/avatar';
+import { Rate } from '../Rate/rate';
 // import "bootstrap/dist/js/popper.min.js";
 
-import Styles from "./profile.module.css";
+import Styles from './profile.module.css';
 
 export function Profile() {
   const user = useSelector((state) => state.profile.user);
-  console.log(user, "=======>store.profile.user");
+  console.log(user, '=======>store.profile.user');
 
   const userAuth = useSelector((state) => state.auth.user);
 

@@ -12,19 +12,19 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable no-undef */
 /* eslint-disable no-else-return */
-import React, { useEffect, useState } from "react";
-import { Table } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { Table } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 export default function YourQuestion() {
   const [question, setQuestion] = useState([]);
 
   useEffect(() => {
     const getQuestion = async () => {
-      const response = await fetch("http://localhost:4000/myquestion", {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
+      const response = await fetch('http://localhost:4000/myquestion', {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
       });
       if (response.ok) {
         const result = await response.json();
@@ -47,7 +47,7 @@ export default function YourQuestion() {
           </tr>
         </thead>
         <tbody>
-          {" "}
+          {' '}
           {(question.length &&
             question.map(({ Subjects, id, title, text, price }) => (
               <tr key={id}>
