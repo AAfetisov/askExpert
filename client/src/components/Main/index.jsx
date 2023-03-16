@@ -1,11 +1,11 @@
 /* eslint-disable import/no-named-as-default */
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import QuestionForm from "../QuestionForm";
-import YourQuestion from "../YourQuestion/YourQuestion";
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import QuestionForm from '../QuestionForm';
 import Subscribe from '../Subscribe/Subscribe';
-import style from "./style.module.css";
+import YourQuestion from '../YourQuestion/YourQuestion';
+import style from './style.module.css';
 
 export default function Main() {
   const navigate = useNavigate();
@@ -29,7 +29,7 @@ export default function Main() {
           <Subscribe />
         </>
       ) : (
-        <button type="button" onClick={() => navigate("/login")}>
+        <button type="button" onClick={() => navigate('/login')}>
           Sign In to ask question
         </button>
       )}

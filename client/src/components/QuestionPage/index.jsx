@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import style from './style.module.css';
-import turnServerConfig from './turnServerConfig';
+import { turnServerConfig } from './turnServerConfig';
 
 export default function QuestionPage() {
   const navigate = useNavigate();

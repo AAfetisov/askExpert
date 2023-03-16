@@ -1,19 +1,19 @@
 /* eslint-disable react/jsx-one-expression-per-line */
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, Route, Routes } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, Route, Routes } from 'react-router-dom';
 
-import Styles from "./App.css";
-import LoginForm from "./components/LoginForm";
-import { Logo } from "./components/Logo/logo";
-import Logout from "./components/Logout";
-import Main from "./components/Main";
-import { Profile } from "./components/Profile/profile";
-import { ProfileForm } from "./components/ProfileForm";
-import RegisterForm from "./components/RegistrationForm";
-import { refreshSessionTh } from "./store/authReducer/actions";
-import { refreshUser } from "./store/profileReducer/actions";
-import QuestionPage from "./components/QuestionPage";
+import Styles from './App.css';
+import LoginForm from './components/LoginForm';
+import { Logo } from './components/Logo/logo';
+import Logout from './components/Logout';
+import Main from './components/Main';
+import { Profile } from './components/Profile/profile';
+import { ProfileForm } from './components/ProfileForm';
+import QuestionPage from './components/QuestionPage';
+import RegisterForm from './components/RegistrationForm';
+import { refreshSessionTh } from './store/authReducer/actions';
+import { refreshUser } from './store/profileReducer/actions';
 
 function App() {
   const dispatch = useDispatch();

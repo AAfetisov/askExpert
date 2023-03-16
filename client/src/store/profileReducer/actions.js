@@ -1,5 +1,5 @@
-import { useNavigate } from "react-router-dom";
-import ATypes from "../types";
+import { useNavigate } from 'react-router-dom';
+import ATypes from '../types';
 
 export const updateUserAC = (user) => ({
   type: ATypes.UPDATE_USER,
@@ -7,10 +7,10 @@ export const updateUserAC = (user) => ({
 });
 
 export const updateUser = (arg) => async (dispatch) => {
-  const response = await fetch("http://localhost:4000/profile/form", {
-    method: "put",
-    headers: { "Content-Type": "application/json" },
-    credentials: "include",
+  const response = await fetch('http://localhost:4000/profile/form', {
+    method: 'put',
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',
     body: JSON.stringify({ user: arg }),
   });
 
@@ -20,7 +20,7 @@ export const updateUser = (arg) => async (dispatch) => {
 
   const result = await response.json();
 
-  console.log(result, "result from back");
+  console.log(result, 'result from back');
 
   const user = {
     id: result.id,
@@ -40,10 +40,10 @@ export const refreshUserAC = (user) => ({
 });
 
 export const refreshUser = (arg) => async (dispatch) => {
-  const response = await fetch("http://localhost:4000/profile/form", {
-    method: "get",
-    headers: { "Content-Type": "application/json" },
-    credentials: "include",
+  const response = await fetch('http://localhost:4000/profile/form', {
+    method: 'get',
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',
   });
   if (!response.ok) {
     throw new Error(`status - ${response.status}, ${response.statusText}`);
@@ -51,7 +51,7 @@ export const refreshUser = (arg) => async (dispatch) => {
 
   const result = await response.json();
 
-  console.log(result, "result from back");
+  console.log(result, 'result from back');
 
   const user = {
     id: result.id,

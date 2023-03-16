@@ -1,4 +1,4 @@
-import ATypes from "../types";
+import ATypes from '../types';
 
 // export const setAuthAC = (isAuth)=>({type:ATypes.AUTH_SET,payload: {isAuth}});
 export const setUserAC = (user) => ({
@@ -12,10 +12,10 @@ export const refreshSEssionAC = (user) => ({
 export const logoutAC = () => ({ type: ATypes.AUTH_LOGOUT, payload: {} });
 
 export const refreshSessionTh = () => async (dispatch) => {
-  const response = await fetch("http://localhost:4000/auth", {
-    method: "get",
-    headers: { "Content-Type": "application/json" },
-    credentials: "include",
+  const response = await fetch('http://localhost:4000/auth', {
+    method: 'get',
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',
   });
   if (response.ok) {
     const result = await response.json();
@@ -26,15 +26,15 @@ export const refreshSessionTh = () => async (dispatch) => {
 
 export const endUserSessionTh = (callback) => async (dispatch) => {
   // callback это navigate
-  const response = await fetch("http://localhost:4000/auth/signout", {
-    method: "delete",
-    headers: { "Content-Type": "application/json" },
-    credentials: "include",
+  const response = await fetch('http://localhost:4000/auth/signout', {
+    method: 'delete',
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',
   });
   if (response.ok) {
     dispatch(logoutAC());
-    if (typeof callback === "function") {
-      callback("/");
+    if (typeof callback === 'function') {
+      callback('/');
     }
   }
 };
