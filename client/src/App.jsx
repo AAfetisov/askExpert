@@ -58,6 +58,8 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/profile/form" element={<ProfileForm />} />
         <Route path="/question/:id" element={<QuestionPage />} />
+        <Route path="/mainchat" element={<MainChat />} />
+        <Route path="/chat" element={<Chat />} />
       </Routes>
     </>
   );
