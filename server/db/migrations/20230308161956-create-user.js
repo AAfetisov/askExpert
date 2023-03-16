@@ -20,6 +20,9 @@ module.exports = {
           notEmpty: true,
         },
       },
+      userpic: {
+        type: Sequelize.STRING,
+      },
       email: {
         allowNull: false,
         unique: true,

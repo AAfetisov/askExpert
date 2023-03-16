@@ -20,8 +20,6 @@ export const updateUser = (arg) => async (dispatch) => {
 
   const result = await response.json();
 
-  console.log(result, 'result from back');
-
   const user = {
     id: result.id,
     name: result.name,
@@ -50,8 +48,6 @@ export const refreshUser = (arg) => async (dispatch) => {
   }
 
   const result = await response.json();
-
-  console.log(result, 'result from back');
 
   const user = {
     id: result.id,
