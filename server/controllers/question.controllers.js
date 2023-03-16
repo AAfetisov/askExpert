@@ -1,3 +1,6 @@
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable max-len */
+/* eslint-disable no-await-in-loop */
 const {
   Question, Subject, Tag, User,
 } = require('../db/models');
@@ -26,7 +29,7 @@ exports.CreateQuestion = async (req, res) => {
   }
 };
 exports.getQuestion = async (req, res) => {
-  const id = parseInt(req.params.id);
+  const id = parseInt(req.params.id, 10);
   if (!id) { res.status(401).json({ err: 'Id must be a number' }); return; }
   try {
     const question = await Question.findOne({
@@ -36,31 +39,16 @@ exports.getQuestion = async (req, res) => {
         { model: User, attributes: ['email', 'name', 'surname', 'id'] },
       ],
     });
-    console.log(question);
     res.json(question);
-<<<<<<< HEAD
-}catch(error){
-    console.log('getQuestion: ',error);
-    res.status(501).json({err:'something wrong with the Db :('})
-}
-}
-
-exports.setQuestionCompleted = async (req,res)=>{
-    const {user}= req.session;
-    const id = parseInt(req.params.id);
-    if(!id){res.status(401).json({err:'Id must be a number'});return}
-    if(!user){res.status(401).json({err:'Authorization required'});return}
-=======
   } catch (error) {
     console.log('getQuestion: ', error);
     res.status(501).json({ err: 'something wrong with the Db :(' });
   }
 };
->>>>>>> dev
 
 exports.setQuestionCompleted = async (req, res) => {
   const { user } = req.session;
-  const id = parseInt(req.params.id);
+  const id = parseInt(req.params.id, 10);
   if (!id) { res.status(401).json({ err: 'Id must be a number' }); return; }
   if (!user) { res.status(401).json({ err: 'Authorization required' }); return; }
 

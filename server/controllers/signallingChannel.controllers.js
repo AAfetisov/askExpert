@@ -9,7 +9,7 @@ exports.sendMessage = async (req, res) => {
   const record = Signal.create({ message, fromId: user.id, toId: recepient });
 };
 
-exports.getMessage = async (req, res) => {
+exports.receiveMessage = async (req, res) => {
   const { user } = req.session;
 
   if (!user) { res.status(401).json({ err: 'no session for current user found' }); return; }
