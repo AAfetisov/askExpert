@@ -47,7 +47,6 @@ export default function YourQuestion() {
           </tr>
         </thead>
         <tbody>
-          {' '}
           {(question.length &&
             question.map(({ Subjects, id, title, text, price }) => (
               <tr key={id}>
