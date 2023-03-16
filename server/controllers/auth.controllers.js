@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 const bcrypt = require('bcrypt');
 const { User } = require('../db/models');
 
@@ -40,6 +39,7 @@ exports.createNewUserAndSession = async (req, res) => {
 
     req.session.user = { id: newUserRecord.id, email: newUserRecord.email };
     res.json({ id: newUserRecord.id, email: newUserRecord.email });
+    console.log(req.session);
   } catch (error) {
     console.log('createNewUserAndSession: ', error);
     res.status(501).json({ err: 'something wrong with the Db :(' });

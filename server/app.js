@@ -9,6 +9,8 @@ const morgan = require('morgan');
 // routes
 const authRouter = require('./routes/auth.route');
 const questionRouter = require('./routes/question.route');
+const profileRouter = require('./routes/profile.route');
+const myQuestionRouter = require('./routes/myQuestion.route');
 const subscribeRouter = require('./routes/subscribe.route');
 
 const app = express();
@@ -24,17 +26,26 @@ const sessionConfig = {
   resave: false,
   saveUninitialized: false,
   store: new FileStore({}),
-  cookie: { httpOnly: true },
+  cookie: {
+    secure: false,
+    httpOnly: true,
+    maxAge: 1e3 * 86400, // COOKIE'S LIFETIME — 1 DAY
+  },
 };
 app.use(session(sessionConfig));
 
-app.use(cors({
-  origin: ['http://localhost:3000', 'http://127.0.0.1:3000'],
-  credentials: true,
-}));
+app.use(
+  cors({
+    origin: ['http://localhost:3000', 'http://127.0.0.1:3000'],
+    // origin: '*',
+    credentials: true,
+  }),
+);
 
 app.use('/auth', authRouter);
 app.use('/question', questionRouter);
+app.use('/profile', profileRouter);
+app.use('/myquestion', myQuestionRouter);
 app.use('/subscribe', subscribeRouter);
 
 const port = process.env.PORT ?? 3100;

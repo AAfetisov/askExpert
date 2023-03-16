@@ -1,31 +1,38 @@
-import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import QuestionForm from '../QuestionForm';
+/* eslint-disable import/no-named-as-default */
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import QuestionForm from "../QuestionForm";
+import YourQuestion from "../YourQuestion/YourQuestion";
 import Subscribe from '../Subscribe/Subscribe';
-import style from './style.module.css';
+import style from "./style.module.css";
 
 export default function Main() {
   const navigate = useNavigate();
   const isAuth = useSelector((state) => state.auth.isAuth);
-
-  // useEffect(() => {
-  //   const abortController = new AbortController();
-  //   const { signal } = abortController;
-  //   // dispatch(getTodoTh(signal));
-  //   return () => abortController.abort();
-  // }, []);
+  const [qBtnClicked, setQBtnClicked] = useState(false);
 
   return (
     <div className={style.flexcontainer}>
-      {isAuth
-        ? (
-          <>
-            <QuestionForm />
-            <Subscribe />
-          </>
-        )
-        : <button type="button" onClick={() => navigate('/login')}>Sign In to ask question</button>}
+      {isAuth ? (
+        <>
+          <span>
+            {qBtnClicked ? (
+              <QuestionForm />
+            ) : (
+              <button type="button" onClick={() => setQBtnClicked(true)}>
+                Ask an expert your question
+              </button>
+            )}
+          </span>
+          <YourQuestion />
+          <Subscribe />
+        </>
+      ) : (
+        <button type="button" onClick={() => navigate("/login")}>
+          Sign In to ask question
+        </button>
+      )}
     </div>
   );
 }
