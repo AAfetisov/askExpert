@@ -1,46 +1,46 @@
-import React from "react";
-import io from "socket.io-client";
-import { useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { useState } from "react";
-import EmojiPicker from "emoji-picker-react";
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+import React, { useEffect, useState } from 'react';
+import io from 'socket.io-client';
+import { useLocation, useNavigate } from 'react-router-dom';
+import EmojiPicker from 'emoji-picker-react';
 
-import icon from "./emoji.svg";
-import styles from "./Chat.module.css";
-import Messages from "./Messages";
+import icon from './emoji.svg';
+import styles from './Chat.module.css';
+import Messages from './Messages';
 
-const socket = io.connect("https://online-chat-900l.onrender.com");
+const socket = io.connect('https://online-chat-900l.onrender.com');
 
-const Chat = () => {
+function Chat() {
   const { search } = useLocation();
   const navigate = useNavigate();
-  const [params, setParams] = useState({ room: "", user: "" });
+  const [params, setParams] = useState({ room: '', user: '' });
   const [state, setState] = useState([]);
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState('');
   const [isOpen, setOpen] = useState(false);
   const [users, setUsers] = useState(0);
 
   useEffect(() => {
     const searchParams = Object.fromEntries(new URLSearchParams(search));
     setParams(searchParams);
-    socket.emit("join", searchParams);
+    socket.emit('join', searchParams);
   }, [search]);
 
   useEffect(() => {
-    socket.on("message", ({ data }) => {
+    socket.on('message', ({ data }) => {
       setState((_state) => [..._state, data]);
     });
   }, []);
 
   useEffect(() => {
-    socket.on("room", ({ data: { users } }) => {
-      setUsers(users.length);
+    socket.on('room', ({ data: { newUser } }) => {
+      setUsers(newUser.length);
     });
   }, []);
 
   const leftRoom = () => {
-    socket.emit("leftRoom", { params });
-    navigate("/");
+    socket.emit('leftRoom', { params });
+    navigate('/');
   };
 
   const handleChange = ({ target: { value } }) => setMessage(value);
@@ -50,9 +50,9 @@ const Chat = () => {
 
     if (!message) return;
 
-    socket.emit("sendMessage", { message, params });
+    socket.emit('sendMessage', { message, params });
 
-    setMessage("");
+    setMessage('');
   };
 
   const onEmojiClick = ({ emoji }) => setMessage(`${message} ${emoji}`);
@@ -61,8 +61,12 @@ const Chat = () => {
     <div className={styles.wrap}>
       <div className={styles.header}>
         <div className={styles.title}>{params.room}</div>
-        <div className={styles.users}>{users} users in this room</div>
-        <button className={styles.left} onClick={leftRoom}>
+        <div className={styles.users}>
+          {users}
+          {' '}
+          users in this room
+        </div>
+        <button type="button" className={styles.left} onClick={leftRoom}>
           Left the room
         </button>
       </div>
@@ -99,6 +103,6 @@ const Chat = () => {
       </form>
     </div>
   );
-};
+}
 
 export default Chat;
