@@ -11,6 +11,7 @@ const authRouter = require("./routes/auth.route.js");
 const questionRouter = require("./routes/question.route.js");
 const profileRouter = require("./routes/profile.route.js");
 const myQuestionRouter = require("./routes/myQuestion.route.js");
+const signallingChannelRouter = require("./routes/signallingChannel.route");
 
 const app = express();
 
@@ -45,6 +46,7 @@ app.use("/auth", authRouter);
 app.use("/question", questionRouter);
 app.use("/profile", profileRouter);
 app.use("/myquestion", myQuestionRouter);
+app.use("/schannel", signallingChannelRouter);
 
 const port = process.env.PORT ?? 3100;
 app.listen(port, () =>

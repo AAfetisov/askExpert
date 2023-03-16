@@ -37,6 +37,7 @@ try{
     res.status(501).json({err:'something wrong with the Db :('})
 }
 }
+
 exports.setQuestionCompleted = async (req,res)=>{
     const {user}= req.session;
     const id = parseInt(req.params.id);
