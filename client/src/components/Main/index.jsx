@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import QuestionForm from '../QuestionForm';
+import Subscribe from '../Subscribe/Subscribe';
 import style from './style.module.css';
 
 export default function Main() {
@@ -18,7 +19,12 @@ export default function Main() {
   return (
     <div className={style.flexcontainer}>
       {isAuth
-        ? <QuestionForm />
+        ? (
+          <>
+            <QuestionForm />
+            <Subscribe />
+          </>
+        )
         : <button type="button" onClick={() => navigate('/login')}>Sign In to ask question</button>}
     </div>
   );
