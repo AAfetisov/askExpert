@@ -1,7 +1,9 @@
+/* eslint-disable jsx-a11y/media-has-caption */
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import style from './style.module.css';
+import { turnServerConfig } from './turnServerConfig';
 
 export default function QuestionPage() {
   const navigate = useNavigate();
@@ -51,11 +53,19 @@ export default function QuestionPage() {
     }
   };
 
+  const makeCall = async () => {
+    const myPeerConnection = new RTCPeerConnection(turnServerConfig);
+    console.log(turnServerConfig);
+  };
+
   return (
     <div className={style.flexcontainer}>
       {question
         ? (
+
           <div className={style.container}>
+            <button type="button" onClick={makeCall}>Share Your Screen</button>
+            <video id="localVideo" autoPlay playsInline controls={false} />
             {!question.status
             && <div className={style.status}>Completed</div>}
             <div className={style.title}>
@@ -88,7 +98,6 @@ export default function QuestionPage() {
           </div>
         )
         : <div>Nothing Found</div>}
-
     </div>
   );
 }
