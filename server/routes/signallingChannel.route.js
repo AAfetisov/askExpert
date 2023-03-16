@@ -1,12 +1,11 @@
-const express =require('express')
+const express = require('express');
 
-const router = express.Router()
+const router = express.Router();
 
-const {receiveMessage, sendMessage} = require('../controllers/signallingChannel.controllers')
+const { receiveMessage, sendMessage } = require('../controllers/signallingChannel.controllers');
 
 router.route('/')
-.get(receiveMessage)
-.post(sendMessage)
+  .get(receiveMessage)
+  .post(sendMessage);
 
-
-module.exports = router; 
+module.exports = router;
