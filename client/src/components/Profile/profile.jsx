@@ -48,7 +48,7 @@ export function Profile() {
         </Link>
       </div>
       <Rate />
-      <Chat />
+      {/* <Chat /> */}
     </div>
   );
 }
