@@ -8,37 +8,34 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      questionId: {
-        type: Sequelize.INTEGER,
-        allowNull:false,
-        references:{
-          model:'Questions',
-          key: 'id',
-        },
-        onDelete:'cascade',
-      },
       text: {
         type: Sequelize.STRING,
-        allowNull:false,
       },
-      expertId: {
+      user_from: {
         type: Sequelize.INTEGER,
-        allowNull:false,
-        references:{
-          model:'Users',
+        references: {
+          model: 'Users',
           key: 'id',
         },
-        onDelete:'cascade',
+        allowNull: false,
+        onDelete: 'cascade',
+      },
+      user_to: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Users',
+          key: 'id',
+        },
+        allowNull: false,
+        onDelete: 'cascade',
       },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.fn('now'),
       },
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.fn('now'),
       },
     });
   },
