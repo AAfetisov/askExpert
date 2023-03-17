@@ -1,7 +1,56 @@
-
-
-.flexcontainer{
+.flexcontainer {
+  padding: 25px 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  }
+}
+
+.infobox {
+  display: flex;
+  height: 500px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.infobox img {
+  width: 400px;
+  height: 500px;
+  border-radius: 5%;
+  box-shadow: 0 0 20px 0 lightgray;
+}
+
+.title {
+  text-align: center;
+}
+
+h2 {
+  padding: 20px;
+  margin: 40px 0;
+  color: #333333;
+  font-family: 'Inter', sans-serif;
+  font-size: 26px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+h3 {
+  margin: 40px 40px;
+  color: #333333;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.button {
+  margin: 50px;
+  padding: 0 18px;
+  height: 40px;
+  color: white;
+  background: #0095DD;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  line-height: 1.2;
+  border: 0;
+}

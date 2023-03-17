@@ -20,7 +20,7 @@ export default function Main() {
             {qBtnClicked ? (
               <QuestionForm />
             ) : (
-              <button type="button" onClick={() => setQBtnClicked(true)}>
+              <button className={style.button} type="button" onClick={() => setQBtnClicked(true)}>
                 Ask an expert your question
               </button>
             )}
@@ -29,9 +29,24 @@ export default function Main() {
           <Subscribe />
         </>
       ) : (
-        <button type="button" onClick={() => navigate('/login')}>
-          Sign In to ask question
-        </button>
+        <>
+          <button className={style.button} type="button" onClick={() => navigate('/login')}>
+            Sign In to ask question
+          </button>
+          <div className={style.infobox}>
+            <img src="Fon.jpg" alt="fon" />
+            <div className={style.title}>
+              <h2>Ask an expert</h2>
+              <h3>
+                There will always be an answer to your question.
+                We use technologies that carefully protect your data.
+              </h3>
+
+            </div>
+          </div>
+
+        </>
+
       )}
     </div>
   );

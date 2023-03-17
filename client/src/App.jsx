@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, Route, Routes } from 'react-router-dom';
 
-import Styles from './App.css';
+import Styles from './App.module.css';
 import LoginForm from './components/LoginForm';
 import { Logo } from './components/Logo/logo';
 import Logout from './components/Logout';
@@ -36,18 +36,33 @@ function App() {
       <nav>
         {isAuth ? (
           <>
-            <img src="logo.png" alt="logo" />
-            <div className="userinfo">
-              Logged in as: {user?.name || user?.email}
+            <div>
+              <img src="logo.png" alt="logo" />
             </div>
-            <Link to="/logout">Logout</Link>
-            <Link to="/profile">Profile</Link>
+            <div className={Styles.loginBox}>
+              <div className={Styles.text}>
+                Logged in as: {user?.name || user?.email}
+              </div>
+              <Link to="/">Home</Link>
+              <Link to="/logout">Logout</Link>
+              <Link to="/profile">Profile</Link>
+            </div>
+
           </>
         ) : (
           <>
-            <img src="logo.png" alt="logo" />
-            <Link to="/login">Login</Link>
-            <Link to="/register">Register</Link>
+            <div>
+              <img src="logo.png" alt="logo" />
+            </div>
+            <div className={Styles.loginBox}>
+              <div>
+                <Link to="/login">Login</Link>
+              </div>
+              <div>
+                <Link to="/register">Register</Link>
+              </div>
+            </div>
+
           </>
         )}
       </nav>
