@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
+import OffersForTheQuestion from './OffersForTheQuestion';
 import { receiveSignalMessage, sendSignalMessage, turnServerConfig } from './signallingChannel';
 import style from './style.module.css';
 
@@ -128,8 +129,12 @@ export default function QuestionPage() {
             </div>
             <div className={style.error}>{err.message}</div>
             {user.id === question?.User?.id && question.status
-        && <button type="button" onClick={handleSolveClick} className={style.solvedBtn}>Solved</button>}
-
+        && (
+        <>
+          <OffersForTheQuestion questionId={id} />
+          <button type="button" onClick={handleSolveClick} className={style.solvedBtn}>Solved</button>
+        </>
+        )}
             { user.id !== question?.User?.id && question.status
             && (
             <div>

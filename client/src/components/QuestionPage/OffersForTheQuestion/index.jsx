@@ -1,11 +1,49 @@
-import React, { useEffect } from 'react';
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable react/prop-types */
+import React, { useEffect, useRef, useState } from 'react';
+import style from './style.module.css';
 
-export default function OffersForTheQuestion() {
-  useEffect(() => () => {
+export default function OffersForTheQuestion({ questionId }) {
+  const [offers, setOffers] = useState([]);
 
+  useEffect(() => {
+    const abortController = new AbortController();
+    const { signal } = abortController;
+
+    (async () => {
+      const response = await fetch(`http://localhost:4000/question/${questionId}/offers`, {
+        method: 'GET',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        signal,
+      });
+
+      const data = await response.json();
+      setOffers(data);
+    })();
+
+    return () => abortController.abort();
   }, []);
 
+  const handleOfferClick = (id, e) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
+
   return (
-    <div>OffersForTheQuestion</div>
+    <>
+      <h3>Offers with help for you:</h3>
+      <ul className={style.offers}>
+        {offers?.length && offers.map((of) => (
+          <a key={of.id} href="dummy" onClick={(e) => handleOfferClick(of.id, e)}>
+            <li className={style.offer}>
+              <span className={style.userEmail}>{of.User.email}</span>
+              <span className={style.price}>{of.price}</span>
+            </li>
+          </a>
+        ))}
+      </ul>
+    </>
   );
 }
