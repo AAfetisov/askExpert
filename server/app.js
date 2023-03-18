@@ -17,6 +17,7 @@ const myQuestionRouter = require('./routes/myQuestion.route');
 const signallingChannelRouter = require('./routes/signallingChannel.route');
 const subscribeRouter = require('./routes/subscribe.route');
 const messageApiRouter = require('./routes/message.api.router');
+const allQuestionsRouter = require('./routes/allQuestions.route');
 
 const app = express();
 
@@ -54,6 +55,7 @@ app.use('/myquestion', myQuestionRouter);
 app.use('/schannel', signallingChannelRouter);
 app.use('/subscribe', subscribeRouter);
 app.use('/api/message', messageApiRouter);
+app.use('/allquestions', allQuestionsRouter);
 
 const server = http.createServer(app);
 
