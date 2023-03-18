@@ -49,33 +49,31 @@ export default function Subscribe() {
       <br />
       <br />
       <br />
-      <Table striped="columns">
+      {/* <Table striped="columns">
         <thead>
           <tr>
             <th>Title</th>
-            <th>Username</th>
-            <th>Tags</th>
+            <th>Useremail</th>
             <th>Text</th>
             <th>Price</th>
           </tr>
         </thead>
         <tbody>
-          {(offer.length
-            && offer.map(({
-              Subjects, Offers, id, Username, title, text, price,
+          {(offer?.length
+            && offer?.map(({
+              Question, Offers, id, User, email, title, price,
             }) => (
               <tr key={id}>
-                <td>{Subjects?.map((el1) => el1.title)}</td>
-                <td>{Offers?.map((el3) => el3.title)}</td>
+                <td>{Question?.map((of) => of.title)}</td>
+                <td>{Question.User?.map((of) => of.email)}</td>
                 <td>
                   <Link to={`/subscribe/${id}`}>{title}</Link>
                 </td>
-                <td>{text}</td>
                 <td>{price}</td>
               </tr>
             ))) || <div>There is no question now</div>}
         </tbody>
-      </Table>
+      </Table> */}
     </>
   );
 }
