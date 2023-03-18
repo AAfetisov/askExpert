@@ -1,8 +1,9 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable max-len */
 /* eslint-disable no-await-in-loop */
+const { Op } = require('sequelize');
 const {
-  Question, Subject, Tag, User, Offer,
+  Question, Subject, Tag, User, Offer, ChatMessage,
 } = require('../db/models');
 
 exports.CreateQuestion = async (req, res) => {
@@ -114,6 +115,32 @@ exports.getAllOffersForQuestion = async (req, res) => {
     res.json(offers);
   } catch (error) {
     console.log('getAllOffersForQuestion: ', error);
+    res.status(501).json({ err: 'something wrong with the Db :(' });
+  }
+};
+
+exports.getMessagesByQuestionBetweenTwoUsers = async (req, res) => {
+  const { user } = req.session;
+  const { id: questionId } = req.params;
+  const userOne = user.id;
+  const { recipientId: userTwo } = req.body;
+  console.log(1111, userOne, userTwo);
+  try {
+    const messages = await ChatMessage.findAll({
+      where: {
+        questionId,
+        [Op.or]: [
+          { fromId: userOne, toId: userTwo },
+          { fromId: userTwo, toId: userOne },
+        ],
+      },
+      order: [['createdAt', 'DESC']],
+      limit: 20,
+    });
+
+    res.json(messages.reverse());
+  } catch (error) {
+    console.log('getMessagesByQuestionBetweenTwoUsers: ', error);
     res.status(501).json({ err: 'something wrong with the Db :(' });
   }
 };
