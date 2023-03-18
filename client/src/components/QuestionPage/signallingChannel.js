@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 export const turnServerConfig = {
   iceServers: [
     {
