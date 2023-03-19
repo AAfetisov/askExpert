@@ -45,7 +45,6 @@ export function Profile() {
           <button className={Styles.button}>Change your profile</button>
         </Link>
       </div>
-      <Rate />
     </div>
   );
 }

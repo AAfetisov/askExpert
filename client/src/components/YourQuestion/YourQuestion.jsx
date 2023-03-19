@@ -15,7 +15,11 @@
 import React, { useEffect, useState } from 'react';
 import { Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+<<<<<<< HEAD
+import Style from './YourQuestion.module.css';
+=======
 import styles from './YourQuestion.module.css';
+>>>>>>> dev
 
 export default function YourQuestion() {
   const [question, setQuestion] = useState([]);
@@ -56,7 +60,7 @@ export default function YourQuestion() {
                   <Link to={`/question/${id}`}>{title}</Link>
                 </td>
                 <td>{text}</td>
-                <td>{price}</td>
+                <td className={Style.priceTd}>{price}</td>
               </tr>
             ))) || <div>There is no question now</div>}
         </tbody>
