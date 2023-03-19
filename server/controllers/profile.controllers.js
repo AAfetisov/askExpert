@@ -8,6 +8,7 @@ exports.GetUser = async (req, res) => {
   try {
     const profile = await User.update(
       {
+        userpic: req.body.user.avatar,
         name: req.body.user.name,
         surname: req.body.user.surname,
         email: req.body.user.email,
@@ -41,6 +42,30 @@ exports.findUser = async (req, res) => {
     const data = delete userRecord.password;
 
     res.json(userRecord);
+  } catch (error) {
+    console.log('User: ', error);
+    res.status(501).json({ err: 'something wrong with the Db :(' });
+  }
+};
+
+exports.UpdateAvatar = async (req, res) => {
+  const {
+    id, avatar,
+  } = req.body;
+
+  try {
+    const userAvatar = await User.update(
+      {
+        userpic: req.body.user.avatar,
+      },
+      {
+        where: { id: req.body.user.id },
+        returning: true,
+        plain: true,
+      },
+    );
+
+    res.json(userAvatar);
   } catch (error) {
     console.log('User: ', error);
     res.status(501).json({ err: 'something wrong with the Db :(' });

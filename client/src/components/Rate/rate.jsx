@@ -5,7 +5,7 @@ import Styles from './rate.module.css';
 export function Rate() {
   return (
     <div className={Styles.container_ratings}>
-      <span>Average rating:</span>
+      <h3>Your rate</h3>
       <div className={Styles.astar_rating} id="averageRating">
         <input type="radio" name="astars" id="astar-a" value="5" />
         <label htmlFor="astar-a" />
