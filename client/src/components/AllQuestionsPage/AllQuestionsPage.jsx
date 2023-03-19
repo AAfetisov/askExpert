@@ -23,24 +23,22 @@ export default function AllQuestion() {
 
   return (
     <>
-      <div>
-        <h2>All Questions</h2>
-      </div>
-      <div className={styles.tableBox}>
-        <table>
-          <thead>
-            <tr>
-              <th>User</th>
-              <th>Tag</th>
-              <th>Question Title</th>
-              <th>Question Text</th>
-              <th>Price</th>
-            </tr>
-          </thead>
-          <tbody>
-            {allQuestion?.length && allQuestion?.map((el) => (
-              <tr key={el.id} className={styles.allQuestions}>
-                {/* <td>{User.map((user) => user.name)}</td>
+      <div className={styles.allQuestionsPage}>All Questions</div>
+      <br />
+      <table className={styles.tableAllQuestionsPage}>
+        <thead>
+          <tr>
+            <th>User</th>
+            <th>Tag</th>
+            <th>Question Title</th>
+            <th>Question Text</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          {allQuestion?.length && allQuestion?.map((el) => (
+            <tr key={el.id} className={styles.allQuestions}>
+              {/* <td>{User.map((user) => user.name)}</td>
               <td>{Subject.map((sub) => sub.title)}</td>
               <td>
                 <Link to={`/question/${id}`}>{question.title}</Link>

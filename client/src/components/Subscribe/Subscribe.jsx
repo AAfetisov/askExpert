@@ -1,7 +1,8 @@
 /* eslint-disable no-console */
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { Table } from 'react-bootstrap';
+// import { Table } from 'react-bootstrap';
+import Table from 'react-bootstrap/Table';
 import styles from './Subscribe.module.css';
 
 export default function Subscribe() {
@@ -24,10 +25,12 @@ export default function Subscribe() {
 
   return (
     <>
-      <div className={styles.SubscribeBox}>
-        <h2>My subscribe</h2>
-      </div>
-      <table>
+      <br />
+      <br />
+      <br />
+      <div className={styles.subscribedOffer}>My subscribe</div>
+      <br />
+      <table className={styles.tablesubscribe}>
         <thead>
           <tr>
             <th>User email</th>
