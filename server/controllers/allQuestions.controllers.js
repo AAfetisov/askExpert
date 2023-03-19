@@ -6,7 +6,7 @@ const ShowAllQuestions = async (req, res) => {
   console.log('🚀🚀 ~ file: allQuestions.controllers.js:5 ~ ShowAllQuestions ~ user:', user);
   // try {
   const allQuestion = await Question.findAll({
-    include: [{ model: Subject }, { model: User }], raw: true,
+    include: [{ model: Subject }, { model: User, attributes: ['id', 'name', 'surname', 'email', 'bio', 'userpic'] }], raw: true,
   });
   console.log('🚀🚀🚀 ~ file: allQuestions.controllers.js:13 ~ ShowAllQuestions ~ question:', allQuestion);
   if (allQuestion) {
