@@ -27,12 +27,33 @@ export default function Subscribe() {
       <br />
       <br />
       <br />
-      <div className={styles.subscribedOffer}>My subscribe</div>
-      <div className={styles.subscribedOffer}>
+      <div>My subscribe</div>
+      <br />
+      <table>
+        <thead>
+          <tr>
+            <th>User email</th>
+            <th>Question title</th>
+            <th>Offer text</th>
+            <th>Offer Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          {offer?.length && offer?.map((el) => (
+            <tr key={el.id}>
+              <td>{el.Question.User.email}</td>
+              <td>{el.Question.title}</td>
+              <td>{el.text}</td>
+              <td>{el.price}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      {/* <div>
         {offer?.length
             && offer?.map((of) => <div key={of.id}>{of.Question.title}</div>)}
       </div>
-      <div className={styles.subscribedOffer}>
+      <div>
         {offer?.length
             && offer?.map((of) => <div key={of.id}>{of.Question.User.email}</div>)}
       </div>
@@ -43,7 +64,7 @@ export default function Subscribe() {
       <div>
         {offer?.length
             && offer?.map((of) => <div key={of.id}>{of.price}</div>)}
-      </div>
+      </div> */}
       <br />
       <br />
       <br />
