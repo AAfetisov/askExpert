@@ -8,8 +8,6 @@ import LoginForm from './components/LoginForm';
 import { Logo } from './components/Logo/logo';
 import Logout from './components/Logout';
 import Main from './components/Main';
-import MainChat from './components/MainChat/MainChat';
-import Chat from './components/Chat/Chat';
 import { Profile } from './components/Profile/profile';
 import { ProfileForm } from './components/ProfileForm';
 import QuestionPage from './components/QuestionPage';
@@ -75,8 +73,6 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/profile/form" element={<ProfileForm />} />
         <Route path="/question/:id" element={<QuestionPage />} />
-        <Route path="/mainchat" element={<MainChat />} />
-        <Route path="/chat" element={<Chat />} />
       </Routes>
     </>
   );

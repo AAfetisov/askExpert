@@ -7,6 +7,7 @@ import style from './style.module.css';
 
 export default function OffersForTheQuestion({ questionId, setRecipientId }) {
   const [offers, setOffers] = useState([]);
+  const [elementClicked, setElementClicked] = useState(null);
 
   useEffect(() => {
     const abortController = new AbortController();
@@ -21,6 +22,7 @@ export default function OffersForTheQuestion({ questionId, setRecipientId }) {
       });
 
       const data = await response.json();
+      console.log(data);
       setOffers(data);
     })();
 
@@ -30,23 +32,35 @@ export default function OffersForTheQuestion({ questionId, setRecipientId }) {
   const handleOfferClick = (id, expertId, e) => {
     e.preventDefault();
     e.stopPropagation();
-    console.log(expertId);
     setRecipientId(expertId);
+    if (elementClicked) {
+      elementClicked.style.backgroundColor = 'inherit';
+      elementClicked.style.color = 'inherit';
+    }
+    e.target.style.backgroundColor = '#175792';
+    e.target.style.color = 'white';
+    setElementClicked(e.target);
   };
 
+  if (offers.length <= 0) { return (<div className={style.blockTitle} style={{ backgroundColor: 'grey' }}>No offers yet</div>); }
   return (
-    <>
-      <h3>Offers with help for you:</h3>
+
+    <div className={style.offersContainer}>
+
+      <div className={style.blockTitle}>Help offered:</div>
       <ul className={style.offers}>
         {offers?.length && offers.map((of) => (
           <a key={of.id} href="dummy" onClick={(e) => handleOfferClick(of.id, of.expertId, e)}>
             <li className={style.offer}>
-              <span className={style.userEmail}>{of.User.email}</span>
+              <img alt="upic" className={style.userpic} src={`../${of.User.userpic}`} />
+              <span className={style.userEmail}>{of.User.name}</span>
+              <span className={style.userEmail}>{of.User.surname}</span>
               <span className={style.price}>{of.price}</span>
             </li>
           </a>
         ))}
       </ul>
-    </>
+    </div>
+
   );
 }

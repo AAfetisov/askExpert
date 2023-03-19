@@ -46,6 +46,7 @@ export default function QuestionPage() {
         signal,
       });
       const data = await response.json();
+      console.log(data);
       setQuestion(data);
     })();
     checkIfUserOfferedHelpToThisQUestion();
@@ -62,28 +63,12 @@ export default function QuestionPage() {
       });
       if (response.ok) {
         setQuestion((state) => ({ ...state, status: false }));
-        // navigate('/');
-        console.log(response);
       } else {
         throw new Error('error communicating with server');
       }
     } catch (error) {
-      console.log(error);
       setErr(error);
     }
-  };
-
-  const makeCall = async () => {
-    const peerConnection = new RTCPeerConnection(turnServerConfig);
-    const myOffer = await peerConnection.createOffer();
-    await peerConnection.setLocalDescription(myOffer);
-    sendSignalMessage(2, myOffer);
-  };
-
-  const acceptCall = async () => {
-    setInvitationToVideo(null);
-    console.log(invitationToVideo);
-    // receiveSignalMessage(2);
   };
 
   const handleOfferHelp = async () => {
@@ -103,17 +88,27 @@ export default function QuestionPage() {
     <div className={style.flexcontainer}>
       {question
         ? (
-
-          <div className={style.container}>
-            {!question.status
-            && <div className={style.status}>Completed</div>}
-            <div className={style.title}>
-              {question.title}
-            </div>
-            { question.Subjects
-        && (
           <>
-            <div className={style.tagsContainer}>
+
+            <div className={style.container_left}>
+              <div className={style.userpic} style={{ backgroundImage: `url(../${question?.User?.userpic})` }} />
+              <div className={style.name}>{question?.User?.name}</div>
+              <div className={style.name}>{question?.User?.surname}</div>
+              <div className={style.priceTitle}>question price:</div>
+              <div className={style.price}>{question?.price}</div>
+              {user.id === question?.User?.id && question.status
+              && <button type="button" onClick={handleSolveClick} className={style.solvedBtn}>Solved</button>}
+            </div>
+
+            <div className={style.container_right}>
+              {!question.status
+            && <div className={style.status}>Completed</div>}
+              <div className={style.title}>
+                {question.title}
+              </div>
+              { question.Subjects
+        && (
+          <div className={style.tagsContainer}>
               { question.Subjects.map((s) => (
                 <span
                   key={s.id}
@@ -122,35 +117,33 @@ export default function QuestionPage() {
                   {s.title}
                 </span>
               ))}
-            </div>
-            <div className={style.price}>
-              {question.price}
-            </div>
-          </>
+          </div>
         )}
-            <div className={style.text}>
-              {question.text}
-            </div>
-            <div className={style.error}>{err.message}</div>
-            {user.id === question?.User?.id && question.status
+              <div className={style.textTitle}>Problem description:</div>
+              <div className={style.text}>
+                {question.text}
+              </div>
+              <div className={style.error}>{err.message}</div>
+              {user.id === question?.User?.id && question.status
         && (
         <>
-          <button type="button" onClick={handleSolveClick} className={style.solvedBtn}>Solved</button>
+
           <OffersForTheQuestion questionId={id} setRecipientId={setRecipientId} />
           {recipientId && <ChatGPT questionId={id} recipientId={recipientId} />}
         </>
         )}
-            { user.id !== question?.User?.id && question.status
+              { user.id !== question?.User?.id && question.status
             && (
             <div>
 
               {offeredHelp
                 ? (
                   <div>
-                    Help offered for
-                    {' '}
-                    {offeredHelp.price}
-                    ₽
+                    <div className={style.helpOffered}>
+                      <span>Help offered for</span>
+                      <span className={style.offeredPrice}>{offeredHelp.price}</span>
+
+                    </div>
                     {question?.userId && <ChatGPT questionId={id} recipientId={question.userId} />}
                   </div>
                 )
@@ -163,7 +156,8 @@ export default function QuestionPage() {
             </div>
             )}
 
-          </div>
+            </div>
+          </>
         )
         : <div>Nothing Found</div>}
     </div>

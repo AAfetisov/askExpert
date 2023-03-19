@@ -37,7 +37,7 @@ exports.getQuestion = async (req, res) => {
       where: { id },
       include: [
         { model: Subject, attributes: ['id', 'title'] },
-        { model: User, attributes: ['email', 'name', 'surname', 'id'] },
+        { model: User, attributes: ['email', 'name', 'surname', 'id', 'userpic'] },
       ],
     });
     res.json(question);
@@ -111,7 +111,7 @@ exports.getAllOffersForQuestion = async (req, res) => {
   if (!parseInt(questionId, 10)) { res.status(401).json({ err: 'questionId must be a number' }); return; }
 
   try {
-    const offers = await Offer.findAll({ where: { questionId }, include: [{ model: User, attributes: ['name', 'surname', 'email'] }] });
+    const offers = await Offer.findAll({ where: { questionId }, include: [{ model: User, attributes: ['name', 'surname', 'email', 'userpic'] }] });
     res.json(offers);
   } catch (error) {
     console.log('getAllOffersForQuestion: ', error);
