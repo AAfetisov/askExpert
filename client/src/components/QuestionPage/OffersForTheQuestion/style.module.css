@@ -1,0 +1,19 @@
+.offers {
+  list-style: none;
+  border: 1px solid blueviolet;
+  user-select: none;
+  font-size: 1.5rem;
+}
+.userEmail {
+}
+
+.offer {
+  display: flex;
+  gap: 1rem;
+  background-color: bisque;
+}
+
+.price::after {
+  content: "₽";
+  margin-left: 0.2rem;
+}

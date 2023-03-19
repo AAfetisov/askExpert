@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import AllQuestion from '../AllQuestionsPage/AllQuestionsPage';
 import QuestionForm from '../QuestionForm';
 import Subscribe from '../Subscribe/Subscribe';
 import YourQuestion from '../YourQuestion/YourQuestion';
@@ -27,6 +28,7 @@ export default function Main() {
           </span>
           <YourQuestion />
           <Subscribe />
+          <AllQuestion />
         </>
       ) : (
         <>
