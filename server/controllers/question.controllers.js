@@ -1,8 +1,9 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable max-len */
 /* eslint-disable no-await-in-loop */
+const { Op } = require('sequelize');
 const {
-  Question, Subject, Tag, User, Offer,
+  Question, Subject, Tag, User, Offer, ChatMessage,
 } = require('../db/models');
 
 exports.CreateQuestion = async (req, res) => {
@@ -92,14 +93,54 @@ exports.getOffer = async (req, res) => {
   const { id: questionId } = req.params;
 
   if (!user) { res.status(401).json({ err: 'Authorization required' }); return; }
-
   if (!parseInt(questionId, 10)) { res.status(401).json({ err: 'questionId must be a number' }); return; }
+
   try {
     const offer = await Offer.findOne({ where: { questionId, expertId: user.id } });
-    console.log(222, offer);
     res.json(offer);
   } catch (error) {
     console.log('getOffer: ', error);
+    res.status(501).json({ err: 'something wrong with the Db :(' });
+  }
+};
+
+exports.getAllOffersForQuestion = async (req, res) => {
+  const { user } = req.session;
+  const { id: questionId } = req.params;
+  if (!user) { res.status(401).json({ err: 'Authorization required' }); return; }
+  if (!parseInt(questionId, 10)) { res.status(401).json({ err: 'questionId must be a number' }); return; }
+
+  try {
+    const offers = await Offer.findAll({ where: { questionId }, include: [{ model: User, attributes: ['name', 'surname', 'email'] }] });
+    res.json(offers);
+  } catch (error) {
+    console.log('getAllOffersForQuestion: ', error);
+    res.status(501).json({ err: 'something wrong with the Db :(' });
+  }
+};
+
+exports.getMessagesByQuestionBetweenTwoUsers = async (req, res) => {
+  const { user } = req.session;
+  const { id: questionId } = req.params;
+  const userOne = user.id;
+  const { recipientId: userTwo } = req.body;
+  console.log(1111, userOne, userTwo);
+  try {
+    const messages = await ChatMessage.findAll({
+      where: {
+        questionId,
+        [Op.or]: [
+          { fromId: userOne, toId: userTwo },
+          { fromId: userTwo, toId: userOne },
+        ],
+      },
+      order: [['createdAt', 'DESC']],
+      limit: 20,
+    });
+
+    res.json(messages.reverse());
+  } catch (error) {
+    console.log('getMessagesByQuestionBetweenTwoUsers: ', error);
     res.status(501).json({ err: 'something wrong with the Db :(' });
   }
 };

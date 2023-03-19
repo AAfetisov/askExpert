@@ -3,6 +3,8 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
+import ChatGPT from '../chatGPT';
+import OffersForTheQuestion from './OffersForTheQuestion';
 import { receiveSignalMessage, sendSignalMessage, turnServerConfig } from './signallingChannel';
 import style from './style.module.css';
 
@@ -16,6 +18,7 @@ export default function QuestionPage() {
   const [price, setPrice] = useState(1);
   const [err, setErr] = useState('');
   const [invitationToVideo, setInvitationToVideo] = useState(null);
+  const [recipientId, setRecipientId] = useState(null);
 
   const checkIfUserOfferedHelpToThisQUestion = async () => {
     const response = await fetch(`http://localhost:4000/question/${id}/offer`, {
@@ -26,12 +29,13 @@ export default function QuestionPage() {
     if (response.ok) {
       const data = await response.json();
       setOfferHelp(data);
+      // setRecipientId(question.userId);
     }
   };
 
   useEffect(() => {
     setErr('');
-    checkIfUserOfferedHelpToThisQUestion();
+
     const abortController = new AbortController();
     const { signal } = abortController;
     (async () => {
@@ -44,7 +48,7 @@ export default function QuestionPage() {
       const data = await response.json();
       setQuestion(data);
     })();
-
+    checkIfUserOfferedHelpToThisQUestion();
     return () => abortController.abort();
   }, []);
 
@@ -129,8 +133,13 @@ export default function QuestionPage() {
             </div>
             <div className={style.error}>{err.message}</div>
             {user.id === question?.User?.id && question.status
-        && <button type="button" onClick={handleSolveClick} className={style.solvedBtn}>Solved</button>}
-
+        && (
+        <>
+          <button type="button" onClick={handleSolveClick} className={style.solvedBtn}>Solved</button>
+          <OffersForTheQuestion questionId={id} setRecipientId={setRecipientId} />
+          {recipientId && <ChatGPT questionId={id} recipientId={recipientId} />}
+        </>
+        )}
             { user.id !== question?.User?.id && question.status
             && (
             <div>
@@ -142,6 +151,7 @@ export default function QuestionPage() {
                     {' '}
                     {offeredHelp.price}
                     ₽
+                    {question?.userId && <ChatGPT questionId={id} recipientId={question.userId} />}
                   </div>
                 )
                 : (
