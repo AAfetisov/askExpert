@@ -28,7 +28,7 @@ export default function Subscribe() {
       <br />
       <br />
       <br />
-      <div>My subscribe</div>
+      <div className={styles.subscribedOffer}>My subscribe</div>
       <br />
       <table className={styles.tablesubscribe}>
         <thead>

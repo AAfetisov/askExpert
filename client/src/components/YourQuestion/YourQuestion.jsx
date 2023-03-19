@@ -15,6 +15,7 @@
 import React, { useEffect, useState } from 'react';
 import { Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import styles from './YourQuestion.module.css';
 
 export default function YourQuestion() {
   const [question, setQuestion] = useState([]);
@@ -36,8 +37,8 @@ export default function YourQuestion() {
 
   return (
     <>
-      <div>My question</div>
-      <Table striped="columns">
+      <div className={styles.yourQuestionModule}>My question</div>
+      <Table className={styles.yourQuestionModuleTable} striped="columns">
         <thead>
           <tr>
             <th>Tags</th>
