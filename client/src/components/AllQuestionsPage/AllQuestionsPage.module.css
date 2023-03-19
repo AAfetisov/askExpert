@@ -1,5 +1,11 @@
 .allQuestionsPage {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-  }
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.tableBox {
+  width: 80%;
+  overflow-x: auto;
+  height: 200px;
+}

@@ -15,6 +15,7 @@
 import React, { useEffect, useState } from 'react';
 import { Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import Style from './YourQuestion.module.css';
 
 export default function YourQuestion() {
   const [question, setQuestion] = useState([]);
@@ -36,9 +37,13 @@ export default function YourQuestion() {
 
   return (
     <>
-      <div>My question</div>
-      <Table striped="columns">
-        <thead>
+      <div>
+        <h2 className={Style.MyQuestionBox}>
+          My question
+        </h2>
+      </div>
+      <Table striped="columns" className={Style.table}>
+        <thead className={Style.thead}>
           <tr>
             <th>Tags</th>
             <th>Title</th>
@@ -55,7 +60,7 @@ export default function YourQuestion() {
                   <Link to={`/question/${id}`}>{title}</Link>
                 </td>
                 <td>{text}</td>
-                <td>{price}</td>
+                <td className={Style.priceTd}>{price}</td>
               </tr>
             ))) || <div>There is no question now</div>}
         </tbody>

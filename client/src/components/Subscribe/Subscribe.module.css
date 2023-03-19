@@ -3,3 +3,57 @@
   flex-wrap: wrap;
   justify-content: space-evenly;
 }
+
+.SubscribeBox {
+  margin-top: 50px;
+}
+
+table {
+  width: 80%;
+}
+
+thead {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+th {
+  padding: 6px;
+}
+
+td {
+  padding: 6px;
+  text-align: center;
+
+}
+
+.priceTd:nth-child(2n) {
+  animation: example 5s infinite linear;
+  border-radius: 6px;
+}
+
+@keyframes example {
+  0% {
+    background: #33CCCC;
+  }
+
+  20% {
+    background: #33CC36;
+  }
+
+  40% {
+    background: #B8CC33;
+  }
+
+  60% {
+    background: #FCCA00;
+  }
+
+  80% {
+    background: #33CC36;
+  }
+
+  100% {
+    background: #33CCCC;
+  }
+}

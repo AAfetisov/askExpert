@@ -24,11 +24,9 @@ export default function Subscribe() {
 
   return (
     <>
-      <br />
-      <br />
-      <br />
-      <div>My subscribe</div>
-      <br />
+      <div className={styles.SubscribeBox}>
+        <h2>My subscribe</h2>
+      </div>
       <table>
         <thead>
           <tr>
