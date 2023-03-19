@@ -1,3 +1,6 @@
+/* eslint-disable react/jsx-closing-tag-location */
+/* eslint-disable react/jsx-indent-props */
+/* eslint-disable react/jsx-indent */
 /* eslint-disable no-console */
 /* eslint-disable object-shorthand */
 /* eslint-disable prefer-destructuring */
@@ -11,7 +14,9 @@ import Typography from '@mui/material/Typography';
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { updateUser, updateUserAC } from '../../store/profileReducer/actions';
+import {
+  setUserAvatar, setUserBio, setUserName, setUserSurname, updateUser, updateUserAC,
+} from '../../store/profileReducer/actions';
 
 export function ProfileForm() {
   const err = null;
@@ -21,7 +26,7 @@ export function ProfileForm() {
   const updatedUser = useSelector((state) => state.profile.user);
   const userId = useSelector((state) => state.auth.user);
 
-  console.log(updatedUser, userId, '5555555555');
+  console.log(updatedUser.surname, '5555555555');
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -29,10 +34,10 @@ export function ProfileForm() {
     const data = new FormData(event.currentTarget);
     console.log(data, 'here dats');
 
+    const avatar = data.get('avatar');
     const name = data.get('name');
     const surname = data.get('surname');
     const email = data.get('email');
-    const password = data.get('password');
     const bio = data.get('bio');
 
     const id = userId.id;
@@ -40,14 +45,30 @@ export function ProfileForm() {
     dispatch(
       updateUser({
         id: id,
+        avatar: avatar,
         name: name,
         surname: surname,
         email: email,
-        password: password,
         bio: bio,
       }),
     );
     navigate('/profile');
+  };
+
+  const onChangeName = (ev) => {
+    dispatch(setUserName(ev.target.value));
+  };
+
+  const onChangeAvatar = (ev) => {
+    dispatch(setUserAvatar(ev.target.value));
+  };
+
+  const onChangeSurname = (ev) => {
+    dispatch(setUserSurname(ev.target.value));
+  };
+
+  const onChangeBio = (ev) => {
+    dispatch(setUserBio(ev.target.value));
   };
 
   return (
@@ -68,6 +89,66 @@ export function ProfileForm() {
           {err && <>Incorrect Email or Password</>}
         </Typography>
         <Box component="form" noValidate sx={{ mt: 1 }} onSubmit={handleSubmit}>
+          {updatedUser ? (
+            <>
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="avatar"
+            name="avatar"
+            onChange={onChangeAvatar}
+            value={updatedUser.avatar}
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="name"
+            name="name"
+            autoComplete="name"
+            onChange={onChangeName}
+            value={updatedUser.name}
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="surname"
+            name="surname"
+            autoComplete="surname"
+            onChange={onChangeSurname}
+            value={updatedUser.surname}
+          />
+              <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="email"
+            name="email"
+            autoComplete="email"
+            value={userId.email}
+              />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="bio"
+            id="bio"
+            onChange={onChangeBio}
+            value={updatedUser.bio}
+          />
+          </>
+          ) : (
+            <>
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="avatar"
+            label="Avatar"
+            name="avatar"
+          />
           <TextField
             margin="normal"
             required
@@ -84,7 +165,6 @@ export function ProfileForm() {
             id="surname"
             label="Surname"
             name="surname"
-            autoComplete="surname"
           />
           <TextField
             margin="normal"
@@ -96,25 +176,16 @@ export function ProfileForm() {
             autoComplete="email"
             value={userId.email}
           />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            value={userId.password}
-            autoComplete="current-password"
-          />
-          <TextField
+            <TextField
             margin="normal"
             required
             fullWidth
             name="bio"
             label="Bio"
             id="bio"
-          />
+            />
+          </>
+          )}
           <Button
             type="submit"
             fullWidth
