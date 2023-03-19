@@ -5,13 +5,14 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class Question extends Model {
     static associate({
-      User, Offer, Contract, Comment, Subject, Tag,
+      User, Offer, Contract, Comment, Subject, Tag, ChatMessage,
     }) {
       this.belongsTo(User, { foreignKey: 'userId' });
       this.hasMany(Offer, { foreignKey: 'questionId' });
       this.hasMany(Contract, { foreignKey: 'questionId' });
       // this.hasMany(Comment, { foreignKey: 'questionId' });
       this.belongsToMany(Subject, { through: Tag, foreignKey: 'questionId', otherKey: 'subjectId' });
+      this.hasMany(ChatMessage, { foreignKey: 'questionId' });
     }
   }
   Question.init({
