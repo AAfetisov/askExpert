@@ -30,7 +30,6 @@ export function Profile() {
             <h3>Name: {user.name}</h3>
             <h3>Surname: {user.surname}</h3>
             <h3>Email: {user.email}</h3>
-            <h3>Password: {user.password}</h3>
             <h3>Bio: {user.bio}</h3>
           </>
         ) : (
@@ -38,13 +37,12 @@ export function Profile() {
             <h3>Name: {userAuth.name}</h3>
             <h3>Surname: {userAuth.surname}</h3>
             <h3>Email: {userAuth.email}</h3>
-            <h3>Password: {userAuth.password}</h3>
             <h3>Bio: {userAuth.bio}</h3>
           </>
         )}
 
         <Link to="/profile/form">
-          <button>Change your profile</button>
+          <button className={Styles.button}>Change your profile</button>
         </Link>
       </div>
       <Rate />

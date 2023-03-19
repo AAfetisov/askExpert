@@ -16,6 +16,7 @@ const myQuestionRouter = require('./routes/myQuestion.route');
 const signallingChannelRouter = require('./routes/signallingChannel.route');
 const subscribeRouter = require('./routes/subscribe.route');
 const messageApiRouter = require('./routes/message.api.router');
+const allQuestionsRouter = require('./routes/allQuestions.route');
 
 const app = express();
 
@@ -53,6 +54,7 @@ app.use('/myquestion', myQuestionRouter);
 app.use('/schannel', signallingChannelRouter);
 app.use('/subscribe', subscribeRouter);
 app.use('/api/message', messageApiRouter);
+app.use('/allquestions', allQuestionsRouter);
 
 const port = process.env.PORT ?? 3100;
 const server = app.listen(port, () => console.log(`Sever started on http://localhost:${port}`));
