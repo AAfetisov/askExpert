@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap');
+
+nav {
+  padding: 14px 50px;
+  display: flex;
+  background: #FFFFFF;
+  height: 4rem;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 0 20px 0 lightgray;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: #333333;
+}
+
+img {
+  width: 50px;
+  height: 50px;
+}
+
+.loginBox {
+  display: flex;
+  gap: 5rem;
+}
+
+a {
+  color: #333333;
+  text-decoration: none;
+  cursor: pointer;
+  text-align: center;
+}
+
+a:hover {
+  text-decoration: underline;
+  text-decoration-style: solid;
+  text-decoration-color: #0095DD;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
+.text {
+  color: #007DBA;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* .imgBox img {
+  width: 30px;
+  height: 30px;
+} */
+
+flex-container-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  border-radius: 10px;
+}
+
+input {
+  font-size: 1.3rem;
+  min-width: 20rem;
+}
+
+spacer-1rem {
+  margin: 1rem 1rem;
+}

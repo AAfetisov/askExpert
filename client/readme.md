@@ -1,7 +1,5 @@
-# React-todo-list   
-Сделаем ещё раз старую задачу, но с новыми знаниями.
+# React-WEBRTC  
 
-![asd](readme-assets/React-Ant-Design-Todo-List.png)
 
 ## Release 0
 

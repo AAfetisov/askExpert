@@ -1,13 +1,10 @@
+/* eslint-disable no-console */
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import style from './Subscribe.module.css';
+import { useNavigate, Link } from 'react-router-dom';
+import { Table } from 'react-bootstrap';
+import styles from './Subscribe.module.css';
 
 export default function Subscribe() {
-  // const [user, setUser] = useState([]);
-  // const [title, setTitle] = useState('');
-  // const [text, setText] = useState('');
-  // const [price, setPrice] = useState(1);
-  // const [tags, setTags] = useState([]);
   const [offer, setOffer] = useState([]);
 
   useEffect(() => {
@@ -26,8 +23,57 @@ export default function Subscribe() {
   }, []);
 
   return (
-    <div>
-      {offer.length && offer.map((el) => <div key={el.id}>{el.id}</div>)}
-    </div>
+    <>
+      <br />
+      <br />
+      <br />
+      <div className={styles.subscribedOffer}>My subscribe</div>
+      <div className={styles.subscribedOffer}>
+        {offer?.length
+            && offer?.map((of) => <div key={of.id}>{of.Question.title}</div>)}
+      </div>
+      <div className={styles.subscribedOffer}>
+        {offer?.length
+            && offer?.map((of) => <div key={of.id}>{of.Question.User.email}</div>)}
+      </div>
+      <div>
+        {offer?.length
+            && offer?.map((of) => <div key={of.id}>{of.text}</div>)}
+      </div>
+      <div>
+        {offer?.length
+            && offer?.map((of) => <div key={of.id}>{of.price}</div>)}
+      </div>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      {/* <Table striped="columns">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Useremail</th>
+            <th>Text</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          {(offer?.length
+            && offer?.map(({
+              Question, Offers, id, User, email, title, price,
+            }) => (
+              <tr key={id}>
+                <td>{Question?.map((of) => of.title)}</td>
+                <td>{Question.User?.map((of) => of.email)}</td>
+                <td>
+                  <Link to={`/subscribe/${id}`}>{title}</Link>
+                </td>
+                <td>{price}</td>
+              </tr>
+            ))) || <div>There is no question now</div>}
+        </tbody>
+      </Table> */}
+    </>
   );
 }

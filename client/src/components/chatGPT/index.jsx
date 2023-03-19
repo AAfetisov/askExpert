@@ -106,9 +106,9 @@ export default function ChatGPT({ questionId, recipientId }) {
         onKeyDown={handleEnterPress}
       />
       <button className={style.messageSend} type="button" onClick={sendMessage}>Send</button>
-      <div>screen sharing:</div>
+      {/* <div>screen sharing:</div>
       {socket
-      && <ScreenShare socket={socket} />}
+      && <ScreenShare socket={socket} />} */}
     </div>
   );
 }

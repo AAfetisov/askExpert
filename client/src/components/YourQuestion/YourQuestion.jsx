@@ -41,13 +41,12 @@ export default function YourQuestion() {
         <thead>
           <tr>
             <th>Tags</th>
-            <th>Tittle</th>
+            <th>Title</th>
             <th>Text</th>
             <th>Price</th>
           </tr>
         </thead>
         <tbody>
-          {' '}
           {(question.length &&
             question.map(({ Subjects, id, title, text, price }) => (
               <tr key={id}>

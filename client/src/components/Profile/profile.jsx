@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable import/named */
 /* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable react/button-has-type */
@@ -8,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { updatedUser, updateUserAC } from '../../store/profileReducer/actions';
 import { Avatar } from '../Avatar/avatar';
+import { Chat, MainChat2 } from '../Chat_2/Chat';
 import { Rate } from '../Rate/rate';
 // import "bootstrap/dist/js/popper.min.js";
 
@@ -47,6 +49,7 @@ export function Profile() {
         </Link>
       </div>
       <Rate />
+      {/* <Chat /> */}
     </div>
   );
 }

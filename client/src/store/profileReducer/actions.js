@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { useNavigate } from 'react-router-dom';
 import ATypes from '../types';
 
