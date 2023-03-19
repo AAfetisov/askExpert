@@ -43,16 +43,15 @@ export default function AllQuestion() {
               <td>
                 <Link to={`/question/${id}`}>{question.title}</Link>
               </td> */}
-                <td>{el['User.name']}</td>
-                <td>{el['Subjects.title']}</td>
-                <td>{el.title}</td>
-                <td>{el.text}</td>
-                <td>{el.price}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+              <td>{el['User.name']}</td>
+              <td>{el['Subjects.title']}</td>
+              <td>{el.title}</td>
+              <td>{el.text}</td>
+              <td>{el.price}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
       {/* <div className={styles.allQuestionsPage}>All questions</div>
       <div>
         {allQuestion.map((question) => <p>{question.title}</p>)}
