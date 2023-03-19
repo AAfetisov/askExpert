@@ -88,4 +88,19 @@ io.on('connection', (socket) => {
       toId, fromId: currentUser, body, questionId,
     });
   });
+  // video
+  socket.on('screenShare', (description) => {
+    console.log('screenShare');
+    socket.broadcast.emit('screenShare', description);
+  });
+
+  socket.on('offer', (offer) => {
+    console.log('OFFER');
+    socket.broadcast.emit('offer', offer);
+  });
+
+  socket.on('answer', (answer) => {
+    console.log('answer');
+    socket.broadcast.emit('answer', answer);
+  });
 });

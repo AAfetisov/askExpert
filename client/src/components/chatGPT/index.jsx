@@ -4,6 +4,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import io from 'socket.io-client';
+import ScreenShare from '../ScreenShare';
 import style from './style.module.css';
 
 export default function ChatGPT({ questionId, recipientId }) {
@@ -105,6 +106,9 @@ export default function ChatGPT({ questionId, recipientId }) {
         onKeyDown={handleEnterPress}
       />
       <button className={style.messageSend} type="button" onClick={sendMessage}>Send</button>
+      <div>screen sharing:</div>
+      {socket
+      && <ScreenShare socket={socket} />}
     </div>
   );
 }
