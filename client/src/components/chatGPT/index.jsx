@@ -4,7 +4,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import io from 'socket.io-client';
-import ScreenShare from '../ScreenShare';
 import style from './style.module.css';
 
 export default function ChatGPT({ questionId, recipientId }) {
@@ -32,7 +31,6 @@ export default function ChatGPT({ questionId, recipientId }) {
   }, [questionId, recipientId]);
 
   useEffect(() => {
-    // подключение к чату
     const newSocket = io('http://localhost:4000', {
       withCredentials: true,
     });
@@ -82,14 +80,14 @@ export default function ChatGPT({ questionId, recipientId }) {
   };
 
   return (
-    <div>
+    <div className={style.chatContainer}>
       <div className={style.chatWindow} ref={containerRef}>
         {messages.map((message, index) => (
           <div
             key={index}
             className={style.message}
             style={{
-              backgroundColor: message.fromId === user.id ? 'white' : '#daf8b4',
+              backgroundColor: message.fromId === user.id ? '#eef137' : '#daf8b4',
               alignSelf: message.fromId === user.id ? 'flex-end' : 'flex-start',
             }}
           >
@@ -104,11 +102,9 @@ export default function ChatGPT({ questionId, recipientId }) {
         value={inputMessage}
         onChange={(e) => setInputMessage(e.target.value)}
         onKeyDown={handleEnterPress}
+        placeholder="Enter your message"
       />
       <button className={style.messageSend} type="button" onClick={sendMessage}>Send</button>
-      {/* <div>screen sharing:</div>
-      {socket
-      && <ScreenShare socket={socket} />} */}
     </div>
   );
 }

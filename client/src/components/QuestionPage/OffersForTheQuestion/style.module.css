@@ -1,19 +1,66 @@
+.offersContainer {
+  outline: 2px #dddddd solid;
+  border-radius: 4px;
+  margin-top: 2rem;
+  min-width: 400px;
+}
+.blockTitle {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  text-align: center;
+  background-color: #0095dd;
+  border-radius: 4px;
+  color: white;
+  font-size: 1.2rem;
+  line-height: 2rem;
+}
+
 .offers {
   list-style: none;
-  border: 1px solid blueviolet;
+  border: 1px solid #0095dd;
   user-select: none;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
 }
+
 .userEmail {
+  pointer-events: none;
 }
 
 .offer {
   display: flex;
-  gap: 1rem;
-  background-color: bisque;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  line-height: 2em;
+}
+.offer:hover {
+  background-color: #e2edfd;
 }
 
+.price {
+  pointer-events: none;
+  color: rgba(255, 222, 37, 0.829);
+  font-weight: bold;
+  text-shadow: 1px 1px #3f3f3f;
+}
 .price::after {
   content: "₽";
   margin-left: 0.2rem;
+}
+.price::before {
+  color: black;
+  text-shadow: none;
+  content: "-";
+  margin-right: 0.3rem;
+}
+.name {
+  pointer-events: none;
+}
+.surname {
+  pointer-events: none;
+}
+.userpic {
+  pointer-events: none;
+  width: 1.3em;
+  height: 1.3em;
 }
