@@ -1,8 +1,33 @@
 .mainbox {
-  margin: 20px;
+  margin: 50px;
   display: flex;
+  /* align-items: center; */
+  justify-content:center;
+  gap: 20px;
 }
 
 .userInfo {
+  margin: 2px;
+}
+
+.userInfo h3 {
+  color: #333333;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.button {
   margin: 50px;
+  padding: 0 18px;
+  height: 40px;
+  color: white;
+  background: #0095DD;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  line-height: 1.2;
+  border: 0;
 }
