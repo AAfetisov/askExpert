@@ -1,19 +1,21 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap");
 
 nav {
   padding: 14px 50px;
   display: flex;
-  background: #FFFFFF;
+  background: #ffffff;
   height: 4rem;
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 0 20px 0 lightgray;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 16px;
   font-weight: 500;
   color: #333333;
 }
-
+html {
+  font-size: 16px;
+}
 img {
   width: 50px;
   height: 50px;
@@ -34,22 +36,17 @@ a {
 a:hover {
   text-decoration: underline;
   text-decoration-style: solid;
-  text-decoration-color: #0095DD;
+  text-decoration-color: #0095dd;
   text-decoration-thickness: 2px;
   text-underline-offset: 4px;
 }
 
 .text {
-  color: #007DBA;
-  font-family: 'Inter', sans-serif;
+  color: #007dba;
+  font-family: "Inter", sans-serif;
   font-size: 16px;
   font-weight: 500;
 }
-
-/* .imgBox img {
-  width: 30px;
-  height: 30px;
-} */
 
 flex-container-column {
   display: flex;
@@ -66,4 +63,38 @@ input {
 
 spacer-1rem {
   margin: 1rem 1rem;
+}
+
+h2 {
+  padding: 20px;
+  margin: 40px 0;
+  color: #333333;
+  font-family: "Inter", sans-serif;
+  font-size: 26px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+h3 {
+  margin: 40px 40px;
+  color: #333333;
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+button {
+  padding: 0 1rem;
+  height: 2.5rem;
+  color: rgb(255, 255, 255);
+  background: #0095dd;
+  border-radius: 5px;
+  cursor: pointer;
+  line-height: 1.2;
+  border: 0;
+}
+
+button:hover {
+  background: #01a0f0;
+  outline: 1px rgb(255, 255, 255) solid;
 }
