@@ -23,9 +23,9 @@ export default function AllQuestion() {
 
   return (
     <>
-      <div>All Questions</div>
+      <div className={styles.allQuestionsPage}>All Questions</div>
       <br />
-      <table>
+      <table className={styles.tableAllQuestionsPage}>
         <thead>
           <tr>
             <th>User</th>
