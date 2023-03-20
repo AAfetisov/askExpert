@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+/* eslint-disable max-len */
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './AllQuestionsPage.module.css';
 
@@ -15,7 +16,7 @@ export default function AllQuestion() {
       if (response.ok) {
         const result = await response.json();
         setAllQuestion(result);
-        console.log('🚀🚀 ~ file: AllQuestionsPage.jsx:19 ~ getAllQuestion ~ result:', result);
+        // console.log('🚀🚀 ~ file: AllQuestionsPage.jsx:19 ~ getAllQuestion ~ result:', result);
       }
     };
     getAllQuestion();
@@ -28,26 +29,33 @@ export default function AllQuestion() {
       <table className={styles.tableAllQuestionsPage}>
         <thead>
           <tr>
-            <th>User</th>
-            <th>Tag</th>
-            <th>Question Title</th>
-            <th>Question Text</th>
+            <th>Created by</th>
+            <th>Tags</th>
+            <th>Question</th>
             <th>Price</th>
+            <th>Date</th>
           </tr>
         </thead>
         <tbody>
           {allQuestion?.length && allQuestion?.map((el) => (
             <tr key={el.id} className={styles.allQuestions}>
-              {/* <td>{User.map((user) => user.name)}</td>
-              <td>{Subject.map((sub) => sub.title)}</td>
               <td>
-                <Link to={`/question/${id}`}>{question.title}</Link>
-              </td> */}
-              <td>{el['User.name']}</td>
-              <td>{el['Subjects.title']}</td>
-              <td>{el.title}</td>
-              <td>{el.text}</td>
+                {el.User.name}
+                {' '}
+                {el.User.surname}
+              </td>
+              <td>{el.Subjects.map((s) => <span key={s.id} className={styles.tag}>{s.title}</span>)}</td>
+              <td>
+                <Link to={`/question/${el.id}`}>
+                  {el.title}
+                </Link>
+              </td>
               <td>{el.price}</td>
+              <td>
+                {new Date(el.createdAt).toLocaleDateString()}
+                {' '}
+                {new Date(el.createdAt).toLocaleTimeString()}
+              </td>
             </tr>
           ))}
         </tbody>

@@ -38,28 +38,32 @@ export default function YourQuestion() {
 
   return (
     <>
-      <div className={styles.yourQuestionModule}>My question</div>
+      <br />
+      <div className={styles.yourQuestionModule}>My questions</div>
+      <br />
       <Table className={styles.yourQuestionModuleTable} striped="columns">
         <thead>
           <tr>
             <th>Tags</th>
-            <th>Title</th>
-            <th>Text</th>
+            <th>Question</th>
             <th>Price</th>
+            <th>Date</th>
           </tr>
         </thead>
         <tbody>
-          {(question.length &&
-            question.map(({ Subjects, id, title, text, price }) => (
+          {(question?.length &&
+            question?.map(({ Subjects, id, title, price, createdAt }) => (
               <tr key={id}>
-                <td>{Subjects.map((el2) => el2.title)}</td>
-                <td>
-                  <Link to={`/question/${id}`}>{title}</Link>
-                </td>
-                <td>{text}</td>
+                <td>{Subjects.map((s) => <span key={s.id} className={styles.tag}>{s.title}</span>)}</td>
+                <td><Link to={`/question/${id}`}>{title}</Link></td>
                 <td>{price}</td>
+                <td>
+                  {new Date(createdAt).toLocaleDateString()}
+                  {' '}
+                  {new Date(createdAt).toLocaleTimeString()}
+                </td>
               </tr>
-            ))) || <div>There is no question now</div>}
+            )))}
         </tbody>
       </Table>
     </>
