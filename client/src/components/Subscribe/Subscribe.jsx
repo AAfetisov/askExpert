@@ -1,7 +1,9 @@
+/* eslint-disable max-len */
 /* eslint-disable no-console */
-import React, { useState, useEffect } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
-import { Table } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+// import { Table } from 'react-bootstrap';
+import Table from 'react-bootstrap/Table';
 import styles from './Subscribe.module.css';
 
 export default function Subscribe() {
@@ -27,23 +29,31 @@ export default function Subscribe() {
       <br />
       <br />
       <br />
-      <div>My subscribe</div>
+      <div className={styles.subscribedOffer}>My offers</div>
       <br />
-      <table>
+      <table className={styles.tablesubscribe}>
         <thead>
           <tr>
-            <th>User email</th>
-            <th>Question title</th>
-            <th>Offer text</th>
+            <th>Question by</th>
+            <th>Tags</th>
+            <th>Question</th>
             <th>Offer Price</th>
           </tr>
         </thead>
         <tbody>
           {offer?.length && offer?.map((el) => (
             <tr key={el.id}>
-              <td>{el.Question.User.email}</td>
-              <td>{el.Question.title}</td>
-              <td>{el.text}</td>
+              <td>
+                {el.Question.User.name}
+                {' '}
+                {el.Question.User.surname}
+              </td>
+              <td>{el.Question.Subjects.map((s) => <span key={s.id} className={styles.tag}>{s.title}</span>)}</td>
+              <td>
+                <Link to={`/question/${el.Question.id}`}>
+                  {el.Question.title}
+                </Link>
+              </td>
               <td>{el.price}</td>
             </tr>
           ))}

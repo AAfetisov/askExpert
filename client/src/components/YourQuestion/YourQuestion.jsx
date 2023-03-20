@@ -1,7 +1,10 @@
+/* eslint-disable max-len */
 import React, { useEffect, useState } from 'react';
 // import { Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import style from './YourQuestion.module.css';
+// import style from './YourQuestion.module.css';
+
+import styles from './YourQuestion.module.css';
 
 export default function YourQuestion() {
   const [question, setQuestion] = useState([]);
@@ -23,30 +26,42 @@ export default function YourQuestion() {
 
   return (
     <>
-      <div>My question</div>
-      <table className={style.table}>
+      <br />
+      <div className={styles.yourQuestionModule}>My questions</div>
+      <br />
+      <table className={styles.yourQuestionModuleTable}>
         <thead>
           <tr>
-            <th className={style.th}>Tags</th>
-            <th className={style.th}>Title</th>
-            <th className={style.th}>Text</th>
-            <th className={style.th}>Price</th>
+            <th>Tags</th>
+            <th>Question</th>
+            <th>Price</th>
+            <th>Date</th>
           </tr>
         </thead>
         <tbody>
-          {(question.length
-            && question.map(({
-              Subjects, id, title, text, price,
+          {question?.length
+            && question?.map(({
+              Subjects, id, title, price, createdAt,
             }) => (
               <tr key={id}>
-                <td className={style.td}>{Subjects.map((el2) => el2.title)}</td>
-                <td className={style.td}>
+                <td>
+                  {Subjects.map((s) => (
+                    <span key={s.id} className={styles.tag}>
+                      {s.title}
+                    </span>
+                  ))}
+                </td>
+                <td>
                   <Link to={`/question/${id}`}>{title}</Link>
                 </td>
-                <td className={style.td}>{text}</td>
-                <td className={style.td}>{price}</td>
+                <td>{price}</td>
+                <td>
+                  {new Date(createdAt).toLocaleDateString()}
+                  {' '}
+                  {new Date(createdAt).toLocaleTimeString()}
+                </td>
               </tr>
-            ))) || <div>There is no question now</div>}
+            ))}
         </tbody>
       </table>
     </>
