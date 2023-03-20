@@ -77,3 +77,15 @@
   border-radius: 5px;
   padding: 0.3rem;
 }
+
+.buttonAllview {
+  visibility: hidden;
+  position: sticky;
+  right: 540px;
+}
+
+.buttonAllfree {
+  visibility: visible;
+  position: sticky;
+  right: 540px;
+}
