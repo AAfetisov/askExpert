@@ -101,7 +101,41 @@ export default function AllQuestion() {
                 <td>
                   <Link to={`/question/${el.id}`}>{el.title}</Link>
                 </td>
-                <td>{el.price}</td>
+                <td className={styles.snowflakes} aria-hidden="true">
+                  <div className="snowflakes" aria-hidden="true">
+                    <div className={styles.snowflake}>
+                      ❅
+                    </div>
+                    <div className={styles.snowflake}>
+                      ❅
+                    </div>
+                    <div className={styles.snowflake}>
+                      ❆
+                    </div>
+                    <div className={styles.snowflake}>
+                      ❄
+                    </div>
+                    <div className={styles.snowflake}>
+                      ❅
+                    </div>
+                    <div className={styles.snowflake}>
+                      ❆
+                    </div>
+                    <div className={styles.snowflake}>
+                      ❄
+                    </div>
+                    <div className={styles.snowflake}>
+                      ❅
+                    </div>
+                    <div className={styles.snowflake}>
+                      ❆
+                    </div>
+                    <div className={styles.snowflake}>
+                      ❄
+                    </div>
+                  </div>
+                  {el.price}
+                </td>
                 <td>
                   {new Date(el.createdAt).toLocaleDateString()}
                   {' '}
