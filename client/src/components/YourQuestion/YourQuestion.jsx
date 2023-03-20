@@ -1,20 +1,7 @@
-/* eslint-disable comma-dangle */
-/* eslint-disable no-template-curly-in-string */
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable max-len */
-/* eslint-disable no-lone-blocks */
-/* eslint-disable operator-linebreak */
-/* eslint-disable object-curly-newline */
-/* eslint-disable no-mixed-operators */
-/* eslint-disable consistent-return */
-/* eslint-disable react/no-unknown-property */
-/* eslint-disable react/jsx-one-expression-per-line */
-/* eslint-disable no-use-before-define */
-/* eslint-disable no-undef */
-/* eslint-disable no-else-return */
 import React, { useEffect, useState } from 'react';
-import { Table } from 'react-bootstrap';
+// import { Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import style from './YourQuestion.module.css';
 
 export default function YourQuestion() {
   const [question, setQuestion] = useState([]);
@@ -37,35 +24,31 @@ export default function YourQuestion() {
   return (
     <>
       <div>My question</div>
-      <Table striped="columns">
+      <table className={style.table}>
         <thead>
           <tr>
-            <th>Tags</th>
-            <th>Title</th>
-            <th>Text</th>
-            <th>Price</th>
+            <th className={style.th}>Tags</th>
+            <th className={style.th}>Title</th>
+            <th className={style.th}>Text</th>
+            <th className={style.th}>Price</th>
           </tr>
         </thead>
         <tbody>
-          {(question.length &&
-            question.map(({ Subjects, id, title, text, price }) => (
+          {(question.length
+            && question.map(({
+              Subjects, id, title, text, price,
+            }) => (
               <tr key={id}>
-                <td>{Subjects.map((el2) => el2.title)}</td>
-                <td>
+                <td className={style.td}>{Subjects.map((el2) => el2.title)}</td>
+                <td className={style.td}>
                   <Link to={`/question/${id}`}>{title}</Link>
                 </td>
-                <td>{text}</td>
-                <td>{price}</td>
+                <td className={style.td}>{text}</td>
+                <td className={style.td}>{price}</td>
               </tr>
             ))) || <div>There is no question now</div>}
         </tbody>
-      </Table>
+      </table>
     </>
   );
-}
-{
-  /* <div> {question.length && question.map(({ id, title, text, price }) =>  */
-}
-{
-  /* <div key={id}> title={title} text={text} price={price}</div>) || "There is no question now"}</div>) */
 }
