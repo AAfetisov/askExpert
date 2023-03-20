@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unknown-property */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-shadow */
@@ -5,7 +6,7 @@
 /* eslint-disable react/button-has-type */
 /* eslint-disable react/jsx-filename-extension */
 /* eslint-disable consistent-return */
-import firebase from 'firebase/app';
+import firebase from 'firebase/compat/app';
 import defaultExport from 'firebase/firestore';
 import React, { useEffect, useRef, useState } from 'react';
 

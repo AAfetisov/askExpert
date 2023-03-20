@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import AllQuestion from '../AllQuestionsPage/AllQuestionsPage';
 import QuestionForm from '../QuestionForm';
+import ScreenShare from '../ScreenShare';
 import Subscribe from '../Subscribe/Subscribe';
 import YourQuestion from '../YourQuestion/YourQuestion';
 import style from './style.module.css';
@@ -17,6 +18,7 @@ export default function Main() {
     <div className={style.flexcontainer}>
       {isAuth ? (
         <>
+          <ScreenShare />
           <span>
             {qBtnClicked ? (
               <QuestionForm />
