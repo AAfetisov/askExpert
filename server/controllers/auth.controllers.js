@@ -29,7 +29,7 @@ exports.checkUserAndCreateSession = async (req, res) => {
 exports.createNewUserAndSession = async (req, res) => {
   const { email, password } = req.body;
   if (!email || !password) { res.status(401).json({ err: 'Email, password should not be empty' }); return; }
-
+  console.log(1232123, req.body.email);
   try {
     const userRecord = await User.findOne({ where: { email } });
     if (userRecord) { res.status(401).json({ err: 'User with this email already exists' }); return; }
