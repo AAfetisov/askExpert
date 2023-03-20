@@ -15,7 +15,7 @@ const ShowAllQuestions = async (req, res) => {
     if (allQuestion.length > 0) {
       res.json(allQuestion);
     } else {
-      res.sendStatus(402).json({ error: "Can't find questions" });
+      res.status(402).json({ error: "Can't find questions" });
     }
   } catch (error) {
     console.log(error);

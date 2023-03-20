@@ -48,26 +48,21 @@ exports.findUser = async (req, res) => {
   }
 };
 
-exports.UpdateAvatar = async (req, res) => {
-  const {
-    id, avatar,
-  } = req.body;
+exports.FindCurrentUser = async (req, res) => {
+  const userId = req.params.id;
+  console.log(userId, 'req params');
 
   try {
-    const userAvatar = await User.update(
+    const currentUser = await User.findOne(
       {
-        userpic: req.body.user.avatar,
-      },
-      {
-        where: { id: req.body.user.id },
+        where: { id: userId },
         returning: true,
         plain: true,
       },
     );
 
-    res.json(userAvatar);
+    res.json(currentUser);
   } catch (error) {
-    console.log('User: ', error);
     res.status(501).json({ err: 'something wrong with the Db :(' });
   }
 };
