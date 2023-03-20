@@ -9,6 +9,7 @@ import LoginForm from './components/LoginForm';
 import { Logo } from './components/Logo/logo';
 import Logout from './components/Logout';
 import Main from './components/Main';
+import BasicModal from './components/Modal/Modal';
 import { Profile } from './components/Profile/profile';
 import { ProfileForm } from './components/ProfileForm';
 import QuestionPage from './components/QuestionPage';
@@ -75,6 +76,7 @@ function App() {
         <Route path="/profile/:id" element={<CurrentProfile />} />
         <Route path="/profile/form" element={<ProfileForm />} />
         <Route path="/question/:id" element={<QuestionPage />} />
+        <Route path="/rating/:id" element={<BasicModal />} />
       </Routes>
     </>
   );
