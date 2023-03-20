@@ -19,7 +19,7 @@ const ShowSubscribe = async (req, res) => {
       res.json(offer);
       return;
     }
-    res.sendStatus(401).json({ error: "Can't find offer with this id" });
+    res.status(401).json({ error: "Can't find offer with this id" });
   } catch (error) {
     res.status(501).json({ error });
   }
