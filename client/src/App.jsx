@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, Route, Routes } from 'react-router-dom';
 
 import Styles from './App.module.css';
+import { CurrentProfile } from './components/CurrentProfile/currentProfile';
 import LoginForm from './components/LoginForm';
 import { Logo } from './components/Logo/logo';
 import Logout from './components/Logout';
@@ -71,6 +72,7 @@ function App() {
         <Route path="/login" element={<LoginForm />} />
         <Route path="/logout" element={<Logout />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/profile/:id" element={<CurrentProfile />} />
         <Route path="/profile/form" element={<ProfileForm />} />
         <Route path="/question/:id" element={<QuestionPage />} />
       </Routes>
