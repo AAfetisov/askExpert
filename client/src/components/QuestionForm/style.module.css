@@ -49,7 +49,7 @@
   line-height: 1.5rem;
 }
 
-.handleSubmitClickGradient {
+.handleSubmitClickGradient:hover {
   animation: example 5s infinite linear;
   /* border-radius: 6px; */
 }
