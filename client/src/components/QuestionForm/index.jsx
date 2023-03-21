@@ -70,7 +70,7 @@ export default function QuestionForm() {
         <label htmlFor="textId">Text</label>
         <textarea id="textId" type="text" name="text" onChange={(e) => setText(e.target.value)} value={text} />
 
-        <button type="button" onClick={handleSubmitClick}>Submit</button>
+        <button type="button" className={style.handleSubmitClickGradient} onClick={handleSubmitClick}>Submit</button>
       </form>
     </div>
   );

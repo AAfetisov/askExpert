@@ -30,9 +30,7 @@ export default function YourQuestion() {
 
   return (
     <>
-      <br />
       <div className={styles.yourQuestionModule}>My questions</div>
-      <br />
       <table className={styles.yourQuestionModuleTable}>
         <thead>
           <tr>

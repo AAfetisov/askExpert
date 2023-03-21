@@ -7,6 +7,7 @@ import QuestionForm from '../QuestionForm';
 import Subscribe from '../Subscribe/Subscribe';
 import YourQuestion from '../YourQuestion/YourQuestion';
 import style from './style.module.css';
+import { TopExperts } from '../TopExperts/TopExperts';
 
 export default function Main() {
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ export default function Main() {
             {qBtnClicked ? (
               <QuestionForm />
             ) : (
-              <button className={style.button} type="button" onClick={() => setQBtnClicked(true)}>
+              <button className={style.buttonAsk} type="button" onClick={() => setQBtnClicked(true)}>
                 Ask an expert your question
               </button>
             )}
@@ -29,6 +30,7 @@ export default function Main() {
           <YourQuestion />
           <Subscribe />
           <AllQuestion />
+          <TopExperts />
         </>
       ) : (
         <>
