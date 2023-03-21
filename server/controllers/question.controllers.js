@@ -18,7 +18,7 @@ exports.CreateQuestion = async (req, res) => {
     });
 
     for (const tag of tags) {
-      const [subj, created] = await Subject.findOrCreate({ where: { title: tag }, defaults: { title: tag } });
+      const [subj, created] = await Subject.findOrCreate({ where: { title: tag.toLowerCase() }, defaults: { title: tag.toLowerCase() } });
       const tagRec = await Tag.create({ subjectId: subj.id, questionId: questionRec.id });
     }
 
