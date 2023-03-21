@@ -132,7 +132,7 @@ export default function QuestionPage() {
 
           <OffersForTheQuestion questionId={id} setRecipientId={setRecipientId} />
           {recipientId && <ChatGPT questionId={id} recipientId={recipientId} />}
-          <ScreenSharing questionId={id} recipientId={recipientId} />
+          {/* <ScreenSharing questionId={id} recipientId={recipientId} /> */}
         </>
         )}
               { user.id !== question?.User?.id && question.status
@@ -148,7 +148,7 @@ export default function QuestionPage() {
 
                     </div>
                     {question?.userId && <ChatGPT questionId={id} recipientId={question.userId} />}
-                    <ScreenSharing questionId={id} recipientId={question.userId} />
+                    {/* <ScreenSharing questionId={id} recipientId={question.userId} /> */}
                   </div>
                 )
                 : (
