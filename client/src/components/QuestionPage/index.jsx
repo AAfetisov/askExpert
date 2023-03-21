@@ -84,6 +84,8 @@ export default function QuestionPage() {
     }
   };
 
+  const handelPay = () => {};
+
   return (
     <div className={style.flexcontainer}>
       {question
@@ -97,7 +99,12 @@ export default function QuestionPage() {
               <div className={style.priceTitle}>question price:</div>
               <div className={style.price}>{question?.price}</div>
               {user.id === question?.User?.id && question.status
-              && <button type="button" onClick={handleSolveClick} className={style.solvedBtn}>Solved</button>}
+              && (
+              <>
+                <button type="button" onClick={handleSolveClick} className={style.solvedBtn}>Solved</button>
+                <button type="button" onClick={handelPay} className={style.solvedBtn}>Pay Expert</button>
+              </>
+              )}
             </div>
 
             <div className={style.container_right}>
