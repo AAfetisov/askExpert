@@ -5,19 +5,20 @@ import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import ChatGPT from '../chatGPT';
 import OffersForTheQuestion from './OffersForTheQuestion';
-import { receiveSignalMessage, sendSignalMessage, turnServerConfig } from './signallingChannel';
+import ScreenSharing from './ScreenShare';
+// import { receiveSignalMessage, sendSignalMessage, turnServerConfig } from './signallingChannel';
 import style from './style.module.css';
 
 export default function QuestionPage() {
-  const navigate = useNavigate();
-  const isAuth = useSelector((state) => state.auth.isAuth);
+  // const navigate = useNavigate();
+  // const isAuth = useSelector((state) => state.auth.isAuth);
   const user = useSelector((state) => state.auth.user);
   const [question, setQuestion] = useState({});
   const { id } = useParams();
   const [offeredHelp, setOfferHelp] = useState(null);
   const [price, setPrice] = useState(1);
   const [err, setErr] = useState('');
-  const [invitationToVideo, setInvitationToVideo] = useState(null);
+  // const [invitationToVideo, setInvitationToVideo] = useState(null);
   const [recipientId, setRecipientId] = useState(null);
 
   const checkIfUserOfferedHelpToThisQUestion = async () => {
@@ -86,6 +87,7 @@ export default function QuestionPage() {
 
   return (
     <div className={style.flexcontainer}>
+
       {question
         ? (
           <>
@@ -130,6 +132,7 @@ export default function QuestionPage() {
 
           <OffersForTheQuestion questionId={id} setRecipientId={setRecipientId} />
           {recipientId && <ChatGPT questionId={id} recipientId={recipientId} />}
+          {/* <ScreenSharing questionId={id} recipientId={recipientId} /> */}
         </>
         )}
               { user.id !== question?.User?.id && question.status
@@ -145,6 +148,7 @@ export default function QuestionPage() {
 
                     </div>
                     {question?.userId && <ChatGPT questionId={id} recipientId={question.userId} />}
+                    {/* <ScreenSharing questionId={id} recipientId={question.userId} /> */}
                   </div>
                 )
                 : (

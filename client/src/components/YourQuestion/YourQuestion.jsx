@@ -1,3 +1,7 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
+/* eslint-disable comma-dangle */
+/* eslint-disable no-template-curly-in-string */
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable max-len */
 import React, { useEffect, useState } from 'react';
 // import { Table } from 'react-bootstrap';
