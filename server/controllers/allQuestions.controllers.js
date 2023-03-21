@@ -4,6 +4,7 @@ const question = require('../db/models/question');
 const ShowAllQuestions = async (req, res) => {
   try {
     const allQuestion = await Question.findAll({
+      where: { status: true },
       attributes: ['id', 'userId', 'title', 'price', 'createdAt', 'updatedAt'],
       include: [
         { model: Subject, attributes: ['id', 'title'] },

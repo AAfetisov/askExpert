@@ -23,7 +23,7 @@
   text-align: center;
 }
 
-.button {
+.buttonAsk {
   margin: 1rem;
   padding: 0 1rem;
   height: 2.5rem;
@@ -36,3 +36,35 @@
   line-height: 1.2;
   border: 0;
 }
+
+.buttonAsk:hover {
+  animation: example 5s infinite linear;
+  /* border-radius: 6px; */
+}
+
+@keyframes example {
+  0% {
+    background: #33CCCC;
+  }
+
+  20% {
+    background: #33CC36;
+  }
+
+  40% {
+    background: #B8CC33;
+  }
+
+  /* 60% {
+    background: #FCCA00;
+  } */
+
+  80% {
+    background: #33CC36;
+  }
+
+  100% {
+    background: #33CCCC;
+  }
+}
+
