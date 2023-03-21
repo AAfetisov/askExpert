@@ -44,8 +44,8 @@ function App() {
                 Logged in as: {user?.name || user?.email}
               </div>
               <Link to="/">Home</Link>
-              <Link to="/logout">Logout</Link>
               <Link to="/profile">Profile</Link>
+              <Link to="/logout">Logout</Link>
             </div>
 
           </>
