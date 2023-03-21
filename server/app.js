@@ -75,15 +75,27 @@ io.use((socket, next) => {
 });
 
 const usersOnline = new Map();
+const videoUsersOnline = new Map();
 
 io.on('connection', (socket) => {
   const { user } = socket.request.session;
   const currentUser = user?.id;
 
+  socket.emit('me', socket.id);
   socket.on('join', () => {
     usersOnline.set(user.id, socket.id);
   });
-  socket.on('disconnect', () => { if (currentUser) { usersOnline.delete(currentUser); } });
+  socket.on('join_video', () => {
+    videoUsersOnline.set(user.id, socket.id);
+  });
+
+  socket.on('disconnect', () => {
+    if (currentUser) {
+      usersOnline.delete(currentUser);
+      videoUsersOnline.delete(currentUser);
+    }
+    socket.broadcast.emit('callEnded'); // TODO: не забыть исправить на адресную
+  });
 
   socket.on('send_message', async (message) => {
     socket.to(usersOnline.get(message.toId)).emit('receive_message', message);
@@ -96,19 +108,17 @@ io.on('connection', (socket) => {
       toId, fromId: currentUser, body, questionId,
     });
   });
-  // video
-  socket.on('screenShare', (description) => {
-    console.log('screenShare');
-    socket.broadcast.emit('screenShare', description);
+
+  socket.on('callUser', ({
+    userToCall, signalData, from, name,
+  }) => {
+    const recipientId = videoUsersOnline.get(userToCall);
+    const senderId = videoUsersOnline.get(currentUser);
+    io.to(recipientId).emit('callUser', { signal: signalData, from: senderId, name });
   });
 
-  socket.on('offer', (offer) => {
-    console.log('OFFER');
-    socket.broadcast.emit('offer', offer);
-  });
-
-  socket.on('answer', (answer) => {
-    console.log('answer');
-    socket.broadcast.emit('answer', answer);
+  socket.on('answerCall', (data) => {
+    console.log(8888888, 'AnsweringCall');
+    io.to(data.to).emit('callAccepted', data.signal);
   });
 });
