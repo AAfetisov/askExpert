@@ -62,7 +62,6 @@ export default function ChatGPT({ questionId, recipientId }) {
 
   const sendMessage = () => {
     if (socket && inputMessage) {
-      const toId = 2;
       const message = {
         fromId: user.id, toId: recipientId, questionId, body: inputMessage,
       };

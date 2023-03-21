@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable comma-dangle */
 /* eslint-disable no-template-curly-in-string */
 /* eslint-disable import/no-extraneous-dependencies */
