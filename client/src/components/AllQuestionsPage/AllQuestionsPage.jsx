@@ -70,7 +70,6 @@ export default function AllQuestion() {
     <>
       <div className={styles.allQuestionsPage}>All Questions</div>
       <button type="button" className={styles.button} onClick={hendelDef}>Back to All Questions</button>
-      <br />
       <table className={styles.tableAllQuestionsPage}>
         <thead>
           <tr>
@@ -101,8 +100,9 @@ export default function AllQuestion() {
                 <td>
                   <Link to={`/question/${el.id}`}>{el.title}</Link>
                 </td>
-                <td className={styles.snowflakes} aria-hidden="true">
-                  <div className="snowflakes" aria-hidden="true">
+                <td>
+                  {/* <td className={styles.snowflakes} aria-hidden="true"> */}
+                  {/* <div className="snowflakes" aria-hidden="true">
                     <div className={styles.snowflake}>
                       ❅
                     </div>
@@ -133,7 +133,7 @@ export default function AllQuestion() {
                     <div className={styles.snowflake}>
                       ❄
                     </div>
-                  </div>
+                  </div> */}
                   {el.price}
                 </td>
                 <td>
