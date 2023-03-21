@@ -22,6 +22,8 @@ const messageApiRouter = require('./routes/message.api.router');
 const allQuestionsRouter = require('./routes/allQuestions.route');
 const payRouter = require('./routes/pay.route');
 const { User } = require('./db/models');
+const ratingRouter = require('./routes/rating.route');
+const topExpertsRouter = require('./routes/topExperts.route');
 
 const app = express();
 
@@ -61,6 +63,8 @@ app.use('/subscribe', subscribeRouter);
 app.use('/api/message', messageApiRouter);
 app.use('/allquestions', allQuestionsRouter);
 app.use('/payment', payRouter);
+app.use('/rating', ratingRouter);
+app.use('/topexperts', topExpertsRouter);
 
 const port = process.env.PORT ?? 3100;
 const server = app.listen(port, () => console.log(`Sever started on http://localhost:${port}`));
@@ -77,15 +81,27 @@ io.use((socket, next) => {
 });
 
 const usersOnline = new Map();
+const videoUsersOnline = new Map();
 
 io.on('connection', (socket) => {
   const { user } = socket.request.session;
   const currentUser = user?.id;
 
+  socket.emit('me', socket.id);
   socket.on('join', () => {
     usersOnline.set(user.id, socket.id);
   });
-  socket.on('disconnect', () => { if (currentUser) { usersOnline.delete(currentUser); } });
+  socket.on('join_video', () => {
+    videoUsersOnline.set(user.id, socket.id);
+  });
+
+  socket.on('disconnect', () => {
+    if (currentUser) {
+      usersOnline.delete(currentUser);
+      videoUsersOnline.delete(currentUser);
+    }
+    socket.broadcast.emit('callEnded'); // TODO: не забыть исправить на адресную
+  });
 
   socket.on('send_message', async (message) => {
     socket.to(usersOnline.get(message.toId)).emit('receive_message', message);
@@ -98,20 +114,18 @@ io.on('connection', (socket) => {
       toId, fromId: currentUser, body, questionId,
     });
   });
-  // video
-  socket.on('screenShare', (description) => {
-    console.log('screenShare');
-    socket.broadcast.emit('screenShare', description);
+
+  socket.on('callUser', ({
+    userToCall, signalData, from, name,
+  }) => {
+    const recipientId = videoUsersOnline.get(userToCall);
+    const senderId = videoUsersOnline.get(currentUser);
+    io.to(recipientId).emit('callUser', { signal: signalData, from: senderId, name });
   });
 
-  socket.on('offer', (offer) => {
-    console.log('OFFER');
-    socket.broadcast.emit('offer', offer);
-  });
-
-  socket.on('answer', (answer) => {
-    console.log('answer');
-    socket.broadcast.emit('answer', answer);
+  socket.on('answerCall', (data) => {
+    console.log(8888888, 'AnsweringCall');
+    io.to(data.to).emit('callAccepted', data.signal);
   });
 });
 

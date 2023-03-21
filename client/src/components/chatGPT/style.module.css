@@ -10,12 +10,13 @@
   gap: 0.5rem;
   max-height: 400px;
   min-height: 200px;
-  max-width: 450px;
+  min-width: 460px;
   overflow-y: scroll;
   scroll-behavior: smooth;
   border-radius: 3px;
   scrollbar-width: thin;
   background: rgb(255, 255, 255);
+  outline: 1px solid #cfcfcf;
   /* background: rgb(193, 200, 255);
   background: linear-gradient(
     52deg,
@@ -39,7 +40,7 @@
   padding-right: 1rem;
   border-radius: 3px;
   border: none;
-  width: 80%;
+  width: 85%;
   outline: 1px solid rgb(179, 178, 178);
 }
 .messageSend {

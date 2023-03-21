@@ -1,0 +1,20 @@
+.TopExpertsName {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 900;
+  margin-bottom: 1rem;
+}
+
+.expertBox {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
+}
+
+.nameBox {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}

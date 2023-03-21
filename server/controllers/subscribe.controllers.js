@@ -6,7 +6,7 @@ const ShowSubscribe = async (req, res) => {
   const { user } = req.session;
   try {
     const offer = await Offer.findAll({
-      where: { id: user.id },
+      where: { expertId: user.id },
       include: {
         model: Question,
         include: [

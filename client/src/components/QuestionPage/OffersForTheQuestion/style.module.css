@@ -1,8 +1,9 @@
 .offersContainer {
   outline: 2px #dddddd solid;
   border-radius: 4px;
-  margin-top: 2rem;
-  min-width: 400px;
+  margin-top: 3rem;
+  min-width: 460px;
+  align-self: flex-start;
 }
 .blockTitle {
   padding-left: 1rem;
