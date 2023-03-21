@@ -3,19 +3,10 @@
 /* eslint-disable no-template-curly-in-string */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable max-len */
-/* eslint-disable no-lone-blocks */
-/* eslint-disable operator-linebreak */
-/* eslint-disable object-curly-newline */
-/* eslint-disable no-mixed-operators */
-/* eslint-disable consistent-return */
-/* eslint-disable react/no-unknown-property */
-/* eslint-disable react/jsx-one-expression-per-line */
-/* eslint-disable no-use-before-define */
-/* eslint-disable no-undef */
-/* eslint-disable no-else-return */
 import React, { useEffect, useState } from 'react';
-import { Table } from 'react-bootstrap';
+// import { Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+// import style from './YourQuestion.module.css';
 
 import styles from './YourQuestion.module.css';
 
@@ -42,7 +33,7 @@ export default function YourQuestion() {
       <br />
       <div className={styles.yourQuestionModule}>My questions</div>
       <br />
-      <Table className={styles.yourQuestionModuleTable} striped="columns">
+      <table className={styles.yourQuestionModuleTable}>
         <thead>
           <tr>
             <th>Tags</th>
@@ -52,11 +43,21 @@ export default function YourQuestion() {
           </tr>
         </thead>
         <tbody>
-          {(question?.length &&
-            question?.map(({ Subjects, id, title, price, createdAt }) => (
+          {question?.length
+            && question?.map(({
+              Subjects, id, title, price, createdAt,
+            }) => (
               <tr key={id}>
-                <td>{Subjects.map((s) => <span key={s.id} className={styles.tag}>{s.title}</span>)}</td>
-                <td><Link to={`/question/${id}`}>{title}</Link></td>
+                <td>
+                  {Subjects.map((s) => (
+                    <span key={s.id} className={styles.tag}>
+                      {s.title}
+                    </span>
+                  ))}
+                </td>
+                <td>
+                  <Link to={`/question/${id}`}>{title}</Link>
+                </td>
                 <td>{price}</td>
                 <td>
                   {new Date(createdAt).toLocaleDateString()}
@@ -64,15 +65,9 @@ export default function YourQuestion() {
                   {new Date(createdAt).toLocaleTimeString()}
                 </td>
               </tr>
-            )))}
+            ))}
         </tbody>
-      </Table>
+      </table>
     </>
   );
-}
-{
-  /* <div> {question.length && question.map(({ id, title, text, price }) =>  */
-}
-{
-  /* <div key={id}> title={title} text={text} price={price}</div>) || "There is no question now"}</div>) */
 }

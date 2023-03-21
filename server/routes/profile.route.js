@@ -2,11 +2,11 @@ const express = require('express');
 
 const router = express.Router();
 
-const { GetUser, UpdateAvatar, findUser } = require('../controllers/profile.controllers');
+const { GetUser, FindCurrentUser, findUser } = require('../controllers/profile.controllers');
 
 router.route('/form').put(GetUser);
 router.route('/form').get(findUser);
 
-router.route('/avaterform').put(UpdateAvatar);
+router.route('/:id').get(FindCurrentUser);
 
 module.exports = router;
