@@ -1,3 +1,4 @@
+import { Box, Rating } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Avatar } from '../Avatar/avatar';
@@ -9,6 +10,7 @@ export function CurrentProfile() {
   const userId = useParams().id;
   console.log(userId, '45454545==========');
   const [currentUser, setCurrentUser] = useState('');
+  const [rate, setRate] = useState('');
 
   useEffect(() => {
     (
@@ -20,12 +22,22 @@ export function CurrentProfile() {
         });
         if (response.ok) {
           const data = await response.json();
-          console.log(data, 'data from back!!!!!!!');
-          setCurrentUser(data);
+          if (data.averageRating.length > 0) {
+            const averageRate = Math.ceil(data.averageRating[0].averageRating);
+            setRate(averageRate);
+          } else {
+            const averageRate = 0;
+            setRate(averageRate);
+          }
+
+          console.log(data.currentUser, 'data from back!!!!!!!');
+          setCurrentUser(data.currentUser);
         }
       }
     )();
   }, []);
+
+  console.log(rate, 'averageRate');
 
   return (
 
@@ -33,10 +45,23 @@ export function CurrentProfile() {
       <div className={Styles.imgBox}>
         <img
           className={Styles.avatar}
-          src={currentUser.avatar || 'https://cdn-icons-png.flaticon.com/512/3177/3177440.png'}
+          src={currentUser.userpic || 'https://cdn-icons-png.flaticon.com/512/3177/3177440.png'}
           alt="foto"
         />
-        <Rate />
+        <h3>Rate:</h3>
+        <Box
+          sx={{
+            width: 200,
+            display: 'flex',
+            alignItems: 'center',
+          }}
+        >
+          <Rating
+            name="read-only"
+            value={Number(rate)}
+            readOnly
+          />
+        </Box>
       </div>
 
       <div className={Styles.userInfo}>

@@ -2,7 +2,9 @@ const express = require('express');
 
 const router = express.Router();
 
-const { GetUser, FindCurrentUser, findUser } = require('../controllers/profile.controllers');
+const {
+  GetUser, FindCurrentUser, findUser, GetRating,
+} = require('../controllers/profile.controllers');
 
 router.route('/form').put(GetUser);
 router.route('/form').get(findUser);

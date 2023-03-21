@@ -1,4 +1,4 @@
-const { User } = require('../db/models');
+const { User, Rating, sequelize } = require('../db/models');
 
 exports.GetUser = async (req, res) => {
   const {
@@ -61,7 +61,21 @@ exports.FindCurrentUser = async (req, res) => {
       },
     );
 
-    res.json(currentUser);
+    const result = delete currentUser.password;
+
+    const averageRating = await Rating.findAll({
+      attributes: ['expertId',
+        [sequelize.fn('AVG', sequelize.col('rating')), 'averageRating'],
+      ],
+      where: { expertId: userId },
+      group: ['expertId'],
+      raw: true,
+      nested: true,
+    });
+    console.log(averageRating, '=====>averageRating');
+    // { averageRating: averageRating?.at(0)?.averageRating }
+
+    res.json({ currentUser, averageRating });
   } catch (error) {
     res.status(501).json({ err: 'something wrong with the Db :(' });
   }
