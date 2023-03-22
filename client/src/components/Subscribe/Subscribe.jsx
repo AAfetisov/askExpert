@@ -25,11 +25,7 @@ export default function Subscribe() {
 
   return (
     <>
-      <br />
-      <br />
-      <br />
       <div className={styles.subscribedOffer}>My offers</div>
-      <br />
       <table className={styles.tablesubscribe}>
         <thead>
           <tr>
@@ -74,11 +70,6 @@ export default function Subscribe() {
         {offer?.length
             && offer?.map((of) => <div key={of.id}>{of.price}</div>)}
       </div> */}
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
       {/* <Table striped="columns">
         <thead>
           <tr>

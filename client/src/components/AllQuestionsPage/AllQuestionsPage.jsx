@@ -9,6 +9,7 @@ export default function AllQuestion() {
   const [allQuestion, setAllQuestion] = useState([]);
   const [sortAllQuestionsPrice, setSortAllQuestionPrice] = useState(false);
   const [sortAllQuestionsDate, setSortAllQuestionDate] = useState(false);
+  const [style, setStyle] = useState(false);
 
   useEffect(() => {
     const getAllQuestion = async () => {
@@ -48,13 +49,10 @@ export default function AllQuestion() {
       result.push([...allQuestion].filter((el) => el.id === newTag[i]));
     }
     setAllQuestion(result.flat());
+    setStyle(true);
   };
 
   const hendelDef = async () => {
-    // hendelTag(null);
-    // const result = [...allQuestion];
-    // console.log(result);
-    // setAllQuestion(result);
     const response = await fetch('http://localhost:4000/allquestions', {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
@@ -63,14 +61,14 @@ export default function AllQuestion() {
     if (response.ok) {
       const result = await response.json();
       setAllQuestion(result);
+      setStyle(false);
     }
   };
 
   return (
     <>
       <div className={styles.allQuestionsPage}>All Questions</div>
-      <button type="button" className={styles.button} onClick={hendelDef}>Back to All Questions</button>
-      <br />
+      <button type="button" className={style ? styles.buttonAllfree : styles.buttonAllview} onClick={hendelDef}>Back to All Questions</button>
       <table className={styles.tableAllQuestionsPage}>
         <thead>
           <tr>
@@ -101,7 +99,42 @@ export default function AllQuestion() {
                 <td>
                   <Link to={`/question/${el.id}`}>{el.title}</Link>
                 </td>
-                <td>{el.price}</td>
+                <td>
+                  {/* <td className={styles.snowflakes} aria-hidden="true"> */}
+                  {/* <div className="snowflakes" aria-hidden="true">
+                    <div className={styles.snowflake}>
+                      ❅
+                    </div>
+                    <div className={styles.snowflake}>
+                      ❅
+                    </div>
+                    <div className={styles.snowflake}>
+                      ❆
+                    </div>
+                    <div className={styles.snowflake}>
+                      ❄
+                    </div>
+                    <div className={styles.snowflake}>
+                      ❅
+                    </div>
+                    <div className={styles.snowflake}>
+                      ❆
+                    </div>
+                    <div className={styles.snowflake}>
+                      ❄
+                    </div>
+                    <div className={styles.snowflake}>
+                      ❅
+                    </div>
+                    <div className={styles.snowflake}>
+                      ❆
+                    </div>
+                    <div className={styles.snowflake}>
+                      ❄
+                    </div>
+                  </div> */}
+                  {el.price}
+                </td>
                 <td>
                   {new Date(el.createdAt).toLocaleDateString()}
                   {' '}

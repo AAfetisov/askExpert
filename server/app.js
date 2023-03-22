@@ -1,3 +1,5 @@
+/* eslint-disable camelcase */
+/* eslint-disable import/no-extraneous-dependencies */
 require('dotenv').config();
 const express = require('express');
 const path = require('path');
@@ -6,6 +8,7 @@ const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 const morgan = require('morgan');
 const socketIo = require('socket.io');
+const stripe = require('stripe')('sk_test_51MnpLGEaS26Uz7HefFGi8dwthbR22D9EJ0Jc4bX3E262vPvpndS4t8gW3hyhVAurYQsWMgG5IfeRRQ4jCzD7PlEg00ancir1mK');
 // routes
 const { ChatMessage } = require('./db/models');
 
@@ -17,7 +20,12 @@ const signallingChannelRouter = require('./routes/signallingChannel.route');
 const subscribeRouter = require('./routes/subscribe.route');
 const messageApiRouter = require('./routes/message.api.router');
 const allQuestionsRouter = require('./routes/allQuestions.route');
+const payRouter = require('./routes/pay.route');
+const { User } = require('./db/models');
 const ratingRouter = require('./routes/rating.route');
+const topExpertsRouter = require('./routes/topExperts.route');
+const payOfferRouter = require('./routes/payOffer.route');
+const transactionRouter = require('./routes/transaction.route');
 
 const app = express();
 
@@ -56,7 +64,11 @@ app.use('/schannel', signallingChannelRouter);
 app.use('/subscribe', subscribeRouter);
 app.use('/api/message', messageApiRouter);
 app.use('/allquestions', allQuestionsRouter);
+app.use('/payment', payRouter);
 app.use('/rating', ratingRouter);
+app.use('/topexperts', topExpertsRouter);
+app.use('/payoffer', payOfferRouter);
+app.use('/transaction', transactionRouter);
 
 const port = process.env.PORT ?? 3100;
 const server = app.listen(port, () => console.log(`Sever started on http://localhost:${port}`));
@@ -115,3 +127,24 @@ io.on('connection', (socket) => {
     io.to(data.to).emit('callAccepted', data.signal);
   });
 });
+
+// app.post('/api/charge', async (req, res) => {
+//   try {
+//     const { payment_method_id, amount } = req.body;
+//     console.log(11111, payment_method_id, amount);
+
+//     const paymentIntent = await stripe.paymentIntents.create({
+//       payment_method: payment_method_id,
+//       amount, // Replace with the actual amount of the payment
+//       currency: 'usd', // Replace with the currency of the payment
+//       description: 'Test Payment', // Replace with a description of the payment
+//       confirm: true,
+//     });
+//     // console.log(paymentIntent);
+
+//     res.json({ success: true });
+//   } catch (error) {
+//     console.log(error);
+//     res.status(500).json({ error: 'Failed to complete payment.' });
+//   }
+// });
