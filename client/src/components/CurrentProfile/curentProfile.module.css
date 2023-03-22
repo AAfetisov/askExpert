@@ -39,7 +39,6 @@
   align-items: center;
 }
 
-.avatar {
-  width: 200px;
-  height: 200px;
+.avatarBox {
+  padding-top: 40px;
 }

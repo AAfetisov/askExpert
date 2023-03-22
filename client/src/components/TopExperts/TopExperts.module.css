@@ -3,7 +3,9 @@
   justify-content: center;
   align-items: center;
   font-weight: 900;
-  margin-bottom: 1rem;
+  font-size: 1.6rem;
+  margin-bottom: 14px;
+  margin-top: 20px;
 }
 
 .expertBox {
@@ -11,10 +13,20 @@
   flex-direction: row;
   gap: 1rem;
   align-items: center;
+
 }
 
 .nameBox {
   display: flex;
   align-items: center;
   flex-direction: column;
+  /* position: absolute;
+  visibility: hidden;
+  background: #fec901;
+  width: 400px;
+  height: 300px; */
 }
+
+/* .nameBox.visible {
+  visibility: visible;
+} */

@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       this.belongsTo(models.User, { foreignKey: 'userId' });
+      this.belongsTo(models.User, { foreignKey: 'expertId' });
     }
   }
   Rating.init({

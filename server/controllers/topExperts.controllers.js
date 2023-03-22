@@ -15,7 +15,7 @@ const ShowTopExperts = async (req, res) => {
       order: [['averageRating', 'DESC']],
     });
 
-    // console.log(allExperts, '======>AllExperts');
+    console.log(allExperts, '======>AllExperts');
 
     res.json(allExperts);
   } catch (error) {
