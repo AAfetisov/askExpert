@@ -7,6 +7,37 @@ export const updateUserAC = (user) => ({
   payload: { user },
 });
 
+export const logoutProfileAC = () => ({ type: ATypes.PROFILE_LOGOUT, payload: {} });
+
+export const refreshUserAC = (user) => ({
+  type: ATypes.REFRESH_USER,
+  payload: { user },
+});
+
+export const refreshUser = (arg) => async (dispatch) => {
+  const response = await fetch('http://localhost:4000/profile/form', {
+    method: 'get',
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',
+  });
+  if (!response.ok) {
+    throw new Error(`status - ${response.status}, ${response.statusText}`);
+  }
+
+  const result = await response.json();
+
+  const user = {
+    id: result.id,
+    avatar: result.userpic,
+    name: result.name,
+    surname: result.surname,
+    email: result.email,
+    bio: result.bio,
+  };
+
+  dispatch(refreshUserAC(user));
+};
+
 export const setUserName = (name) => (
   {
     type: ATypes.UPDATE_USER_NAME,
@@ -55,38 +86,8 @@ export const updateUser = (arg) => async (dispatch) => {
     name: result.name,
     surname: result.surname,
     email: result.email,
-    password: result.password,
     bio: result.bio,
   };
 
   dispatch(updateUserAC(user));
-};
-
-export const refreshUserAC = (user) => ({
-  type: ATypes.REFRESH_USER,
-  payload: { user },
-});
-
-export const refreshUser = (arg) => async (dispatch) => {
-  const response = await fetch('http://localhost:4000/profile/form', {
-    method: 'get',
-    headers: { 'Content-Type': 'application/json' },
-    credentials: 'include',
-  });
-  if (!response.ok) {
-    throw new Error(`status - ${response.status}, ${response.statusText}`);
-  }
-
-  const result = await response.json();
-
-  const user = {
-    id: result.id,
-    avatar: result.userpic,
-    name: result.name,
-    surname: result.surname,
-    email: result.email,
-    bio: result.bio,
-  };
-
-  dispatch(refreshUserAC(user));
 };

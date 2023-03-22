@@ -29,7 +29,7 @@ export function TopExperts() {
   return (
     <>
       <div className={styles.TopExpertsName}>Top Experts</div>
-      <Marquee>
+      <Marquee className={styles.marquee}>
         <div className={styles.expertBox}>
           {experts?.length
             && experts?.map((el) => (

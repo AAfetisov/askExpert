@@ -1,9 +1,11 @@
 /* eslint-disable no-console */
 /* eslint-disable jsx-a11y/media-has-caption */
+import { Box, Button, Modal } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import ChatGPT from '../chatGPT';
+import HoverRating from '../Modal/Rating';
 import OffersForTheQuestion from './OffersForTheQuestion';
 import ScreenSharing from './ScreenShare';
 // import { receiveSignalMessage, sendSignalMessage, turnServerConfig } from './signallingChannel';
@@ -20,6 +22,9 @@ export default function QuestionPage() {
   const [err, setErr] = useState('');
   // const [invitationToVideo, setInvitationToVideo] = useState(null);
   const [recipientId, setRecipientId] = useState(null);
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const checkIfUserOfferedHelpToThisQUestion = async () => {
     const response = await fetch(`http://localhost:4000/question/${id}/offer`, {
@@ -64,11 +69,14 @@ export default function QuestionPage() {
       });
       if (response.ok) {
         setQuestion((state) => ({ ...state, status: false }));
+        // setOpen(true);
       } else {
         throw new Error('error communicating with server');
       }
     } catch (error) {
       setErr(error);
+    } finally {
+      setOpen(true);
     }
   };
 
@@ -88,34 +96,52 @@ export default function QuestionPage() {
   const handelPay = () => {};
 
   return (
-    <div className={style.flexcontainer}>
-      {question ? (
-        <>
-          <div className={style.container_left}>
-            <div
-              className={style.userpic}
-              style={{ backgroundImage: `url(../${question?.User?.userpic})` }}
-            />
-            <div className={style.name}>{question?.User?.name}</div>
-            <div className={style.name}>{question?.User?.surname}</div>
-            <div className={style.priceTitle}>question price:</div>
-            <div className={style.price}>{question?.price}</div>
-            {user.id === question?.User?.id && question.status
+    <>
+      <div>
+        {/* <Button onClick={handleOpen}>Please rate expert</Button> */}
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+          className={style.modalBox}
+        >
+          <Box sx={style}>
+            <HoverRating />
+          </Box>
+        </Modal>
+      </div>
+      <div className={style.flexcontainer}>
+        {question ? (
+          <>
+            <div className={style.container_left}>
+              <div
+                className={style.userpic}
+                style={{ backgroundImage: `url(../${question?.User?.userpic})` }}
+              />
+              <div className={style.name}>{question?.User?.name}</div>
+              <div className={style.name}>{question?.User?.surname}</div>
+              <div className={style.priceTitle}>question price:</div>
+              <div className={style.price}>{question?.price}</div>
+              {user.id === question?.User?.id && question.status
                 && (
-                <button
-                  type="button"
-                  onClick={handleSolveClick}
-                  className={style.solvedBtn}
-                >
-                  Solved
-                </button>
+                  <>
+                    <button
+                      type="button"
+                      onClick={handleSolveClick}
+                      className={style.solvedBtn}
+                    >
+                      Solved
+                    </button>
+                    <div />
+                  </>
                 )}
-          </div>
+            </div>
 
-          <div className={style.container_right}>
-            {!question.status && <div className={style.status}>Completed</div>}
-            <div className={style.title}>{question.title}</div>
-            {question.Subjects && (
+            <div className={style.container_right}>
+              {!question.status && <div className={style.status}>Completed</div>}
+              <div className={style.title}>{question.title}</div>
+              {question.Subjects && (
               <div className={style.tagsContainer}>
                 {question.Subjects.map((s) => (
                   <span key={s.id} className={style.tags}>
@@ -123,11 +149,11 @@ export default function QuestionPage() {
                   </span>
                 ))}
               </div>
-            )}
-            <div className={style.textTitle}>Problem description:</div>
-            <div className={style.text}>{question.text}</div>
-            <div className={style.error}>{err.message}</div>
-            {user.id === question?.User?.id && question.status && (
+              )}
+              <div className={style.textTitle}>Problem description:</div>
+              <div className={style.text}>{question.text}</div>
+              <div className={style.error}>{err.message}</div>
+              {user.id === question?.User?.id && question.status && (
               <>
                 <OffersForTheQuestion
                   questionId={id}
@@ -138,8 +164,8 @@ export default function QuestionPage() {
                 )}
                 {/* <ScreenSharing questionId={id} recipientId={recipientId} /> */}
               </>
-            )}
-            {user.id !== question?.User?.id && question.status && (
+              )}
+              {user.id !== question?.User?.id && question.status && (
               <div>
                 {offeredHelp ? (
                   <div>
@@ -168,12 +194,13 @@ export default function QuestionPage() {
                   </>
                 )}
               </div>
-            )}
-          </div>
-        </>
-      ) : (
-        <div>Nothing Found</div>
-      )}
-    </div>
+              )}
+            </div>
+          </>
+        ) : (
+          <div>Nothing Found</div>
+        )}
+      </div>
+    </>
   );
 }

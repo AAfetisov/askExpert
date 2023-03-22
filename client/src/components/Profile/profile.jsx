@@ -7,7 +7,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { updatedUser, updateUserAC } from '../../store/profileReducer/actions';
+import { refreshUserAC, updatedUser, updateUserAC } from '../../store/profileReducer/actions';
 import { Avatar, AvatarComp } from '../Avatar/avatar';
 import { Rate } from '../Rate/rate';
 import StripePay from '../Payments/StripePay';
@@ -21,7 +21,26 @@ export function Profile() {
   console.log(user, '=======>store.profile.user');
 
   const userAuth = useSelector((state) => state.auth.user);
+  console.log(userAuth, 'userAuth');
   const [cash, setCash] = useState([]);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const getUserInfo = async () => {
+      const response = await fetch('http://localhost:4000/profile', {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+      });
+      if (response.ok) {
+        const result = await response.json();
+        console.log(result, '!!!! result');
+        dispatch(refreshUserAC(result));
+      }
+    };
+    getUserInfo();
+  }, []);
 
   useEffect(() => {
     const getCash = async () => {
