@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import ChatGPT from '../chatGPT';
 import OffersForTheQuestion from './OffersForTheQuestion';
-import ScreenSharing from './ScreenShare';
+import ScreenShare from './ScreenShare';
 // import { receiveSignalMessage, sendSignalMessage, turnServerConfig } from './signallingChannel';
 import style from './style.module.css';
 
@@ -134,9 +134,11 @@ export default function QuestionPage() {
                   setRecipientId={setRecipientId}
                 />
                 {recipientId && (
-                  <ChatGPT questionId={id} recipientId={recipientId} />
+                  <>
+                    <ChatGPT questionId={id} recipientId={recipientId} />
+                    <ScreenShare questionId={id} recipientId={recipientId} />
+                  </>
                 )}
-                {/* <ScreenSharing questionId={id} recipientId={recipientId} /> */}
               </>
             )}
             {user.id !== question?.User?.id && question.status && (
@@ -150,9 +152,11 @@ export default function QuestionPage() {
                       </span>
                     </div>
                     {question?.userId && (
-                      <ChatGPT questionId={id} recipientId={question.userId} />
+                      <>
+                        <ChatGPT questionId={id} recipientId={question.userId} />
+                        <ScreenShare questionId={id} recipientId={question.userId} />
+                      </>
                     )}
-                    {/* <ScreenSharing questionId={id} recipientId={question.userId} /> */}
                   </div>
                 ) : (
                   <>

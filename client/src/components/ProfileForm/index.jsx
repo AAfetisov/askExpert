@@ -97,6 +97,7 @@ export function ProfileForm() {
             fullWidth
             id="avatar"
             name="avatar"
+            placeholder="Profile picture"
             onChange={onChangeAvatar}
             value={updatedUser.avatar}
           />
@@ -107,6 +108,7 @@ export function ProfileForm() {
             id="name"
             name="name"
             autoComplete="name"
+            placeholder="Name"
             onChange={onChangeName}
             value={updatedUser.name}
           />
@@ -117,6 +119,7 @@ export function ProfileForm() {
             id="surname"
             name="surname"
             autoComplete="surname"
+            placeholder="Second Name"
             onChange={onChangeSurname}
             value={updatedUser.surname}
           />
@@ -127,6 +130,7 @@ export function ProfileForm() {
             id="email"
             name="email"
             autoComplete="email"
+            placeholder="Email"
             value={userId.email}
               />
           <TextField
@@ -135,6 +139,7 @@ export function ProfileForm() {
             fullWidth
             name="bio"
             id="bio"
+            placeholder="Bio"
             onChange={onChangeBio}
             value={updatedUser.bio}
           />
@@ -192,7 +197,7 @@ export function ProfileForm() {
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
-            Confirm the changes
+            Confirm changes
           </Button>
         </Box>
       </Box>
