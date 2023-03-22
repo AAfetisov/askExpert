@@ -28,7 +28,6 @@ function ScreenShare({ questionId, recipientId }) {
   const socket = useSelector((state) => state.sockets.socket);
   const user = useSelector((state) => state.auth.user);
 
-  // const myVideo = useRef();
   const userVideo = useRef();
   const connectionRef = useRef();
 
@@ -40,7 +39,7 @@ function ScreenShare({ questionId, recipientId }) {
     setCall({});
 
     connectionRef?.current?.destroy();
-    window.location.reload();
+    // window.location.reload();
   };
 
   useEffect(() => {
@@ -64,7 +63,6 @@ function ScreenShare({ questionId, recipientId }) {
   }, [socket]);
 
   const answerCall = () => {
-    // setCallAccepted(true);
     setCallInProgress(true);
     const peer = new Peer({ initiator: false, trickle: false, stream });
 
