@@ -81,6 +81,17 @@
   padding: 0.3rem;
 }
 
+.buttonAllview {
+  visibility: hidden;
+  position: sticky;
+  right: 600px;
+}
+
+.buttonAllfree {
+  visibility: visible;
+  position: sticky;
+  right: 600px;
+}
 .button:hover {
   animation: example 5s infinite linear;
   /* border-radius: 6px; */
