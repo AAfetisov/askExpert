@@ -2,17 +2,21 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable consistent-return */
 import React, { useEffect, useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import io from 'socket.io-client';
+import {
+  dismountSocketTh, mountSocketTh, setSocketOffAC, setSocketOnAC,
+} from '../../store/socketReducer/actions';
 import style from './style.module.css';
 
 export default function ChatGPT({ questionId, recipientId }) {
   const [socket, setSocket] = useState(null);
+  const dispatch = useDispatch();
   const [messages, setMessages] = useState([]);
   const [inputMessage, setInputMessage] = useState('');
-  // const user = useSelector(state=>state.auth.user);
   const user = useSelector((state) => state.auth.user);
   const containerRef = useRef(null);
+
   useEffect(() => {
     (
       async () => {
@@ -34,10 +38,15 @@ export default function ChatGPT({ questionId, recipientId }) {
     const newSocket = io('http://localhost:4000', {
       withCredentials: true,
     });
+
     setSocket(newSocket);
+
     newSocket.emit('join', {});
 
+    dispatch(setSocketOnAC(newSocket));
+
     return () => {
+      dispatch(setSocketOffAC(newSocket));
       newSocket.disconnect();
     };
   }, []);
@@ -49,16 +58,20 @@ export default function ChatGPT({ questionId, recipientId }) {
   }, [messages]);
 
   useEffect(() => {
+    // recipientId в зависимостях, тк иначе он не обновляется при проверке, застревая
+    // на изначальном значении.
     if (socket) {
       socket.on('receive_message', (message) => {
-        setMessages((prevMessages) => [...prevMessages, message]);
+        if (message.fromId === recipientId) {
+          setMessages((prevMessages) => [...prevMessages, message]);
+        }
       });
 
       return () => {
         socket.off('receive_message');
       };
     }
-  }, [socket]);
+  }, [socket, recipientId]);
 
   const sendMessage = () => {
     if (socket && inputMessage) {

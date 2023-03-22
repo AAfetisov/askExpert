@@ -19,7 +19,6 @@ export default function Subscribe() {
       if (response.ok) {
         const result = await response.json();
         setOffer(result);
-        console.log('🚀 ~ file: Subscribe.jsx:25 ~ result:', result);
       }
     })();
   }, []);
