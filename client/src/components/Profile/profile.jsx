@@ -8,7 +8,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { updatedUser, updateUserAC } from '../../store/profileReducer/actions';
-import { Avatar } from '../Avatar/avatar';
+import { Avatar, AvatarComp } from '../Avatar/avatar';
 import { Rate } from '../Rate/rate';
 import StripePay from '../Payments/StripePay';
 // import "bootstrap/dist/js/popper.min.js";
@@ -41,7 +41,7 @@ export function Profile() {
 
   return (
     <div className={Styles.mainbox}>
-      <Avatar />
+      <div className={Styles.avatarBox}> <AvatarComp /></div>
 
       <div className={Styles.userInfo}>
         {user.name ? (

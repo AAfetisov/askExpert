@@ -71,11 +71,6 @@ export default function Subscribe() {
         {offer?.length
             && offer?.map((of) => <div key={of.id}>{of.price}</div>)}
       </div> */}
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
       {/* <Table striped="columns">
         <thead>
           <tr>

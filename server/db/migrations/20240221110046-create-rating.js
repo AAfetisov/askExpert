@@ -10,7 +10,6 @@ module.exports = {
       },
       expertId: {
         type: Sequelize.INTEGER,
-        allowNull: false,
         references: {
           model: {
             tableName: 'Users',
@@ -20,7 +19,6 @@ module.exports = {
       },
       userId: {
         type: Sequelize.INTEGER,
-        allowNull: false,
         references: {
           model: {
             tableName: 'Users',

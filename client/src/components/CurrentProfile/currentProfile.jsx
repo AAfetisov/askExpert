@@ -1,7 +1,7 @@
-import { Box, Rating } from '@mui/material';
+import { Avatar, Box, Rating } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Avatar } from '../Avatar/avatar';
+// import { AvatarCom } from '../Avatar/avatar';
 import { Rate } from '../Rate/rate';
 
 import Styles from './curentProfile.module.css';
@@ -43,11 +43,13 @@ export function CurrentProfile() {
 
     <div className={Styles.mainbox}>
       <div className={Styles.imgBox}>
-        <img
-          className={Styles.avatar}
-          src={currentUser.userpic || 'https://cdn-icons-png.flaticon.com/512/3177/3177440.png'}
-          alt="foto"
-        />
+        <div className={Styles.avatarBox}>
+          <Avatar
+            alt="Remy Sharp"
+            src={currentUser.userpic || 'https://cdn-icons-png.flaticon.com/512/3177/3177440.png'}
+            sx={{ width: 200, height: 200 }}
+          />
+        </div>
         <h3>Rate:</h3>
         <Box
           sx={{

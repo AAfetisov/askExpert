@@ -7,28 +7,10 @@
   margin-bottom: 8px;
 }
 
-/* .tableAllQuestionsPage {
-	width: 100%;
-	margin-bottom: 20px;
-	border: 1px solid #dddddd;
-	border-collapse: collapse; 
-}
-.tableAllQuestionsPage th {
-	font-weight: bold;
-	padding: 5px;
-	background: #efefef;
-	border: 1px solid #dddddd;
-}
-.tableAllQuestionsPage td {
-	border: 1px solid #dddddd;
-	padding: 5px;
-}  */
-
 .tableAllQuestionsPage {
   width: 80%;
   border: none;
-  margin-bottom: 20px;
-  margin-top: 14px;
+  margin-bottom: 14px;
   border-collapse: separate;
 }
 .tableAllQuestionsPage thead th {

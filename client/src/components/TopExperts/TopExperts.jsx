@@ -1,5 +1,7 @@
-import { Rating } from '@mui/material';
+import { Avatar, Rating } from '@mui/material';
 import React, { useEffect, useState } from 'react';
+// import { Slider } from './Myslider';
+import Marquee from 'react-fast-marquee';
 import styles from './TopExperts.module.css';
 
 export function TopExperts() {
@@ -27,11 +29,16 @@ export function TopExperts() {
   return (
     <>
       <div className={styles.TopExpertsName}>Top Experts</div>
-      <div className={styles.expertBox}>
-        {experts?.length
+      <Marquee>
+        <div className={styles.expertBox}>
+          {experts?.length
             && experts?.map((el) => (
               <div key={el['User.id']} className={styles.nameBox}>
-                <img src={el['User.userpic']} alt="avatar" />
+                <Avatar
+                  alt="Remy Sharp"
+                  src={el['User.userpic']}
+                  sx={{ width: 50, height: 50 }}
+                />
                 <div>
                   {el['User.name']}
                   {el['User.surname']}
@@ -46,7 +53,8 @@ export function TopExperts() {
 
               </div>
             ))}
-      </div>
+        </div>
+      </Marquee>
     </>
 
   );
