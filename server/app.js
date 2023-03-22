@@ -72,27 +72,25 @@ io.use((socket, next) => {
   sessionMiddleware(socket.request, {}, next);
 });
 
-const usersOnline = new Map();
-const videoUsersOnline = new Map();
+const usersOnline = new Map();// юзеры чата, а не вообще все.
 
 io.on('connection', (socket) => {
   const { user } = socket.request.session;
   const currentUser = user?.id;
 
   socket.emit('me', socket.id);
+  console.log('+ Connected user id: ', user.id, ', socket.id: ', socket.id);
+
   socket.on('join', () => {
     usersOnline.set(user.id, socket.id);
   });
-  socket.on('join_video', () => {
-    videoUsersOnline.set(user.id, socket.id);
-  });
 
   socket.on('disconnect', () => {
+    // video 1
+    socket.broadcast.emit('callEnded');// TODO: переделать на адресное отключение
     if (currentUser) {
       usersOnline.delete(currentUser);
-      videoUsersOnline.delete(currentUser);
     }
-    socket.broadcast.emit('callEnded'); // TODO: не забыть исправить на адресную
   });
 
   socket.on('send_message', async (message) => {
@@ -106,17 +104,14 @@ io.on('connection', (socket) => {
       toId, fromId: currentUser, body, questionId,
     });
   });
-
+  // video *
   socket.on('callUser', ({
     userToCall, signalData, from, name,
   }) => {
-    const recipientId = videoUsersOnline.get(userToCall);
-    const senderId = videoUsersOnline.get(currentUser);
-    io.to(recipientId).emit('callUser', { signal: signalData, from: senderId, name });
+    io.to(usersOnline.get(userToCall)).emit('callUser', { signal: signalData, from: socket.id, name });
   });
 
   socket.on('answerCall', (data) => {
-    console.log(8888888, 'AnsweringCall');
     io.to(data.to).emit('callAccepted', data.signal);
   });
 });

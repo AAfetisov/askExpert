@@ -2,25 +2,23 @@
 /* eslint-disable jsx-a11y/media-has-caption */
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import ChatGPT from '../chatGPT';
 import OffersForTheQuestion from './OffersForTheQuestion';
-import ScreenSharing from './ScreenShare';
-// import { receiveSignalMessage, sendSignalMessage, turnServerConfig } from './signallingChannel';
+import ScreenShare from './ScreenShare';
 import style from './style.module.css';
 
 export default function QuestionPage() {
-  // const navigate = useNavigate();
-  // const isAuth = useSelector((state) => state.auth.isAuth);
   const user = useSelector((state) => state.auth.user);
   const [question, setQuestion] = useState({});
   const { id } = useParams();
   const [offeredHelp, setOfferHelp] = useState(null);
   const [price, setPrice] = useState(1);
   const [err, setErr] = useState('');
-  // const [invitationToVideo, setInvitationToVideo] = useState(null);
   const [recipientId, setRecipientId] = useState(null);
+  const [isSharingScreen, setSharingScreen] = useState(false);
 
+  const socket = useSelector((state) => state.sockets.socket);
   const checkIfUserOfferedHelpToThisQUestion = async () => {
     const response = await fetch(`http://localhost:4000/question/${id}/offer`, {
       method: 'GET',
@@ -47,7 +45,6 @@ export default function QuestionPage() {
         signal,
       });
       const data = await response.json();
-      console.log(data);
       setQuestion(data);
     })();
     checkIfUserOfferedHelpToThisQUestion();
@@ -132,7 +129,9 @@ export default function QuestionPage() {
 
           <OffersForTheQuestion questionId={id} setRecipientId={setRecipientId} />
           {recipientId && <ChatGPT questionId={id} recipientId={recipientId} />}
-          {/* <ScreenSharing questionId={id} recipientId={recipientId} /> */}
+
+          {recipientId
+          && <ScreenShare questionId={id} recipientId={recipientId} />}
         </>
         )}
               { user.id !== question?.User?.id && question.status
@@ -148,7 +147,8 @@ export default function QuestionPage() {
 
                     </div>
                     {question?.userId && <ChatGPT questionId={id} recipientId={question.userId} />}
-                    {/* <ScreenSharing questionId={id} recipientId={question.userId} /> */}
+                    {question.userId
+          && <ScreenShare questionId={id} recipientId={question.userId} />}
                   </div>
                 )
                 : (

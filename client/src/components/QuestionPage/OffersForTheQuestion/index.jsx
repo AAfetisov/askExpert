@@ -22,7 +22,6 @@ export default function OffersForTheQuestion({ questionId, setRecipientId }) {
       });
 
       const data = await response.json();
-      console.log(data);
       setOffers(data);
     })();
 
