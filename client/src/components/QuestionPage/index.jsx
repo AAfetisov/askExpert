@@ -89,88 +89,91 @@ export default function QuestionPage() {
 
   return (
     <div className={style.flexcontainer}>
-
-      {question
-        ? (
-          <>
-
-            <div className={style.container_left}>
-              <div className={style.userpic} style={{ backgroundImage: `url(../${question?.User?.userpic})` }} />
-              <div className={style.name}>{question?.User?.name}</div>
-              <div className={style.name}>{question?.User?.surname}</div>
-              <div className={style.priceTitle}>question price:</div>
-              <div className={style.price}>{question?.price}</div>
-              {user.id === question?.User?.id && question.status
-              && (
-              <>
-                <button type="button" onClick={handleSolveClick} className={style.solvedBtn}>Solved</button>
-                <button type="button" onClick={handelPay} className={style.solvedBtn}>Pay Expert</button>
-              </>
-              )}
-            </div>
-
-            <div className={style.container_right}>
-              {!question.status
-            && <div className={style.status}>Completed</div>}
-              <div className={style.title}>
-                {question.title}
-              </div>
-              { question.Subjects
-        && (
-          <div className={style.tagsContainer}>
-              { question.Subjects.map((s) => (
-                <span
-                  key={s.id}
-                  className={style.tags}
-                >
-                  {s.title}
-                </span>
-              ))}
-          </div>
-        )}
-              <div className={style.textTitle}>Problem description:</div>
-              <div className={style.text}>
-                {question.text}
-              </div>
-              <div className={style.error}>{err.message}</div>
-              {user.id === question?.User?.id && question.status
-        && (
+      {question ? (
         <>
+          <div className={style.container_left}>
+            <div
+              className={style.userpic}
+              style={{ backgroundImage: `url(../${question?.User?.userpic})` }}
+            />
+            <div className={style.name}>{question?.User?.name}</div>
+            <div className={style.name}>{question?.User?.surname}</div>
+            <div className={style.priceTitle}>question price:</div>
+            <div className={style.price}>{question?.price}</div>
+            {user.id === question?.User?.id && question.status
+                && (
+                <button
+                  type="button"
+                  onClick={handleSolveClick}
+                  className={style.solvedBtn}
+                >
+                  Solved
+                </button>
+                )}
+          </div>
 
-          <OffersForTheQuestion questionId={id} setRecipientId={setRecipientId} />
-          {recipientId && <ChatGPT questionId={id} recipientId={recipientId} />}
-          {/* <ScreenSharing questionId={id} recipientId={recipientId} /> */}
-        </>
-        )}
-              { user.id !== question?.User?.id && question.status
-            && (
-            <div>
-
-              {offeredHelp
-                ? (
+          <div className={style.container_right}>
+            {!question.status && <div className={style.status}>Completed</div>}
+            <div className={style.title}>{question.title}</div>
+            {question.Subjects && (
+              <div className={style.tagsContainer}>
+                {question.Subjects.map((s) => (
+                  <span key={s.id} className={style.tags}>
+                    {s.title}
+                  </span>
+                ))}
+              </div>
+            )}
+            <div className={style.textTitle}>Problem description:</div>
+            <div className={style.text}>{question.text}</div>
+            <div className={style.error}>{err.message}</div>
+            {user.id === question?.User?.id && question.status && (
+              <>
+                <OffersForTheQuestion
+                  questionId={id}
+                  setRecipientId={setRecipientId}
+                />
+                {recipientId && (
+                  <ChatGPT questionId={id} recipientId={recipientId} />
+                )}
+                {/* <ScreenSharing questionId={id} recipientId={recipientId} /> */}
+              </>
+            )}
+            {user.id !== question?.User?.id && question.status && (
+              <div>
+                {offeredHelp ? (
                   <div>
                     <div className={style.helpOffered}>
                       <span>Help offered for</span>
-                      <span className={style.offeredPrice}>{offeredHelp.price}</span>
-
+                      <span className={style.offeredPrice}>
+                        {offeredHelp.price}
+                      </span>
                     </div>
-                    {question?.userId && <ChatGPT questionId={id} recipientId={question.userId} />}
+                    {question?.userId && (
+                      <ChatGPT questionId={id} recipientId={question.userId} />
+                    )}
                     {/* <ScreenSharing questionId={id} recipientId={question.userId} /> */}
                   </div>
-                )
-                : (
+                ) : (
                   <>
-                    <input type="number" name="price" onChange={(e) => setPrice(e.target.value)} value={price} />
-                    <button type="button" onClick={handleOfferHelp}>Offer Help</button>
+                    <input
+                      type="number"
+                      name="price"
+                      onChange={(e) => setPrice(e.target.value)}
+                      value={price}
+                    />
+                    <button type="button" onClick={handleOfferHelp}>
+                      Offer Help
+                    </button>
                   </>
                 )}
-            </div>
+              </div>
             )}
-
-            </div>
-          </>
-        )
-        : <div>Nothing Found</div>}
+          </div>
+        </>
+      ) : (
+        <div>Nothing Found</div>
+      )}
     </div>
   );
 }

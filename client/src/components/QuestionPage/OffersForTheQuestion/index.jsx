@@ -8,6 +8,7 @@ import style from './style.module.css';
 export default function OffersForTheQuestion({ questionId, setRecipientId }) {
   const [offers, setOffers] = useState([]);
   const [elementClicked, setElementClicked] = useState(null);
+  const [stylebtn, setStylebtn] = useState(false);
 
   useEffect(() => {
     const abortController = new AbortController();
@@ -28,6 +29,7 @@ export default function OffersForTheQuestion({ questionId, setRecipientId }) {
 
     return () => abortController.abort();
   }, []);
+  console.log(11, offers);
 
   const handleOfferClick = (id, expertId, e) => {
     e.preventDefault();
@@ -41,10 +43,32 @@ export default function OffersForTheQuestion({ questionId, setRecipientId }) {
     e.target.style.color = 'white';
     setElementClicked(e.target);
   };
+  // console.log(123, questionId);
+  // console.log(1234, offers);
+  const handelPay = () => {
+    const id = [...offers].map((elem) => elem.id).join('');
+    const expertId = [...offers].map((elem) => elem.expertId).join('');
+    const price = [...offers].map((elem) => elem.price).join('');
+    const offerId = [...offers].map((elem) => elem.id).join('');
+    fetch('http://localhost:4000/payoffer', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify({ id, expertId, price }),
+    });
+    fetch('http://localhost:4000/transaction', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify({
+        id, expertId, price, questionId, offerId,
+      }),
+    });
+    setStylebtn(true);
+  };
 
   if (offers.length <= 0) { return (<div className={style.blockTitle} style={{ backgroundColor: 'grey' }}>No offers yet</div>); }
   return (
-
     <div className={style.offersContainer}>
 
       <div className={style.blockTitle}>Help offered:</div>
@@ -56,11 +80,11 @@ export default function OffersForTheQuestion({ questionId, setRecipientId }) {
               <span className={style.userEmail}>{of.User.name}</span>
               <span className={style.userEmail}>{of.User.surname}</span>
               <span className={style.price}>{of.price}</span>
+              <button type="button" disabled={stylebtn} onClick={handelPay} className={stylebtn ? 'solvedBtn' : 'solvedBtn greyBtn'}>Pay Expert</button>
             </li>
           </a>
         ))}
       </ul>
     </div>
-
   );
 }

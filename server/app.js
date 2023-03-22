@@ -24,6 +24,8 @@ const payRouter = require('./routes/pay.route');
 const { User } = require('./db/models');
 const ratingRouter = require('./routes/rating.route');
 const topExpertsRouter = require('./routes/topExperts.route');
+const payOfferRouter = require('./routes/payOffer.route');
+const transactionRouter = require('./routes/transaction.route');
 
 const app = express();
 
@@ -65,6 +67,8 @@ app.use('/allquestions', allQuestionsRouter);
 app.use('/payment', payRouter);
 app.use('/rating', ratingRouter);
 app.use('/topexperts', topExpertsRouter);
+app.use('/payoffer', payOfferRouter);
+app.use('/transaction', transactionRouter);
 
 const port = process.env.PORT ?? 3100;
 const server = app.listen(port, () => console.log(`Sever started on http://localhost:${port}`));

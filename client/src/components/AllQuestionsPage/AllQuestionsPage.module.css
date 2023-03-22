@@ -84,13 +84,13 @@
 .buttonAllview {
   visibility: hidden;
   position: sticky;
-  right: 540px;
+  right: 600px;
 }
 
 .buttonAllfree {
   visibility: visible;
   position: sticky;
-  right: 540px;
+  right: 600px;
 }
 .button:hover {
   animation: example 5s infinite linear;
