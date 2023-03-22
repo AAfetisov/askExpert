@@ -37,7 +37,10 @@ function ScreenShare({ questionId, recipientId }) {
     setCallInProgress(false);
     setStream();
     setCall({});
-
+    if (stream) {
+      stream.getTracks().forEach((track) => track.stop());
+      stream.stop();
+    }
     connectionRef?.current?.destroy();
     // window.location.reload();
   };
