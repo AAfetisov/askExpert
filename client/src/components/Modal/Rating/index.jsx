@@ -22,8 +22,8 @@ export default function HoverRating() {
   const [hover, setHover] = useState(-1);
 
   console.log(value, 'value=====');
-  const userId = 1;
-  const expertId = 2;
+  const userId = 2;
+  const expertId = 1;
 
   useEffect(() => {
     (

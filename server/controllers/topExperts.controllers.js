@@ -3,18 +3,12 @@ const question = require('../db/models/question');
 
 const ShowTopExperts = async (req, res) => {
   try {
-    // const expertId = await Rating.findAll({
-    //   attributes: ['expertId'],
-    //   raw: true,
-    //   nested: true,
-    // });
-    // console.log(expertId, '________>exId');
     const allExperts = await Rating.findAll({
       attributes: ['expertId',
         [sequelize.fn('AVG', sequelize.col('rating')), 'averageRating'],
       ],
       include: [
-        { model: User, attributes: ['id', 'name', 'surname', 'userpic'], where: { id: expertId } }],
+        { model: User, attributes: ['id', 'name', 'surname', 'userpic'] }],
       group: ['expertId', 'User.id', 'User.name', 'User.surname', 'User.userpic'],
       raw: true,
       nested: true,
