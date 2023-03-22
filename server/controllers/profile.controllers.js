@@ -2,7 +2,7 @@ const { User, Rating, sequelize } = require('../db/models');
 
 exports.GetUser = async (req, res) => {
   const {
-    id, name, surname, email, password, bio,
+    id, name, surname, email, bio,
   } = req.body;
 
   try {
@@ -12,7 +12,6 @@ exports.GetUser = async (req, res) => {
         name: req.body.user.name,
         surname: req.body.user.surname,
         email: req.body.user.email,
-        password: req.body.user.password,
         bio: req.body.user.bio,
       },
       {
@@ -34,12 +33,15 @@ exports.findUser = async (req, res) => {
 
   try {
     const userRecord = await User.findOne({
+      attributes: ['id', 'name', 'surname', 'email', 'bio', 'userpic', 'cash'],
       where: { id: user.id },
       returning: true,
       plain: true,
     });
 
     const data = delete userRecord.password;
+
+    console.log(userRecord, '++++++++++++HERE');
 
     res.json(userRecord);
   } catch (error) {
@@ -77,6 +79,26 @@ exports.FindCurrentUser = async (req, res) => {
 
     res.json({ currentUser, averageRating });
   } catch (error) {
+    res.status(501).json({ err: 'something wrong with the Db :(' });
+  }
+};
+
+exports.findUserInfo = async (req, res) => {
+  const { user } = req.session;
+
+  try {
+    const userInfo = await User.findOne({
+      attributes: ['id', 'name', 'surname', 'email', 'bio', 'userpic', 'cash'],
+      where: { id: user.id },
+      returning: true,
+      plain: true,
+    });
+
+    const data = delete userInfo.password;
+
+    res.json(userInfo);
+  } catch (error) {
+    console.log('User: ', error);
     res.status(501).json({ err: 'something wrong with the Db :(' });
   }
 };

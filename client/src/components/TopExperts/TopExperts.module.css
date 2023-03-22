@@ -16,7 +16,15 @@
 
 }
 
+.marquee {
+  width: 80%;
+  border: 1px solid #ededed;
+  margin-bottom: 30px;
+  border-radius: 8px;
+}
+
 .nameBox {
+  padding: 6px;
   display: flex;
   align-items: center;
   flex-direction: column;
