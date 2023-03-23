@@ -15,7 +15,7 @@ import { ProfileForm } from './components/ProfileForm';
 import QuestionPage from './components/QuestionPage';
 import RegisterForm from './components/RegistrationForm';
 import { refreshSessionTh } from './store/authReducer/actions';
-import { refreshUser } from './store/profileReducer/actions';
+import { logoutProfileAC, refreshUser } from './store/profileReducer/actions';
 
 function App() {
   const dispatch = useDispatch();
@@ -31,6 +31,10 @@ function App() {
     dispatch(refreshUser());
   }, []);
 
+  const handleLogout = () => {
+    dispatch(logoutProfileAC());
+  };
+
   return (
     <>
       <nav>
@@ -45,7 +49,7 @@ function App() {
               </div>
               <Link to="/">Home</Link>
               <Link to="/profile">Profile</Link>
-              <Link to="/logout">Logout</Link>
+              <Link to="/logout" onClick={handleLogout}>Logout</Link>
             </div>
 
           </>

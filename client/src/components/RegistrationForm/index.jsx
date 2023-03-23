@@ -38,7 +38,7 @@ export default function RegistrationForm() {
     );
     if (response.ok) {
       const result = await response.json();
-      dispatch(setUserAC({ id: result.id, name: result.email }));
+      dispatch(setUserAC({ id: result.id, email: result.email }));
       navigate('/');
     } else {
       const error = await response.json();

@@ -38,7 +38,7 @@ export default function LoginForm() {
     );
     if (response.ok) {
       const result = await response.json();
-      const user = { id: result.id, name: result.email };
+      const user = { id: result.id, email: result.email };
       dispatch(setUserAC(user));
       navigate('/');
     } else {

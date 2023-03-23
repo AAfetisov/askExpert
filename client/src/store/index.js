@@ -14,7 +14,6 @@ import { todosReducers } from './todoReducer/reducers';
 
 const rootReducers = combineReducers({
   auth: authReducers,
-  todos: todosReducers,
   profile: profileReducers,
   sockets: socketReducers,
 });

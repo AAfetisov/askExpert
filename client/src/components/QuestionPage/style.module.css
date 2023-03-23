@@ -28,17 +28,20 @@
 .name {
   font-weight: 600;
 }
+
 .priceTitle {
   margin-top: 2rem;
   font-size: 0.8rem;
   user-select: none;
 }
+
 .price {
   font-size: 1.5rem;
   color: rgba(255, 222, 37, 0.829);
   font-weight: bold;
   text-shadow: 1px 1px #3f3f3f;
 }
+
 .price::after {
   content: "₽";
 }
@@ -93,6 +96,7 @@
   padding-right: 0.3rem; */
   user-select: none;
 }
+
 .textTitle {
   margin-top: 1rem;
   align-self: flex-start;
@@ -121,12 +125,18 @@
   margin-top: 2rem;
   line-height: 3rem;
 }
+
 .offeredPrice {
   margin-left: 0.5rem;
   color: rgba(255, 222, 37, 0.829);
   font-weight: bold;
   text-shadow: 1px 1px #3f3f3f;
 }
+
 .offeredPrice::after {
   content: "₽";
+}
+
+.modalBox {
+  visibility: visible;
 }
