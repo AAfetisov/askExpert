@@ -117,7 +117,7 @@ export default function QuestionPage() {
             <div className={style.container_left}>
               <div
                 className={style.userpic}
-                style={{ backgroundImage: `url(../${question?.User?.userpic})` }}
+                style={{ backgroundImage: `url(${question?.User?.userpic})`, backgroundSize: 'cover' }}
               />
               <div className={style.name}>{question?.User?.name}</div>
               <div className={style.name}>{question?.User?.surname}</div>
@@ -187,6 +187,7 @@ export default function QuestionPage() {
                 ) : (
                   <>
                     <input
+                      className={style.offerInp}
                       type="number"
                       name="price"
                       onChange={(e) => setPrice(e.target.value)}

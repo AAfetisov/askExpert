@@ -140,3 +140,7 @@
 .modalBox {
   visibility: visible;
 }
+.offerInp {
+  line-height: 2rem;
+  width: 100px;
+}

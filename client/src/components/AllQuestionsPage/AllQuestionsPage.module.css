@@ -1,10 +1,11 @@
 .allQuestionsPage {
+  margin-top: 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
   font-weight: 900;
   font-size: 1.6rem;
-  margin-bottom: 8px;
+  margin-bottom: 1rem;
 }
 
 .tableAllQuestionsPage {
@@ -192,4 +193,10 @@ color: #000;
 }
 .tagfilter span:hover::after {
   color: rgb(255, 255, 255);
+}
+
+.spacer {
+  font-size: 2rem;
+  visibility: hidden;
+  /* height: 3rem; */
 }

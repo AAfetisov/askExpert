@@ -135,7 +135,13 @@ function ScreenShare({ questionId, recipientId }) {
         && <button type="button" onClick={() => callUser()}>Share your screen</button>}
 
       {imCalling && !imBeingCalled && !callInProgress
-        && <div>Waiting for user to answer</div>}
+
+        && (
+        <>
+          <div>Waiting for user to answer</div>
+          <button type="button" onClick={leaveCall}>Cancel</button>
+        </>
+        )}
 
       { !imCalling && imBeingCalled && !callInProgress
         && <button type="button" onClick={answerCall}>Answer</button>}
