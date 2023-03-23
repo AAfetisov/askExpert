@@ -35,14 +35,25 @@ function ScreenShare({ questionId, recipientId }) {
     setImCalling(false);
     setImBeingCalled(false);
     setCallInProgress(false);
-    setStream();
     setCall({});
+    // userVideo?.current?.srcObject = null;
     if (stream) {
       stream.getTracks().forEach((track) => track.stop());
-      stream.stop();
     }
-    connectionRef?.current?.destroy();
-    // window.location.reload();
+    setStream();
+
+    // socket.emit(
+    //   'hangedUp',
+    //   recipientId,
+    // );
+    // if (userVideo.current) {
+    //   const tracks = userVideo.current.srcObject.getTracks();
+    //   tracks.forEach((track) => track.stop());
+    //   userVideo.current.srcObject = null;
+    // }
+    // setStream();
+    // connectionRef?.current?.destroy();
+    window.location.reload();
   };
 
   useEffect(() => {
@@ -52,6 +63,12 @@ function ScreenShare({ questionId, recipientId }) {
     socket.on('me', (id) => {
       // setMe(id);
       setMe(user.id);
+    });
+
+    socket.on('callEnded', (remoteUserId) => {
+      console.log('user disconnected:', remoteUserId);
+      if (remoteUserId !== recipientId) { return; }
+      leaveCall();
     });
 
     socket.on('callUser', ({ from, name: callerName, signal }) => {
@@ -102,12 +119,14 @@ function ScreenShare({ questionId, recipientId }) {
       peer.signal(signal);
     });
 
-    socket.on('callEnded', (signal) => {
-      leaveCall();
-    });
-
     connectionRef.current = peer;
   };
+
+  function handleDoubleClick() {
+    if (!document.fullscreenElement) {
+      userVideo.current.requestFullscreen();
+    }
+  }
 
   return (
 
@@ -124,7 +143,13 @@ function ScreenShare({ questionId, recipientId }) {
       { !imCalling && imBeingCalled && callInProgress
       && (
       <>
-        <video playsInline ref={userVideo} autoPlay className={style.video} />
+        <video
+          playsInline
+          ref={userVideo}
+          autoPlay
+          className={style.video}
+          onDoubleClick={handleDoubleClick}
+        />
         <button type="button" onClick={leaveCall}>Hang Up</button>
       </>
       )}

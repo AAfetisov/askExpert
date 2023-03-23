@@ -84,7 +84,7 @@ io.use((socket, next) => {
   sessionMiddleware(socket.request, {}, next);
 });
 
-const usersOnline = new Map();// юзеры чата, а не вообще все.
+const usersOnline = new Map();
 
 io.on('connection', (socket) => {
   const { user } = socket.request.session;
@@ -99,10 +99,14 @@ io.on('connection', (socket) => {
 
   socket.on('disconnect', () => {
     // video 1
-    socket.broadcast.emit('callEnded');// TODO: переделать на адресное отключение
+    console.log('-User has disconnected: ', user.id);
+    socket.broadcast.emit('callEnded', user.id);// TODO: переделать на адресное отключение
     if (currentUser) {
       usersOnline.delete(currentUser);
     }
+  });
+  socket.on('hangedUp', (to) => {
+    console.log('hangedUp: ', to);
   });
 
   socket.on('send_message', async (message) => {
