@@ -35,11 +35,11 @@ export default function Main() {
     <div className={style.flexcontainer}>
       {isAuth ? (
         <>
-          <div>
-            <Marquee speed={30}>
-              {/* {runningTags.map((el) => (
-                <span key={el.id}>{el.Subjects.title}</span>
-              ))} */}
+          <div className={style.marqueeContainer}>
+            <Marquee speed={20}>
+              {runningTags.map((el) => (
+                <span key={el.id}>{el.Subjects[0].title}</span>
+              ))}
             </Marquee>
           </div>
           <span>
