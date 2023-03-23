@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       this.hasMany(models.Signal, { foreignKey: 'toId' });
       this.hasMany(models.ChatMessage, { foreignKey: 'toId' });
       this.hasMany(models.ChatMessage, { foreignKey: 'fromId' });
+      this.hasMany(models.Transaction, { foreignKey: 'expertId' });
     }
   }
   User.init({

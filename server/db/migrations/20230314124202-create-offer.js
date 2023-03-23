@@ -10,21 +10,21 @@ module.exports = {
       },
       expertId: {
         type: Sequelize.INTEGER,
-        allowNull:false,
-        references:{
-          model:'Users',
+        allowNull: false,
+        references: {
+          model: 'Users',
           key: 'id',
         },
-        onDelete:'cascade',
+        onDelete: 'cascade',
       },
       questionId: {
         type: Sequelize.INTEGER,
-        allowNull:false,
-        references:{
-          model:'Questions',
+        allowNull: false,
+        references: {
+          model: 'Questions',
           key: 'id',
         },
-        onDelete:'cascade',
+        onDelete: 'cascade',
       },
       text: {
         type: Sequelize.STRING,

@@ -100,7 +100,7 @@ io.on('connection', (socket) => {
   socket.on('disconnect', () => {
     // video 1
     console.log('-User has disconnected: ', user.id);
-    socket.broadcast.emit('callEnded', user.id);// TODO: переделать на адресное отключение
+    socket.broadcast.emit('callEnded', user.id);
     if (currentUser) {
       usersOnline.delete(currentUser);
     }

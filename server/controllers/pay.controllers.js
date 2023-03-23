@@ -1,4 +1,6 @@
-const { User, Transaction } = require('../db/models');
+const {
+  User, Transaction, Offer, sequelize,
+} = require('../db/models');
 
 exports.PayUser = async (req, res) => {
   const { user } = req.session;
@@ -18,31 +20,76 @@ exports.PayUser = async (req, res) => {
 };
 
 exports.PayOffer = async (req, res) => {
-  const { id, expertId, price } = req.body;
+  // const { offerId } = req.body;
+  // try {
+  //   const userRecord = await User.findOne({ where: { id: expertId } });
+  //   userRecord.cash += Number(price);
+  //   const userRecord2 = await User.findOne({ where: { id } });
+  //   userRecord2.cash -= Number(price);
+  //   const record = await userRecord.save();
+  //   const record2 = await userRecord2.save();
+  //   // res.json(record.cash, record2.cash);
+  // } catch (error) {
+  //   console.log('User: ', error);
+  res.status(501).json({ err: 'something wrong with the Db :(' });
+  // }
+};
+
+exports.Transactions = async (req, res) => {
+  const { user } = req.session;
+  const { offerId } = req.body;
+  if (!user) { res.status(401).json({ err: 'authorization required' }); return; }
+
   try {
-    const userRecord = await User.findOne({ where: { id: expertId } });
-    userRecord.cash += Number(price);
-    const userRecord2 = await User.findOne({ where: { id } });
-    userRecord2.cash -= Number(price);
-    const record = await userRecord.save();
-    const record2 = await userRecord2.save();
-    // res.json(record.cash, record2.cash);
+    const offer = await Offer.findOne({ where: { id: offerId } });
+    if (!offer) { res.status(401).json({ err: 'wrong offerId' }); }
+
+    // перед транзакцией проверим, что у покупателя достаточно баблосика
+    const customer = await User.findOne({ where: { id: user.id } });
+    const seller = await User.findOne({ where: { id: offer.expertId } });
+
+    if (!customer || !seller) { res.status(401).json({ err: 'user not found' }); return; }
+    if (customer.cash < offer.price) { res.status(403).json({ err: 'not enough money on user account' }); return; }
+
+    const [transactionRec, created] = await Transaction.findOrCreate(
+      {
+        where: { offerId: offer.id },
+        defaults: {
+          userId: user.id, expertId: offer.expertId, questionId: offer.questionId, sum: offer.price,
+        },
+      },
+    );
+    if (!created) { res.status(401).json({ err: 'transaction already exists' }); return; }
+
+    // when transaction is successfully created we proceed to exchange money between users accounts
+    customer.cash -= offer.price;
+    seller.cash += offer.price;
+    await customer.save();
+    await seller.save();
+
+    console.log(333, 'Transaction completed! congrats $$$');
+    res.sendStatus(200);
   } catch (error) {
-    console.log('User: ', error);
+    console.log('Transactions ', error);
     res.status(501).json({ err: 'something wrong with the Db :(' });
   }
 };
 
-exports.Transactions = async (req, res) => {
+exports.getTransactionsForQuestion = async (req, res) => {
+  const { user } = req.session;
+  const { id: questionId } = req.params;
+  if (!user) { res.status(401).json({ err: 'authorization required' }); return; }
+
   try {
-    const {
-      id, expertId, price, questionId, offerId,
-    } = req.body;
-    const transactionRec = await Transaction.create({
-      userId: id, expertId, sum: price, questionId, offerId,
-    });
+    const transactions = await Transaction.findAll(
+      {
+        where: { questionId },
+        include: [{ model: User, attributes: ['id', 'name', 'surname', 'email', 'userpic'] }],
+      },
+    );
+    res.json(transactions);
   } catch (error) {
-    console.log('User: ', error);
-    res.status(501).json({ err: 'something wrong with the Db :(' });
+    console.log(error);
+    res.status(501).json({ err: 'something wrong with db' });
   }
 };
