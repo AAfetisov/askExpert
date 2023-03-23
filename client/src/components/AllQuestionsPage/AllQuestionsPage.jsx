@@ -10,6 +10,7 @@ export default function AllQuestion() {
   const [sortAllQuestionsPrice, setSortAllQuestionPrice] = useState(false);
   const [sortAllQuestionsDate, setSortAllQuestionDate] = useState(false);
   const [style, setStyle] = useState(false);
+  const [questionsFiltered, setQuestionsFiltered] = useState([]);
 
   useEffect(() => {
     const getAllQuestion = async () => {
@@ -21,6 +22,7 @@ export default function AllQuestion() {
       if (response.ok) {
         const result = await response.json();
         setAllQuestion(result);
+        setQuestionsFiltered(result);
         // console.log('🚀🚀 ~ file: AllQuestionsPage.jsx:19 ~ getAllQuestion ~ result:', result);
       }
     };
@@ -65,10 +67,33 @@ export default function AllQuestion() {
     }
   };
 
+  const [tagfilter, setTagfilter] = useState([]);
+  useEffect(() => {
+    console.log('tagfilter changed');
+    const filtered = allQuestion?.filter(
+      (q) => tagfilter.every(
+        (tag) => q.Subjects.map((s) => s.title).includes(tag),
+      ),
+    );
+    setQuestionsFiltered(filtered);
+  }, [tagfilter]);
+
+  const handleTagClick = (title, id, e) => {
+    if (tagfilter.includes(title)) { return; }
+    setTagfilter((state) => [...state, title]);
+  };
+
+  const handleTfClick = (i) => {
+    const arr = [...tagfilter];
+    arr.splice(i, 1);
+    setTagfilter(arr);
+  };
+
   return (
     <>
       <div className={styles.allQuestionsPage}>All Questions</div>
       <button type="button" className={style ? styles.buttonAllfree : styles.buttonAllview} onClick={hendelDef}>Back to All Questions</button>
+      <div className={styles.tagfilter}>{tagfilter?.map((tf, i) => <span key={tf} onClick={() => handleTfClick(i)}>{tf}</span>)}</div>
       <table className={styles.tableAllQuestionsPage}>
         <thead>
           <tr>
@@ -80,8 +105,8 @@ export default function AllQuestion() {
           </tr>
         </thead>
         <tbody>
-          {allQuestion?.length
-            && allQuestion?.map((el) => (
+          {questionsFiltered?.length
+            && questionsFiltered?.map((el) => (
               <tr key={el.id} className={styles.allQuestions}>
                 <td>
                   <Link to={`/profile/${el.userId}`}>
@@ -91,7 +116,7 @@ export default function AllQuestion() {
                 </td>
                 <td>
                   {el.Subjects.map((s) => (
-                    <span onClick={(e) => hendelTag(s.title, e)} key={s.id} className={styles.tag}>
+                    <span onClick={(e) => { /* hendelTag(s.title, e); */ handleTagClick(s.title, s.id, e); }} key={s.id} className={styles.tag}>
                       {s.title}
                     </span>
                   ))}
