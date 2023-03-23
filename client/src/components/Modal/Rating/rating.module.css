@@ -1,0 +1,17 @@
+.Btn {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+}
+
+.info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.centred {
+    display: flex;
+    justify-content: center;
+}

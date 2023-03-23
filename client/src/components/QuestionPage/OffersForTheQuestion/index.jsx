@@ -2,6 +2,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/prop-types */
+import { Avatar } from '@mui/material';
 import React, { useEffect, useRef, useState } from 'react';
 import style from './style.module.css';
 
@@ -65,7 +66,12 @@ export default function OffersForTheQuestion({ questionId, setRecipientId }) {
         {offers?.length && offers.map((of) => (
           <a key={of.id} href="dummy" onClick={(e) => handleOfferClick(of.id, of.expertId, e)}>
             <li className={style.offer}>
-              <img alt="upic" className={style.userpic} src={`../${of.User.userpic}`} />
+              {/* <img alt="upic" className={style.userpic} src={`${of.User.userpic}`} /> */}
+              <Avatar
+                alt="Remy Sharp"
+                src={of.User.userpic || 'https://cdn-icons-png.flaticon.com/512/3177/3177440.png'}
+                sx={{ width: 30, height: 30 }}
+              />
               <span className={style.userEmail}>{of.User.name}</span>
               <span className={style.userEmail}>{of.User.surname}</span>
               <span className={style.price}>{of.price}</span>
