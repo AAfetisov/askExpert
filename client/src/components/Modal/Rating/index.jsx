@@ -70,7 +70,10 @@ export default function HoverRating({ questionId }) {
               sx={{ width: 50, height: 50 }}
             />
             <div key={exp.id}>
-              <div className={styles.centred}>{exp.User.name}</div>
+              <div className={styles.centred}>
+                {exp.User.name}
+                {exp.User.surname}
+              </div>
               <Box
                 sx={{
                   width: 200,
