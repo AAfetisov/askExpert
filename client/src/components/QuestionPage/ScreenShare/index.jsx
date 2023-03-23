@@ -1,3 +1,5 @@
+/* eslint-disable consistent-return */
+/* eslint-disable max-len */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-no-constructed-context-values */
@@ -8,32 +10,63 @@ import React, {
 } from 'react';
 import { useSelector } from 'react-redux';
 import Peer from 'simple-peer';
-import { io } from 'socket.io-client';
 import style from './style.module.css';
 
 // const socket = io(window.location.href);
-const socket = io('http://localhost:4000', {
-  withCredentials: true,
-});
 
-export default function ScreenSharing({ questionId, recipientId }) {
-  console.log(1111111, 'questionId, recipientId:', questionId, recipientId);
-  const [callAccepted, setCallAccepted] = useState(false);
-  const [callEnded, setCallEnded] = useState(false);
+function ScreenShare({ questionId, recipientId }) {
+  const [imCalling, setImCalling] = useState(false);
+  const [imBeingCalled, setImBeingCalled] = useState(false);
+  const [callInProgress, setCallInProgress] = useState(false);
+
   const [stream, setStream] = useState();
   const [name, setName] = useState('');
   const [call, setCall] = useState({});
   const [me, setMe] = useState('');
-  const user = useSelector((state) => state.auth.user);
-  // const [idToCall, setIdToCall] = useState('');
+  const [idToCall, setIdToCall] = useState('');
 
-  const myVideo = useRef();
+  const socket = useSelector((state) => state.sockets.socket);
+  const user = useSelector((state) => state.auth.user);
+
   const userVideo = useRef();
   const connectionRef = useRef();
 
-  const answerCall = () => {
-    setCallAccepted(true);
+  const leaveCall = () => {
+    setImCalling(false);
+    setImBeingCalled(false);
+    setCallInProgress(false);
+    setStream();
+    setCall({});
+    if (stream) {
+      stream.getTracks().forEach((track) => track.stop());
+      stream.stop();
+    }
+    connectionRef?.current?.destroy();
+    // window.location.reload();
+  };
 
+  useEffect(() => {
+    if (!socket) { return; }
+    setIdToCall(recipientId);
+
+    socket.on('me', (id) => {
+      // setMe(id);
+      setMe(user.id);
+    });
+
+    socket.on('callUser', ({ from, name: callerName, signal }) => {
+      setCall({
+        isReceivingCall: true, from, name: callerName, signal,
+      });
+      setImBeingCalled(true);
+    });
+    return () => {
+      leaveCall();
+    };
+  }, [socket]);
+
+  const answerCall = () => {
+    setCallInProgress(true);
     const peer = new Peer({ initiator: false, trickle: false, stream });
 
     peer.on('signal', (data) => {
@@ -49,74 +82,58 @@ export default function ScreenSharing({ questionId, recipientId }) {
     connectionRef.current = peer;
   };
 
-  useEffect(() => {
-    socket.emit('join_video', {});
-    socket.on('me', (id) => setMe(id));
-
-    socket.on('callUser', ({ from, name: callerName, signal }) => {
-      setCall({
-        isReceivingCall: true, from, name: callerName, signal,
-      });
-      answerCall();
-    });
-  }, []);
-
-  // useEffect(() => {
-  //   if (stream && myVideo.current) {
-  //     myVideo.current.srcObject = stream;
-  //   }
-  // }, [stream, myVideo.current]);
-
-  const callUser = async (id) => {
-    const currStream = await navigator.mediaDevices.getDisplayMedia({ video: true, audio: true });
-    // .then((currentStream) => {
-    //   setStream(currentStream);
-    // });
-    setStream(currStream);
-
-    const peer = new Peer({ initiator: true, trickle: false, stream });
+  const callUser = async () => {
+    const yourStream = await navigator.mediaDevices.getDisplayMedia({ video: true, audio: true });
+    setStream(yourStream);
+    const peer = new Peer({ initiator: true, trickle: false, stream: yourStream });
 
     peer.on('signal', (data) => {
       socket.emit('callUser', {
-        userToCall: id,
+        userToCall: recipientId,
         signalData: data,
-        from: user.id,
+        from: me,
         name,
       });
     });
-
-    peer.on('stream', (currentStream) => {
-      userVideo.current.srcObject = currentStream;
-    });
+    setImCalling(true);
 
     socket.on('callAccepted', (signal) => {
-      setCallAccepted(true);
-
+      setCallInProgress(true);
       peer.signal(signal);
+    });
+
+    socket.on('callEnded', (signal) => {
+      leaveCall();
     });
 
     connectionRef.current = peer;
   };
 
-  const leaveCall = () => {
-    setCallEnded(true);
-
-    connectionRef.current.destroy();
-
-    window.location.reload();
-  };
-
   return (
-    <>
-      <button type="button" onClick={() => callUser(recipientId)} className={style.callBtn}>
-        Share Screen
-      </button>
-      {/* {stream && (
-        <video playsInline muted ref={myVideo} autoPlay className={style.video} />
-      )} */}
-      {callAccepted && !callEnded && (
+
+    <div className={style.container}>
+      { !imCalling && !imBeingCalled && !callInProgress
+        && <button type="button" onClick={() => callUser()}>Share your screen</button>}
+
+      {imCalling && !imBeingCalled && !callInProgress
+        && <div>Waiting for user to answer</div>}
+
+      { !imCalling && imBeingCalled && !callInProgress
+        && <button type="button" onClick={answerCall}>Answer</button>}
+
+      { !imCalling && imBeingCalled && callInProgress
+      && (
+      <>
         <video playsInline ref={userVideo} autoPlay className={style.video} />
+        <button type="button" onClick={leaveCall}>Hang Up</button>
+      </>
       )}
-    </>
+
+      { imCalling && !imBeingCalled && callInProgress
+        && <button type="button" onClick={leaveCall}>Stop Sharing</button>}
+
+    </div>
   );
 }
+
+export default ScreenShare;

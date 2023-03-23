@@ -1,7 +1,6 @@
 import ATypes from '../types';
 
 const initialState = {
-  isAuth: false,
   user: {},
 };
 export const profileReducers = (state = initialState, action) => {
@@ -10,13 +9,11 @@ export const profileReducers = (state = initialState, action) => {
       return {
         ...state,
         user: action.payload.user,
-        isAuth: true,
       };
     case ATypes.REFRESH_USER:
       return {
         ...state,
         user: action.payload.user,
-        isAuth: true,
       };
     case ATypes.UPDATE_USER_NAME:
       return {
@@ -49,6 +46,10 @@ export const profileReducers = (state = initialState, action) => {
           ...state.user,
           bio: action.payload,
         },
+      };
+    case ATypes.PROFILE_LOGOUT:
+      return {
+        ...state, user: {},
       };
 
     default:
