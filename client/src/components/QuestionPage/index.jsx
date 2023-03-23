@@ -69,14 +69,12 @@ export default function QuestionPage() {
       });
       if (response.ok) {
         setQuestion((state) => ({ ...state, status: false }));
-        // setOpen(true);
+        setTimeout(() => { setOpen(true); }, 300);
       } else {
         throw new Error('error communicating with server');
       }
     } catch (error) {
       setErr(error);
-    } finally {
-      setOpen(true);
     }
   };
 
@@ -107,7 +105,7 @@ export default function QuestionPage() {
           className={style.modalBox}
         >
           <Box sx={style}>
-            <HoverRating />
+            <HoverRating questionId={id} />
           </Box>
         </Modal>
       </div>

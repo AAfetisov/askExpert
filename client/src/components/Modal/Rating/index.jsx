@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import Rating from '@mui/material/Rating';
-import Box from '@mui/material/Box';
 import StarIcon from '@mui/icons-material/Star';
 import { Typography } from '@mui/material';
+import Box from '@mui/material/Box';
+import Rating from '@mui/material/Rating';
+import React, { useEffect, useState } from 'react';
 
 const labels = {
   0.5: 'Useless',
@@ -17,7 +17,8 @@ const labels = {
   5: 'Excellent+',
 };
 
-export default function HoverRating() {
+// eslint-disable-next-line react/prop-types
+export default function HoverRating({ questionId }) {
   const [value, setValue] = useState(0);
   const [hover, setHover] = useState(-1);
 
@@ -26,17 +27,33 @@ export default function HoverRating() {
   const expertId = 1;
 
   useEffect(() => {
+    // по questionId в бд находим транзакции и вытаскиваем из них айди экспертов
+
     (
       async () => {
-        const response = await fetch(`http://localhost:4000/rating/${userId}`, {
-          method: 'POST',
+        const response = await fetch(`http://localhost:4000/transaction/question/${questionId}`, {
+          method: 'get',
           credentials: 'include',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ value, expertId }),
         });
-        console.log(response, 'response');
+        if (response.ok) {
+          const transactions = response.json();
+          console.log(transactions);
+        }
       }
     )();
+
+    // (
+    //   async () => {
+    //     const response = await fetch(`http://localhost:4000/rating/${userId}`, {
+    //       method: 'POST',
+    //       credentials: 'include',
+    //       headers: { 'Content-Type': 'application/json' },
+    //       body: JSON.stringify({ value, expertId }),
+    //     });
+    //     console.log(response, 'response');
+    //   }
+    // )();
   }, [value]);
 
   return (
