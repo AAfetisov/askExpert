@@ -20,19 +20,19 @@ exports.PayUser = async (req, res) => {
 };
 
 exports.PayOffer = async (req, res) => {
-  const { offerId } = req.body;
-  try {
-    const userRecord = await User.findOne({ where: { id: expertId } });
-    userRecord.cash += Number(price);
-    const userRecord2 = await User.findOne({ where: { id } });
-    userRecord2.cash -= Number(price);
-    const record = await userRecord.save();
-    const record2 = await userRecord2.save();
-    // res.json(record.cash, record2.cash);
-  } catch (error) {
-    console.log('User: ', error);
-    res.status(501).json({ err: 'something wrong with the Db :(' });
-  }
+  // const { offerId } = req.body;
+  // try {
+  //   const userRecord = await User.findOne({ where: { id: expertId } });
+  //   userRecord.cash += Number(price);
+  //   const userRecord2 = await User.findOne({ where: { id } });
+  //   userRecord2.cash -= Number(price);
+  //   const record = await userRecord.save();
+  //   const record2 = await userRecord2.save();
+  //   // res.json(record.cash, record2.cash);
+  // } catch (error) {
+  //   console.log('User: ', error);
+  res.status(501).json({ err: 'something wrong with the Db :(' });
+  // }
 };
 
 exports.Transactions = async (req, res) => {
@@ -44,7 +44,7 @@ exports.Transactions = async (req, res) => {
     const offer = await Offer.findOne({ where: { id: offerId } });
     if (!offer) { res.status(401).json({ err: 'wrong offerId' }); }
 
-    // перед транзакцией проверим, что у покупателя достаточно баблоса
+    // перед транзакцией проверим, что у покупателя достаточно баблосика
     const customer = await User.findOne({ where: { id: user.id } });
     const seller = await User.findOne({ where: { id: offer.expertId } });
 
@@ -66,10 +66,11 @@ exports.Transactions = async (req, res) => {
     seller.cash += offer.price;
     await customer.save();
     await seller.save();
-    console.log(333, 'Transaction completed! congrats');
+
+    console.log(333, 'Transaction completed! congrats $$$');
     res.sendStatus(200);
   } catch (error) {
-    console.log('User: ', error);
+    console.log('Transactions ', error);
     res.status(501).json({ err: 'something wrong with the Db :(' });
   }
 };
@@ -80,7 +81,12 @@ exports.getTransactionsForQuestion = async (req, res) => {
   if (!user) { res.status(401).json({ err: 'authorization required' }); return; }
 
   try {
-    const transactions = Transaction.findAll({ where: { questionId } });
+    const transactions = await Transaction.findAll(
+      {
+        where: { questionId },
+        include: [{ model: User, attributes: ['id', 'name', 'surname', 'email', 'userpic'] }],
+      },
+    );
     res.json(transactions);
   } catch (error) {
     console.log(error);

@@ -43,18 +43,6 @@ export default function OffersForTheQuestion({ questionId, setRecipientId }) {
   };
 
   const handelPay = async (offerId) => {
-    // const id = [...offers].map((elem) => elem.id).join('');
-    // const expertId = [...offers].map((elem) => elem.expertId).join('');
-    // const price = [...offers].map((elem) => elem.price).join('');
-    // const offerId = [...offers].map((elem) => elem.id).join('');
-
-    // fetch('http://localhost:4000/payoffer', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   credentials: 'include',
-    //   body: JSON.stringify({ offerId }),
-    // });
-
     const transaction = await fetch('http://localhost:4000/transaction', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
