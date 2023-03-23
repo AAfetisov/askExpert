@@ -57,10 +57,15 @@
 }
 
 .tag {
+  cursor: pointer;
   margin-right: 0.3rem;
   background-color: rgba(177, 233, 255, 0.493);
   border-radius: 5px;
   padding: 0.3rem;
+  user-select: none;
+}
+.tag:hover {
+  background-color: rgba(108, 206, 245, 0.493);
 }
 
 .buttonAllview {
@@ -81,15 +86,15 @@
 
 @keyframes example {
   0% {
-    background: #33CCCC;
+    background: #33cccc;
   }
 
   20% {
-    background: #33CC36;
+    background: #33cc36;
   }
 
   40% {
-    background: #B8CC33;
+    background: #b8cc33;
   }
 
   /* 60% {
@@ -97,17 +102,17 @@
   } */
 
   80% {
-    background: #33CC36;
+    background: #33cc36;
   }
 
   100% {
-    background: #33CCCC;
+    background: #33cccc;
   }
 }
 
 /* .snowflakes {
   animation: example 5s infinite linear; */
-  /* border-radius: 6px; */
+/* border-radius: 6px; */
 /* } */
 
 /* @keyframes example {
@@ -157,3 +162,34 @@
   font-family: 'Raleway', sans-serif;
 color: #000;    
 }               */
+.tagfilter {
+  margin: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
+  font-weight: 500;
+  /* font-size: 0.8re; */
+  font-size: 0.8rem;
+  user-select: none;
+  cursor: pointer;
+}
+.tagfilter::before {
+  display: flex;
+  align-items: center;
+  content: "Filtering by: ";
+  cursor: default;
+}
+
+.tagfilter span {
+  background-color: rgb(85, 85, 85);
+  color: rgb(104, 167, 250);
+  border-radius: 1em;
+  padding: 0.3em 0.7em 0.5em 0.9em;
+}
+.tagfilter span::after {
+  margin-left: 0.5em;
+  font-size: 0.8em;
+  content: "✖";
+}
+.tagfilter span:hover::after {
+  color: rgb(255, 255, 255);
+}
