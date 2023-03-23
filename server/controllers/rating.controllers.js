@@ -16,15 +16,6 @@ exports.addUserRating = async (req, res) => {
     await rating.save();
     console.log('saved existing');
     res.sendStatus(200);
-    // const exist = await Rating.findOne({ where: { userId: id } });
-    // if (exist) {
-    //   exist.rating = value;
-    //   await exist.save();
-    //   res.json({ response: 'ok' });
-    // } else {
-    //   await Rating.create({ expertId, userId: id, rating: value });
-    //   res.json({ response: 'ok' });
-    // }
   } catch (err) {
     res.status(501).json({ err: 'something wrong with the Db :(' });
   }

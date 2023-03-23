@@ -1,8 +1,10 @@
 import StarIcon from '@mui/icons-material/Star';
-import { Typography } from '@mui/material';
+import { Avatar, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import Rating from '@mui/material/Rating';
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import styles from './rating.module.css';
 
 const labels = {
   0.5: 'Useless',
@@ -43,20 +45,6 @@ export default function HoverRating({ questionId }) {
     )();
   }, []);
 
-  // useEffect(() => {
-  //   (
-  //     async () => {
-  //       const response = await fetch(`http://localhost:4000/rating/${userId}`, {
-  //         method: 'POST',
-  //         credentials: 'include',
-  //         headers: { 'Content-Type': 'application/json' },
-  //         body: JSON.stringify({ value }),
-  //       });
-  //       console.log(response, 'response');
-  //     }
-  //   )();
-  // }, [value]);
-
   const sendRatingToDb = async (expertId, event, newValue) => {
     console.log(newValue);
     const response = await fetch('http://localhost:4000/rating', {
@@ -72,31 +60,47 @@ export default function HoverRating({ questionId }) {
   };
 
   return (
-    <Box>
+    <div className={styles.Box}>
       {experts.length > 0
         && experts.map((exp, ind) => (
-          <div key={exp.id}>
-            <div>{exp.User.name}</div>
-            <Box
-              sx={{
-                width: 200,
-                display: 'flex',
-                alignItems: 'center',
-              }}
-            >
-              <Rating
-                name="simple-controlled"
-                value={value[ind]}
-                onChange={(event, newValue) => {
-                  sendRatingToDb(exp.User.id, event, newValue);
-                  const val = [...value];
-                  val[ind] = newValue;
-                  setValue(val);
+          <div className={styles.info}>
+            <Avatar
+              alt="Remy Sharp"
+              src={exp.User.userpic || 'https://cdn-icons-png.flaticon.com/512/3177/3177440.png'}
+              sx={{ width: 50, height: 50 }}
+            />
+            <div key={exp.id}>
+              <div className={styles.centred}>
+                {exp.User.name}
+                {exp.User.surname}
+              </div>
+              <Box
+                sx={{
+                  width: 200,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
                 }}
-              />
-            </Box>
+              >
+                <Rating
+                  name="simple-controlled"
+                  value={value[ind]}
+                  onChange={(event, newValue) => {
+                    sendRatingToDb(exp.User.id, event, newValue);
+                    const val = [...value];
+                    val[ind] = newValue;
+                    setValue(val);
+                  }}
+                />
+              </Box>
+            </div>
           </div>
         ))}
-    </Box>
+      <div className={styles.Btn}>
+        <Link to="/">
+          <button type="button">OK</button>
+        </Link>
+      </div>
+    </div>
   );
 }

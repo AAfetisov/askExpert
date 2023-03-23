@@ -41,7 +41,7 @@ function App() {
         {isAuth ? (
           <>
             <div>
-              <img src="logo.png" alt="logo" />
+              <img src="../logo.png" alt="logo" />
             </div>
             <div className={Styles.loginBox}>
               <div className={Styles.text}>
