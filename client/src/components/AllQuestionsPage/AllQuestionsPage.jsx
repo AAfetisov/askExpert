@@ -30,17 +30,17 @@ export default function AllQuestion() {
   }, []);
 
   const hendelSortPrice = () => {
-    const result = [...allQuestion]
+    const result = [...questionsFiltered]
       .sort((a, b) => (sortAllQuestionsPrice ? b.price - a.price : a.price - b.price));
     setSortAllQuestionPrice((prevState) => !prevState);
-    setAllQuestion(result);
+    setQuestionsFiltered(result);
   };
 
   const hendelSortDate = () => {
-    const result = [...allQuestion]
+    const result = [...questionsFiltered]
       .sort((a, b) => (sortAllQuestionsDate ? +new Date(b.createdAt) - +new Date(a.createdAt) : +new Date(a.createdAt) - +new Date(b.createdAt)));
     setSortAllQuestionDate((prevState) => !prevState);
-    setAllQuestion(result);
+    setQuestionsFiltered(result);
   };
 
   const hendelTag = (titles, e) => {
@@ -92,8 +92,10 @@ export default function AllQuestion() {
   return (
     <>
       <div className={styles.allQuestionsPage}>All Questions</div>
-      <button type="button" className={style ? styles.buttonAllfree : styles.buttonAllview} onClick={hendelDef}>Back to All Questions</button>
-      <div className={styles.tagfilter}>{tagfilter?.map((tf, i) => <span key={tf} onClick={() => handleTfClick(i)}>{tf}</span>)}</div>
+      {/* <button type="button" className={style ? styles.buttonAllfree : styles.buttonAllview} onClick={hendelDef}>Back to All Questions</button> */}
+      {tagfilter.length > 0
+        && <div className={styles.tagfilter}>{tagfilter?.map((tf, i) => <span key={tf} onClick={() => handleTfClick(i)}>{tf}</span>)}</div>}
+
       <table className={styles.tableAllQuestionsPage}>
         <thead>
           <tr>
