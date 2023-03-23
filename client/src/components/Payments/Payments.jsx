@@ -201,7 +201,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { CardElement } from '@stripe/react-stripe-js';
+// import { CardElement } from '@stripe/react-stripe-js';
 
 const CARD_OPTIONS = {
   iconStyle: 'solid',
