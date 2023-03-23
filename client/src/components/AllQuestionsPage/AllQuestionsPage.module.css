@@ -58,6 +58,8 @@
 
 .tag {
   margin-right: 0.3rem;
+  margin-top: 0.3rem;
+  margin-bottom: 0.3rem;
   background-color: rgba(177, 233, 255, 0.493);
   border-radius: 5px;
   padding: 0.3rem;

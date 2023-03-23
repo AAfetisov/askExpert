@@ -36,9 +36,9 @@ export default function Main() {
       {isAuth ? (
         <>
           <div className={style.marqueeContainer}>
-            <Marquee speed={20}>
+            <Marquee speed={21}>
               {runningTags.map((el) => (
-                <span key={el.id}>{el.Subjects[0].title}</span>
+                <span className={style.betweenTagFlex} key={el.id}>{el.Subjects[0].title}</span>
               ))}
             </Marquee>
           </div>

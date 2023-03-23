@@ -10,7 +10,7 @@ import thunkMiddleware from 'redux-thunk';
 import { authReducers } from './authReducer/reducers';
 import { profileReducers } from './profileReducer/reducers';
 import { socketReducers } from './socketReducer/reducers';
-import { todosReducers } from './todoReducer/reducers';
+// import { todosReducers } from './todoReducer/reducers';
 
 const rootReducers = combineReducers({
   auth: authReducers,
