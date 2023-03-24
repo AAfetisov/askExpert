@@ -3,7 +3,7 @@
 import { Box, Button, Modal } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import ChatGPT from '../chatGPT';
 import HoverRating from '../Modal/Rating';
 import OffersForTheQuestion from './OffersForTheQuestion';
@@ -68,8 +68,9 @@ export default function QuestionPage() {
         headers: { 'Content-Type': 'application/json' },
       });
       if (response.ok) {
+        setOpen(true);
+        // setTimeout(() => { setOpen(true); }, 300);
         setQuestion((state) => ({ ...state, status: false }));
-        setTimeout(() => { setOpen(true); }, 300);
       } else {
         throw new Error('error communicating with server');
       }
@@ -117,7 +118,7 @@ export default function QuestionPage() {
           className={style.modalBox}
         >
           <Box sx={modalstyle}>
-            <HoverRating questionId={id} />
+            <HoverRating questionId={id} setOpen={setOpen} />
           </Box>
         </Modal>
       </div>

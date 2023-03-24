@@ -20,7 +20,7 @@ const labels = {
 };
 
 // eslint-disable-next-line react/prop-types
-export default function HoverRating({ questionId }) {
+export default function HoverRating({ questionId, setOpen }) {
   const [value, setValue] = useState([]);
   const [hover, setHover] = useState(-1);
   const [experts, setExperts] = useState([]);
@@ -40,6 +40,9 @@ export default function HoverRating({ questionId }) {
           console.log('transactions', transactions);
           // const expertsFromTransactions = transactions.map((tr) => tr.expertId);
           setExperts(transactions);
+        } else {
+          const transactions = await response.json();
+          console.log('transactions', transactions);
         }
       }
     )();
@@ -97,9 +100,7 @@ export default function HoverRating({ questionId }) {
           </div>
         ))}
       <div className={styles.Btn}>
-        <Link to="/">
-          <button type="button">OK</button>
-        </Link>
+        <button type="button" onClick={() => setOpen(false)}>OK</button>
       </div>
     </div>
   );
