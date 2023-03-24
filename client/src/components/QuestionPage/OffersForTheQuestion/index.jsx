@@ -55,7 +55,10 @@ export default function OffersForTheQuestion({ questionId, setRecipientId }) {
       }),
     });
     if (transaction.ok) {
+      const result = transaction.json();
       setStylebtn(true);
+    } else {
+      console.log('failed transaction');
     }
   };
   // const handleClickModal = () => {

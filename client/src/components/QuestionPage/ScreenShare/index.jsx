@@ -39,8 +39,9 @@ function ScreenShare({ questionId, recipientId }) {
     // userVideo?.current?.srcObject = null;
     if (stream) {
       stream.getTracks().forEach((track) => track.stop());
+      window.location.reload();
     }
-    setStream();
+    // setStream();
 
     // socket.emit(
     //   'hangedUp',
@@ -53,7 +54,6 @@ function ScreenShare({ questionId, recipientId }) {
     // }
     // setStream();
     // connectionRef?.current?.destroy();
-    window.location.reload();
   };
 
   useEffect(() => {

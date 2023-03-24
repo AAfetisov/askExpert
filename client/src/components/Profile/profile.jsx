@@ -9,8 +9,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { refreshUserAC, updatedUser, updateUserAC } from '../../store/profileReducer/actions';
 import { Avatar, AvatarComp } from '../Avatar/avatar';
-import { Rate } from '../Rate/rate';
 import StripePay from '../Payments/StripePay';
+import { Rate } from '../Rate/rate';
 // import "bootstrap/dist/js/popper.min.js";
 
 import Styles from './profile.module.css';

@@ -68,8 +68,9 @@ export default function QuestionPage() {
         headers: { 'Content-Type': 'application/json' },
       });
       if (response.ok) {
+        setOpen(true);
+        // setTimeout(() => { setOpen(true); }, 300);
         setQuestion((state) => ({ ...state, status: false }));
-        setTimeout(() => { setOpen(true); }, 500);
       } else {
         throw new Error('error communicating with server');
       }

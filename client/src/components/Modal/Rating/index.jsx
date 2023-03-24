@@ -40,6 +40,9 @@ export default function HoverRating({ questionId }) {
           console.log('transactions', transactions);
           // const expertsFromTransactions = transactions.map((tr) => tr.expertId);
           setExperts(transactions);
+        } else {
+          const transactions = await response.json();
+          console.log('transactions', transactions);
         }
       }
     )();
@@ -64,11 +67,11 @@ export default function HoverRating({ questionId }) {
       {experts.length > 0
         && experts.map((exp, ind) => (
           <div className={styles.info}>
-            <Avatar
+            {/* <Avatar
               alt="Remy Sharp"
               src={exp.User.userpic || 'https://cdn-icons-png.flaticon.com/512/3177/3177440.png'}
               sx={{ width: 50, height: 50 }}
-            />
+            /> */}
             <div key={exp.id}>
               <div className={styles.centred}>
                 {exp.User.name}
