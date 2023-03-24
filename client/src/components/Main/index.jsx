@@ -37,9 +37,9 @@ export default function Main() {
         <>
           <div className={style.marqueeContainer}>
             <Marquee speed={21}>
-              {/* {runningTags.map((el) => (
+              {runningTags.map((el) => (
                 <span className={style.betweenTagFlex} key={el.id}>{el.Subjects[0].title}</span>
-              ))} */}
+              ))}
             </Marquee>
           </div>
           <span>

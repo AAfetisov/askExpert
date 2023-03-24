@@ -71,7 +71,7 @@ app.use('/payoffer', payOfferRouter);
 app.use('/transaction', transactionRouter);
 
 const port = process.env.PORT ?? 3100;
-const server = app.listen(port, () => console.log(`Sever started on http://localhost:${port}`));
+const server = app.listen(port, () => console.log(`Server started on http://localhost:${port}`));
 
 const io = socketIo(server, {
   cors: {
