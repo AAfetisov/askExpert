@@ -1,14 +1,15 @@
+/* eslint-disable max-len */
 /* eslint-disable import/no-named-as-default */
 import React, { useEffect, useState } from 'react';
+import Marquee from 'react-fast-marquee';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import Marquee from 'react-fast-marquee';
 import AllQuestion from '../AllQuestionsPage/AllQuestionsPage';
 import QuestionForm from '../QuestionForm';
 import Subscribe from '../Subscribe/Subscribe';
+import { TopExperts } from '../TopExperts/TopExperts';
 import YourQuestion from '../YourQuestion/YourQuestion';
 import style from './style.module.css';
-import { TopExperts } from '../TopExperts/TopExperts';
 
 export default function Main() {
   const navigate = useNavigate();
@@ -38,7 +39,7 @@ export default function Main() {
           <div className={style.marqueeContainer}>
             <Marquee speed={21}>
               {runningTags.map((el) => (
-                <span className={style.betweenTagFlex} key={el.id}>{el.Subjects[0].title}</span>
+                <span className={style.betweenTagFlex} key={el.id}>{el.Subjects?.at(0)?.title}</span>
               ))}
             </Marquee>
           </div>
