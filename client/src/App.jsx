@@ -1,15 +1,13 @@
 /* eslint-disable react/jsx-one-expression-per-line */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, Route, Routes } from 'react-router-dom';
 
 import Styles from './App.module.css';
 import { CurrentProfile } from './components/CurrentProfile/currentProfile';
 import LoginForm from './components/LoginForm';
-import { Logo } from './components/Logo/logo';
 import Logout from './components/Logout';
 import Main from './components/Main';
-// import BasicModal from './components/Modal/Modal';
 import { Profile } from './components/Profile/profile';
 import { ProfileForm } from './components/ProfileForm';
 import QuestionPage from './components/QuestionPage';
@@ -21,7 +19,7 @@ function App() {
   const dispatch = useDispatch();
 
   const isAuth = useSelector((state) => state.auth.isAuth);
-  const user = useSelector((state) => state.auth.user);
+  const user = useSelector((state) => state.profile.user);
 
   useEffect(() => {
     dispatch(refreshSessionTh());
@@ -34,7 +32,6 @@ function App() {
   const handleLogout = () => {
     dispatch(logoutProfileAC());
   };
-
   return (
     <>
       <nav>
@@ -45,7 +42,10 @@ function App() {
             </div>
             <div className={Styles.loginBox}>
               <div className={Styles.text}>
-                Logged in as: {user?.name || user?.email}
+                Hi,{' '}
+                <Link to="/profile" className={Styles.linkToProfile}>
+                  {user?.name}{' '}{user?.surname}
+                </Link>
               </div>
               <Link to="/">Home</Link>
               <Link to="/profile">Profile</Link>

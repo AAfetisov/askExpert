@@ -23,6 +23,10 @@ export default function Subscribe() {
     })();
   }, []);
 
+  if (!offer?.length) {
+    return (<div />);
+  }
+
   return (
     <>
       <div className={styles.subscribedOffer}>My offers</div>
@@ -54,47 +58,7 @@ export default function Subscribe() {
           ))}
         </tbody>
       </table>
-      {/* <div>
-        {offer?.length
-            && offer?.map((of) => <div key={of.id}>{of.Question.title}</div>)}
-      </div>
-      <div>
-        {offer?.length
-            && offer?.map((of) => <div key={of.id}>{of.Question.User.email}</div>)}
-      </div>
-      <div>
-        {offer?.length
-            && offer?.map((of) => <div key={of.id}>{of.text}</div>)}
-      </div>
-      <div>
-        {offer?.length
-            && offer?.map((of) => <div key={of.id}>{of.price}</div>)}
-      </div> */}
-      {/* <Table striped="columns">
-        <thead>
-          <tr>
-            <th>Title</th>
-            <th>Useremail</th>
-            <th>Text</th>
-            <th>Price</th>
-          </tr>
-        </thead>
-        <tbody>
-          {(offer?.length
-            && offer?.map(({
-              Question, Offers, id, User, email, title, price,
-            }) => (
-              <tr key={id}>
-                <td>{Question?.map((of) => of.title)}</td>
-                <td>{Question.User?.map((of) => of.email)}</td>
-                <td>
-                  <Link to={`/subscribe/${id}`}>{title}</Link>
-                </td>
-                <td>{price}</td>
-              </tr>
-            ))) || <div>There is no question now</div>}
-        </tbody>
-      </Table> */}
+
     </>
   );
 }

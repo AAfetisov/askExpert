@@ -28,6 +28,9 @@ export default function YourQuestion() {
     getQuestion();
   }, []);
 
+  if (!question?.length) {
+    return (<div />);
+  }
   return (
     <>
       <div className={styles.yourQuestionModule}>My questions</div>

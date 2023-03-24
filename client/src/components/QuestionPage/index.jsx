@@ -3,7 +3,7 @@
 import { Box, Button, Modal } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import ChatGPT from '../chatGPT';
 import HoverRating from '../Modal/Rating';
 import OffersForTheQuestion from './OffersForTheQuestion';
@@ -69,7 +69,7 @@ export default function QuestionPage() {
       });
       if (response.ok) {
         setQuestion((state) => ({ ...state, status: false }));
-        setTimeout(() => { setOpen(true); }, 300);
+        setTimeout(() => { setOpen(true); }, 500);
       } else {
         throw new Error('error communicating with server');
       }

@@ -9,6 +9,7 @@ const ShowSubscribe = async (req, res) => {
       where: { expertId: user.id },
       include: {
         model: Question,
+        where: { status: true },
         include: [
           { model: User, attributes: ['id', 'name', 'surname', 'email', 'userpic'] },
           { model: Subject, attributes: ['id', 'title'] },

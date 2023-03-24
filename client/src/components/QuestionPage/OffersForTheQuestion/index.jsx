@@ -1,16 +1,18 @@
+/* eslint-disable max-len */
 /* eslint-disable react/no-unknown-property */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/prop-types */
 import { Avatar } from '@mui/material';
 import React, { useEffect, useRef, useState } from 'react';
+import Modalwindow from './Modal';
 import style from './style.module.css';
 
 export default function OffersForTheQuestion({ questionId, setRecipientId }) {
   const [offers, setOffers] = useState([]);
   const [elementClicked, setElementClicked] = useState(null);
   const [stylebtn, setStylebtn] = useState(false);
-
+  const [showModal, setShowModal] = useState(false);
   useEffect(() => {
     const abortController = new AbortController();
     const { signal } = abortController;
@@ -56,6 +58,16 @@ export default function OffersForTheQuestion({ questionId, setRecipientId }) {
       setStylebtn(true);
     }
   };
+  // const handleClickModal = () => {
+  //   setShowModal(true);
+  // };
+  // const handleConfirm = () => {
+  //   handelPay();
+  //   setShowModal(false);
+  // };
+  // const handleCancel = () => {
+  //   setShowModal(false);
+  // };
 
   if (offers.length <= 0) { return (<div className={style.blockTitle} style={{ backgroundColor: 'grey' }}>No offers yet</div>); }
   return (
@@ -75,7 +87,18 @@ export default function OffersForTheQuestion({ questionId, setRecipientId }) {
               <span className={style.userEmail}>{of.User.name}</span>
               <span className={style.userEmail}>{of.User.surname}</span>
               <span className={style.price}>{of.price}</span>
+
               <button type="button" disabled={stylebtn} onClick={() => handelPay(of.id)} className={stylebtn ? 'solvedBtn' : 'solvedBtn greyBtn'}>Pay Expert</button>
+
+              {/* <button type="button" disabled={stylebtn} onClick={handleClickModal} className={stylebtn ? 'solvedBtn' : 'solvedBtn greyBtn'}>Pay Expert</button>
+              <Modalwindow
+                show={showModal}
+                message="Are you sure you want to continue?"
+                onConfirm={handleConfirm}
+                onCancel={handleCancel}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+              /> */}
             </li>
           </a>
         ))}

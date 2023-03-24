@@ -98,3 +98,7 @@ button:hover {
   background: #01a0f0;
   outline: 1px rgb(255, 255, 255) solid;
 }
+
+.linkToProfile {
+  color: #01a0f0;
+}
