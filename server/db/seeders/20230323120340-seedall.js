@@ -16,6 +16,7 @@ module.exports = {
     await db.sequelize.query('ALTER SEQUENCE "Questions_id_seq" RESTART WITH 1;');
     await db.sequelize.query('ALTER SEQUENCE "Subjects_id_seq" RESTART WITH 1;');
     await db.sequelize.query('ALTER SEQUENCE "Tags_id_seq" RESTART WITH 1;');
+    await db.sequelize.query('ALTER SEQUENCE "Ratings_id_seq" RESTART WITH 1;');
 
     const questions = [
       {
@@ -454,10 +455,86 @@ module.exports = {
       },
     ];
 
+    const ratings = [
+      {
+        id: 3,
+        expertId: 2,
+        userId: 3,
+        rating: 5,
+        createdAt: '2023-03-23T14:29:48.691Z',
+        updatedAt: '2023-03-23T14:31:01.443Z',
+      },
+      {
+        id: 4,
+        expertId: 1,
+        userId: 3,
+        rating: 3,
+        createdAt: '2023-03-23T14:29:54.372Z',
+        updatedAt: '2023-03-23T14:31:22.768Z',
+      },
+      {
+        id: 5,
+        expertId: 1,
+        userId: 4,
+        rating: 4,
+        createdAt: '2023-03-24T09:41:18.190Z',
+        updatedAt: '2023-03-24T10:54:41.591Z',
+      },
+      {
+        id: 6,
+        expertId: 3,
+        userId: 4,
+        rating: 5,
+        createdAt: '2023-03-24T11:13:12.752Z',
+        updatedAt: '2023-03-24T11:13:12.752Z',
+      },
+      {
+        id: 7,
+        expertId: 5,
+        userId: 1,
+        rating: 4,
+        createdAt: '2023-03-24T11:25:09.839Z',
+        updatedAt: '2023-03-24T11:25:09.839Z',
+      },
+      {
+        id: 8,
+        expertId: 4,
+        userId: 1,
+        rating: 5,
+        createdAt: '2023-03-24T11:25:11.318Z',
+        updatedAt: '2023-03-24T11:25:11.318Z',
+      },
+      {
+        id: 9,
+        expertId: 6,
+        userId: 1,
+        rating: 3,
+        createdAt: '2023-03-24T11:27:55.729Z',
+        updatedAt: '2023-03-24T11:27:55.729Z',
+      },
+      {
+        id: 10,
+        expertId: 7,
+        userId: 1,
+        rating: 5,
+        createdAt: '2023-03-24T11:31:02.862Z',
+        updatedAt: '2023-03-24T11:31:02.862Z',
+      },
+      {
+        id: 11,
+        expertId: 8,
+        userId: 1,
+        rating: 5,
+        createdAt: '2023-03-24T11:34:06.826Z',
+        updatedAt: '2023-03-24T11:34:06.826Z',
+      },
+    ];
+
     await queryInterface.bulkInsert('Users', users);
     await queryInterface.bulkInsert('Subjects', subjects);
     await queryInterface.bulkInsert('Questions', questions);
     await queryInterface.bulkInsert('Tags', tags);
+    await queryInterface.bulkInsert('Ratings', tags);
   },
 
   async down(queryInterface, Sequelize) {
@@ -472,5 +549,6 @@ module.exports = {
     await queryInterface.bulkDelete('Subjects', null, {});
     await queryInterface.bulkDelete('Questions', null, {});
     await queryInterface.bulkDelete('Tags', null, {});
+    await queryInterface.bulkDelete('Ratings', null, {});
   },
 };

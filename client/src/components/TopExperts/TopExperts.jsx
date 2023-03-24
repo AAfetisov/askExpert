@@ -2,13 +2,14 @@ import { Avatar, Rating } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 // import { Slider } from './Myslider';
 import Marquee from 'react-fast-marquee';
+import { Link } from 'react-router-dom';
 import styles from './TopExperts.module.css';
 
 export function TopExperts() {
   const [experts, setExperts] = useState([]);
 
   useEffect(() => {
-    const getAllExperts = async () => {
+    (async () => {
       const response = await fetch('http://localhost:4000/topexperts', {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
@@ -18,8 +19,7 @@ export function TopExperts() {
         const result = await response.json();
         setExperts(result);
       }
-    };
-    getAllExperts();
+    })();
   }, []);
 
   // if (experts) {
@@ -34,11 +34,13 @@ export function TopExperts() {
           {experts?.length
             && experts?.map((el) => (
               <div key={el['User.id']} className={styles.nameBox}>
-                <Avatar
-                  alt="Remy Sharp"
-                  src={el['User.userpic']}
-                  sx={{ width: 50, height: 50 }}
-                />
+                <Link to={`/profile/${el['User.id']}`}>
+                  <Avatar
+                    alt="Remy Sharp"
+                    src={el['User.userpic']}
+                    sx={{ width: 50, height: 50 }}
+                  />
+                </Link>
                 <div>
                   {el['User.name']}
                   {el['User.surname']}

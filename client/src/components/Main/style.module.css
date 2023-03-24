@@ -35,24 +35,25 @@
   cursor: pointer;
   line-height: 1.2;
   border: 0;
+  animation: example 5s infinite linear;
 }
 
 .buttonAsk:hover {
-  animation: example 5s infinite linear;
+  /* animation: example 5s infinite linear; */
   /* border-radius: 6px; */
 }
 
 @keyframes example {
   0% {
-    background: #33CCCC;
+    background: #33cccc;
   }
 
   20% {
-    background: #33CC36;
+    background: #33cc36;
   }
 
   40% {
-    background: #B8CC33;
+    background: #b8cc33;
   }
 
   /* 60% {
@@ -60,11 +61,11 @@
   } */
 
   80% {
-    background: #33CC36;
+    background: #33cc36;
   }
 
   100% {
-    background: #33CCCC;
+    background: #33cccc;
   }
 }
 
@@ -80,6 +81,6 @@
   padding-top: 1px;
   padding-bottom: 3px;
   /* margin-right: 1rem; */
-  background-color:  #ededed;
+  background-color: #ededed;
   border-radius: 6px;
 }

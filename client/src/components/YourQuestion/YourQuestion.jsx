@@ -50,7 +50,7 @@ export default function YourQuestion() {
             }) => (
               <tr key={id}>
                 <td>
-                  {Subjects.map((s) => (
+                  {Subjects?.map((s) => (
                     <span key={s.id} className={styles.tag}>
                       {s.title}
                     </span>

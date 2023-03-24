@@ -4,7 +4,7 @@ exports.findAndSupplyQuestion = async (req, res) => {
   const { user } = req.session;
   try {
     const question = await Question.findAll({
-      where: { userId: user.id },
+      where: { userId: user.id, status: true },
       include: [
         { model: Subject, attributes: ['title', 'id'] }],
     });
