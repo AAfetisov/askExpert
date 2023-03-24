@@ -83,7 +83,7 @@ export function Profile() {
           <button className={Styles.button}>Change your profile</button>
         </Link>
         <br />
-        {cash ? <h3>You mony: {cash} $</h3> : <h3>You mony: 0 $</h3>}
+        {cash ? <h3>You mony: {cash} $</h3> : <h3>Your money: 0 $</h3>}
         {showItem ? (
           <StripePay />
         ) : (
