@@ -20,7 +20,7 @@ const labels = {
 };
 
 // eslint-disable-next-line react/prop-types
-export default function HoverRating({ questionId }) {
+export default function HoverRating({ questionId, setOpen }) {
   const [value, setValue] = useState([]);
   const [hover, setHover] = useState(-1);
   const [experts, setExperts] = useState([]);
@@ -67,11 +67,11 @@ export default function HoverRating({ questionId }) {
       {experts.length > 0
         && experts.map((exp, ind) => (
           <div className={styles.info}>
-            {/* <Avatar
+            <Avatar
               alt="Remy Sharp"
               src={exp.User.userpic || 'https://cdn-icons-png.flaticon.com/512/3177/3177440.png'}
               sx={{ width: 50, height: 50 }}
-            /> */}
+            />
             <div key={exp.id}>
               <div className={styles.centred}>
                 {exp.User.name}
@@ -100,9 +100,7 @@ export default function HoverRating({ questionId }) {
           </div>
         ))}
       <div className={styles.Btn}>
-        <Link to="/">
-          <button type="button">OK</button>
-        </Link>
+        <button type="button" onClick={() => setOpen(false)}>OK</button>
       </div>
     </div>
   );

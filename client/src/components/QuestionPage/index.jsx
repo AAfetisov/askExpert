@@ -118,7 +118,7 @@ export default function QuestionPage() {
           className={style.modalBox}
         >
           <Box sx={modalstyle}>
-            <HoverRating questionId={id} />
+            <HoverRating questionId={id} setOpen={setOpen} />
           </Box>
         </Modal>
       </div>
