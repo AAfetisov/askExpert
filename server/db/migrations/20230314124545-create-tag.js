@@ -10,21 +10,21 @@ module.exports = {
       },
       questionId: {
         type: Sequelize.INTEGER,
-        allowNull:false,
-        references:{
-          model:'Questions',
+        allowNull: false,
+        references: {
+          model: 'Questions',
           key: 'id',
         },
-        onDelete:'cascade',
+        onDelete: 'cascade',
       },
       subjectId: {
         type: Sequelize.INTEGER,
-        allowNull:false,
-        references:{
-          model:'Subjects',
+        allowNull: false,
+        references: {
+          model: 'Subjects',
           key: 'id',
         },
-        onDelete:'cascade',
+        onDelete: 'cascade',
       },
       createdAt: {
         allowNull: false,

@@ -10,6 +10,16 @@
   height: 200px;
 }
 
-.btn {
-  width: 100px;
+.button {
+  margin: 50px;
+  padding: 0 18px;
+  height: 40px;
+  color: white;
+  background: #0095DD;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  line-height: 1.2;
+  border: 0;
 }

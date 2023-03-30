@@ -9,12 +9,19 @@
     "test": "cd client && npm test",
     "test-dev": "cd client && npm run test-dev",
     "test-only": "cd client && npm run test-only",
-    "start-server": "cd server && npm start"
+    "start-server": "cd server && npm start",
+    "db-up": "npx sequelize-cli db:create; npx sequelize-cli db:migrate; npx sequelize-cli db:seed:all",
+    "db-down": "npx sequelize-cli db:migrate:undo:all; npx sequelize-cli db:seed:undo:all; npx sequelize-cli db:drop"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "chalk": "^4.1.2"
+    "axios": "^1.3.4",
+    "chalk": "^4.1.2",
+    "ky": "^0.33.2",
+    "ky-universal": "^0.11.0",
+    "websocket": "^1.0.34",
+    "ws": "^8.13.0"
   }
 }

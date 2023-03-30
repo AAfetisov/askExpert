@@ -4,10 +4,17 @@ const {
 
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
-    static associate({ Question, Offer, Comment }) {
-      this.hasMany(Question, { foreignKey: 'userId' });
-      this.hasMany(Offer, { foreignKey: 'expertId' });
-      this.hasMany(Comment, { foreignKey: 'expertId' });
+    static associate(models) {
+      this.hasMany(models.Question, { foreignKey: 'userId' });
+      this.hasMany(models.Offer, { foreignKey: 'expertId' });
+      this.hasMany(models.Rating, { foreignKey: 'userId' });
+      this.hasMany(models.Comment, { foreignKey: 'user_from', as: 'sender' });
+      this.hasMany(models.Comment, { foreignKey: 'user_to', as: 'receiver' });
+      this.hasMany(models.Signal, { foreignKey: 'fromId' });
+      this.hasMany(models.Signal, { foreignKey: 'toId' });
+      this.hasMany(models.ChatMessage, { foreignKey: 'toId' });
+      this.hasMany(models.ChatMessage, { foreignKey: 'fromId' });
+      this.hasMany(models.Transaction, { foreignKey: 'expertId' });
     }
   }
   User.init({
@@ -16,6 +23,8 @@ module.exports = (sequelize, DataTypes) => {
     email: DataTypes.STRING,
     password: DataTypes.STRING,
     bio: DataTypes.STRING,
+    userpic: DataTypes.STRING,
+    cash: DataTypes.INTEGER,
   }, {
     sequelize,
     modelName: 'User',

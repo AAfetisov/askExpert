@@ -1,8 +1,12 @@
 .container_ratings {
-  margin: 50px;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  text-align: center;
+}
+
+.container_ratings h3 {
+  margin: 5px 50px;
+  text-align: center;
 }
 
 /* average rating */
@@ -17,12 +21,14 @@
   position: relative;
   pointer-events: none;
 }
+
 /* hide the inputs */
 .astar_rating input {
   display: none;
 }
+
 /* set properties of all labels */
-.astar_rating > label {
+.astar_rating>label {
   width: 30px;
   height: 30px;
   font-family: Arial;
@@ -42,7 +48,8 @@
   top: 0px;
   line-height: 26px;
 }
+
 /* set full star shape for checked label and those that come after it */
-.astar_rating input:checked ~ label:before {
+.astar_rating input:checked~label:before {
   content: "\2605";
 }

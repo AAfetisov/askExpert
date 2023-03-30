@@ -1,0 +1,40 @@
+.TopExpertsName {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 900;
+  font-size: 1.6rem;
+  margin-bottom: 14px;
+  margin-top: 20px;
+}
+
+.expertBox {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
+
+}
+
+.marquee {
+  width: 80%;
+  border: 1px solid #ededed;
+  margin-bottom: 30px;
+  border-radius: 8px;
+}
+
+.nameBox {
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  /* position: absolute;
+  visibility: hidden;
+  background: #fec901;
+  width: 400px;
+  height: 300px; */
+}
+
+/* .nameBox.visible {
+  visibility: visible;
+} */

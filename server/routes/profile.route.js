@@ -1,10 +1,15 @@
-const express = require("express");
+const express = require('express');
+
 const router = express.Router();
 
-const { GetUser } = require("../controllers/profile.controllers.js");
-const { findUser } = require("../controllers/profile.controllers.js");
+const {
+  GetUser, FindCurrentUser, findUser, findUserInfo
+} = require('../controllers/profile.controllers');
 
-router.route("/form").put(GetUser);
-router.route("/form").get(findUser);
+router.route('/').get(findUserInfo);
+router.route('/form').put(GetUser);
+router.route('/form').get(findUser);
+
+router.route('/:id').get(FindCurrentUser);
 
 module.exports = router;

@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/no-unknown-property */
 /* eslint-disable jsx-a11y/label-has-associated-control */
@@ -69,7 +70,7 @@ export default function QuestionForm() {
         <label htmlFor="textId">Text</label>
         <textarea id="textId" type="text" name="text" onChange={(e) => setText(e.target.value)} value={text} />
 
-        <button type="button" onClick={handleSubmitClick}>Submit</button>
+        <button type="button" className={style.handleSubmitClickGradient} onClick={handleSubmitClick}>Submit</button>
       </form>
     </div>
   );

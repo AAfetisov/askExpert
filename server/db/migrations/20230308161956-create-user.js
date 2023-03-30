@@ -20,6 +20,9 @@ module.exports = {
           notEmpty: true,
         },
       },
+      userpic: {
+        type: Sequelize.STRING,
+      },
       email: {
         allowNull: false,
         unique: true,
@@ -38,6 +41,9 @@ module.exports = {
       },
       bio: {
         type: Sequelize.STRING(500),
+      },
+      cash: {
+        type: Sequelize.INTEGER,
       },
       createdAt: {
         allowNull: false,

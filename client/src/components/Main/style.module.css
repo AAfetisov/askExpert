@@ -1,7 +1,86 @@
-
-
-.flexcontainer{
+.flexcontainer {
+  padding: 25px 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.infobox {
+  display: flex;
+  height: 500px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.infobox img {
+  width: 400px;
+  height: 500px;
+  border-radius: 5%;
+  box-shadow: 0 0 20px 0 lightgray;
+}
+
+.title {
+  text-align: center;
+}
+
+.buttonAsk {
+  margin: 1rem;
+  padding: 0 1rem;
+  height: 2.5rem;
+  color: white;
+  background: #0095dd;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  line-height: 1.2;
+  border: 0;
+  animation: example 5s infinite linear;
+}
+
+.buttonAsk:hover {
+  /* animation: example 5s infinite linear; */
+  /* border-radius: 6px; */
+}
+
+@keyframes example {
+  0% {
+    background: #33cccc;
   }
+
+  20% {
+    background: #33cc36;
+  }
+
+  40% {
+    background: #b8cc33;
+  }
+
+  /* 60% {
+    background: #FCCA00;
+  } */
+
+  80% {
+    background: #33cc36;
+  }
+
+  100% {
+    background: #33cccc;
+  }
+}
+
+.marqueeContainer {
+  margin-bottom: 7px;
+  width: 80%;
+}
+
+.betweenTagFlex {
+  padding-right: 8px;
+  padding-left: 8px;
+  margin-left: 1rem;
+  padding-top: 1px;
+  padding-bottom: 3px;
+  /* margin-right: 1rem; */
+  background-color: #ededed;
+  border-radius: 6px;
+}
