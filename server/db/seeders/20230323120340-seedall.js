@@ -187,6 +187,63 @@ module.exports = {
         createdAt: '2023-03-22T15:27:39.832Z',
         updatedAt: '2023-03-23T11:19:53.862Z',
       },
+
+      {
+        name: null,
+        surname: null,
+        userpic: null,
+        email: '4',
+        password: '$2b$10$s4IhHsTBcrRXRwveReo7auKdzG8F2s3vFS5QDyAUa8STaSgJ3i.aS',
+        bio: null,
+        cash: null,
+        createdAt: '2023-03-30T18:41:59.912Z',
+        updatedAt: '2023-03-30T18:41:59.912Z',
+      },
+      {
+        name: null,
+        surname: null,
+        userpic: null,
+        email: 'user5',
+        password: '$2b$10$4ZLCKoH6MfxdpCQbrsDXu.osH9zvShEl.r35vX1zt22pdDJHasAJO',
+        bio: null,
+        cash: null,
+        createdAt: '2023-03-30T18:42:10.030Z',
+        updatedAt: '2023-03-30T18:42:10.030Z',
+      },
+      {
+        name: null,
+        surname: null,
+        userpic: null,
+        email: 'user6',
+        password: '$2b$10$bWxyJI4I5Bv.JG2eRWKgr.tAoCoKNjfMvHp3fDvMNlSrmIwiu6jJq',
+        bio: null,
+        cash: null,
+        createdAt: '2023-03-30T18:42:17.410Z',
+        updatedAt: '2023-03-30T18:42:17.410Z',
+      },
+      {
+        name: null,
+        surname: null,
+        userpic: null,
+        email: 'user7',
+        password: '$2b$10$vX7VJxgpMxVhfmUljTcMie8//oU4zL1Cv2v8rL2USYQ4Cnf.Hg0e.',
+        bio: null,
+        cash: null,
+        createdAt: '2023-03-30T18:42:23.868Z',
+        updatedAt: '2023-03-30T18:42:23.868Z',
+      },
+      {
+        name: null,
+        surname: null,
+        userpic: null,
+        email: 'user8',
+        password: '$2b$10$24xxDLb9Ae9x9CaiBF0mIOGmc7hgPkEqjCtcRI7Wl1Tuf85Fkf5ga',
+        bio: null,
+        cash: null,
+        createdAt: '2023-03-30T18:43:12.612Z',
+        updatedAt: '2023-03-30T18:43:12.612Z',
+      },
+
     ];
     const subjects = [
       {
@@ -534,7 +591,7 @@ module.exports = {
     await queryInterface.bulkInsert('Subjects', subjects);
     await queryInterface.bulkInsert('Questions', questions);
     await queryInterface.bulkInsert('Tags', tags);
-    await queryInterface.bulkInsert('Ratings', tags);
+    await queryInterface.bulkInsert('Ratings', ratings);
   },
 
   async down(queryInterface, Sequelize) {

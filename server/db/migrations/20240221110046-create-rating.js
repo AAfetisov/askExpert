@@ -16,6 +16,7 @@ module.exports = {
           },
           key: 'id',
         },
+        onDelete: 'cascade',
       },
       userId: {
         type: Sequelize.INTEGER,
@@ -25,6 +26,7 @@ module.exports = {
           },
           key: 'id',
         },
+        onDelete: 'cascade',
       },
       rating: {
         type: Sequelize.INTEGER,
